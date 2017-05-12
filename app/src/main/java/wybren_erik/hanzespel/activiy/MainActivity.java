@@ -1,4 +1,4 @@
-package wybren_erik.hanzespel;
+package wybren_erik.hanzespel.activiy;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -6,6 +6,9 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import wybren_erik.hanzespel.City;
+import wybren_erik.hanzespel.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
                     return true;
             }
             return false;
+
+
         }
 
     };
