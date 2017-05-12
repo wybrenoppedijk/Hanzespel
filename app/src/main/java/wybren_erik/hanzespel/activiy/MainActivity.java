@@ -24,13 +24,13 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
+                    mTextMessage.setText(R.string.status_string);
                     return true;
                 case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
+                    mTextMessage.setText(R.string.handel_string);
                     return true;
                 case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
+                    mTextMessage.setText(R.string.map_string);
                     return true;
             }
             return false;
@@ -190,13 +190,6 @@ public class MainActivity extends AppCompatActivity {
         roadMap.addEdge(turku, stockholm, 5);
         roadMap.addEdge(turku, danzig, 10);
         roadMap.addEdge(turku, stralsund, 14);
-
-
-
-
-
-
-
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
