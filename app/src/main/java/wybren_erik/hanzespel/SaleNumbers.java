@@ -1,8 +1,8 @@
 package wybren_erik.hanzespel;
 
-class SaleNumbers {
+class SaleFactor {
 
-    double getFactor(City c, Product p) {
+    static double getFactor(City c, Product p) {
         switch(c.getName()) {
             case "Kampen":
                 switch(p) {
