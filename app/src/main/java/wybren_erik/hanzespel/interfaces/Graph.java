@@ -27,7 +27,7 @@ public interface Graph<V extends Vertex, E extends Edge> {
      * @param bidirectional Can the edge be traversed both ways?
      * @return True, if the edge can be added. False, if the edge is already in the graph.
      */
-    boolean addEdge(V from, V to, int distance, boolean bidirectional);
+    boolean addEdge(V from, V to, int distance);
 
     /**
      * Adds a vertex to this graph.
