@@ -23,18 +23,21 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.navigation_home:
+                case R.id.navigation_status:
                     mTextMessage.setText(R.string.status_string);
                     return true;
-                case R.id.navigation_dashboard:
+                case R.id.navigation_handel:
                     mTextMessage.setText(R.string.handel_string);
                     return true;
-                case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.map_string);
+                case R.id.navigation_map:
+                    String allCities = "";
+                    for(City c : cityMap.getCities()) {
+                        allCities += c.getName() + ", ";
+                    }
+                    mTextMessage.setText(allCities);
                     return true;
             }
             return false;
-
         }
 
     };
@@ -43,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initMap();
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -51,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressWarnings("unchecked")
     private void initMap() {
-        cityMap = new RoadMap();
+        cityMap = RoadMap.getInstance();
 
         City kampen = new City("Kampen", Product.BIER);
         City bergen = new City("Bergen", Product.STOKVIS);

@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigation_status"
         android:icon="@mipmap/status_icon"
         android:title="@string/status_string" />
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_handel"
         android:icon="@mipmap/handel_icon"
         android:title="@string/handel_string" />
 
     <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_map"
         android:icon="@mipmap/map_icon"
         android:title="@string/map_string" />
 

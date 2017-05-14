@@ -9,10 +9,16 @@ import wybren_erik.hanzespel.interfaces.Vertex;
 
 public class RoadMap implements Graph {
 
+    private static RoadMap instance;
     private Set<Vertex> vertices = new HashSet<>();
     private Set<Edge> roads = new HashSet<>();
 
-    public RoadMap() {
+    private RoadMap() {
+    }
+
+    public static RoadMap getInstance() {
+        if(instance == null) instance = new RoadMap();
+        return instance;
     }
 
     @Override
@@ -57,5 +63,13 @@ public class RoadMap implements Graph {
 
         vertices.add(newVertex);
         return true;
+    }
+
+    public Set<City> getCities() {
+        Set<City> result = new HashSet<>();
+        for(Vertex v : vertices) {
+            result.add((City) v);
+        }
+        return result;
     }
 }

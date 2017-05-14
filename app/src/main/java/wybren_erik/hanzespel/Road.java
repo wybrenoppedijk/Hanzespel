@@ -29,6 +29,4 @@ public class Road implements Edge {
         return weight;
     }
 
-
-
 }
