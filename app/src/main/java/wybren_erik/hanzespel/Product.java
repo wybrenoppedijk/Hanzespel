@@ -1,9 +1,5 @@
 package wybren_erik.hanzespel;
 
-/**
- * Created by wybrenoppedijk on 12/05/2017.
- */
-
 public enum Product {
     BIER(100),
     STOKVIS(300),

@@ -2,10 +2,6 @@ package wybren_erik.hanzespel;
 
 import wybren_erik.hanzespel.interfaces.Vertex;
 
-/**
- * Created by wybrenoppedijk on 12/05/2017.
- */
-
 public class City implements Vertex<String> {
 
     private String name;
@@ -20,4 +16,9 @@ public class City implements Vertex<String> {
     public String getName() {
         return name;
     }
+
+    public Product getProduct() {
+        return product;
+    }
+
 }
