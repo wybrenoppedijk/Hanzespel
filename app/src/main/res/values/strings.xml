@@ -3,4 +3,8 @@
     <string name="status_string">Status</string>
     <string name="handel_string">Handel</string>
     <string name="map_string">Map</string>
+    <string name="inventory_string">Inventaris</string>
+    <string name="position_string">Positie</string>
+    <string name="arrival_string">Aankomsttijd</string>
+    <string name="balance_string">Saldo</string>
 </resources>

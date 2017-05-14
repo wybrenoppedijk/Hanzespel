@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/INTERNAL_inv_text"
+        android:text="@string/inventory_string"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="24dp"
+        android:textSize="24sp"/>
+
+    <ImageView
+        android:id="@+id/status_inventory_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignStart="@id/INTERNAL_inv_text"
+        android:layout_below="@id/INTERNAL_inv_text"
+        android:layout_marginTop="4dp"
+        app:srcCompat="@mipmap/status_icon" />
+
+    <TextView
+        android:layout_alignBottom="@id/status_inventory_icon"
+        android:text="TESTTESTTEST"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/status_inventory_icon"
+        android:textSize="18sp"
+        android:layout_marginStart="4dp"/>
+
+    <TextView
+        android:text="@string/position_string"
+        android:id="@+id/INTERNAL_pos_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/INTERNAL_inv_text"
+        android:textSize="24sp"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/status_inventory_icon" />
+
+    <TextView
+        android:text="TESTTESTTEST"
+        android:id="@+id/status_position_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/INTERNAL_inv_text"
+        android:textSize="18sp"
+        android:layout_marginTop="4dp"
+        android:layout_below="@id/INTERNAL_pos_text" />
+
+    <TextView
+        android:text="@string/arrival_string"
+        android:id="@+id/INTERNAL_arrival_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/INTERNAL_inv_text"
+        android:textSize="24sp"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/status_position_text" />
+
+    <ProgressBar
+        android:progress="267149"
+        android:id="@+id/status_arrival_progressbar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/INTERNAL_arrival_text"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="4dp"
+        android:max="@integer/max_travel_time_ms" />
+
+    <TextView
+        android:text="4:27.149"
+        android:id="@+id/status_arrival_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="12sp"
+        android:layout_below="@id/status_arrival_progressbar" />
+
+    <TextView
+        android:text="@string/balance_string"
+        android:id="@+id/INTERNAL_bal_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/INTERNAL_inv_text"
+        android:textSize="24sp"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/status_arrival_text" />
+
+    <TextView
+        android:text="ƒ 500.00"
+        android:id="@+id/status_balance_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/INTERNAL_inv_text"
+        android:textSize="16sp"
+        android:layout_marginTop="4dp"
+        android:layout_below="@id/INTERNAL_bal_text" />
+
+</RelativeLayout>

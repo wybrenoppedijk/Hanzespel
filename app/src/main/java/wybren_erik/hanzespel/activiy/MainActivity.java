@@ -3,6 +3,8 @@ package wybren_erik.hanzespel.activiy;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -16,30 +18,30 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
     private RoadMap cityMap;
+    private StatusFragment statusFragment;
+    private EmptyFragment mapFragment;
+    private EmptyFragment handelFragment;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             switch (item.getItemId()) {
                 case R.id.navigation_status:
-                    mTextMessage.setText(R.string.status_string);
-                    return true;
+                    transaction.replace(R.id.main_fragment, statusFragment);
+                    break;
                 case R.id.navigation_handel:
-                    mTextMessage.setText(R.string.handel_string);
-                    return true;
+                    transaction.replace(R.id.main_fragment, handelFragment);
+                    break;
                 case R.id.navigation_map:
-                    String allCities = "";
-                    for(City c : cityMap.getCities()) {
-                        allCities += c.getName() + ", ";
-                    }
-                    mTextMessage.setText(allCities);
-                    return true;
+                    transaction.replace(R.id.main_fragment, mapFragment);
+                    break;
             }
-            return false;
+            transaction.commit();
+            return true;
         }
-
     };
 
     @Override
@@ -48,9 +50,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initMap();
 
-        mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        statusFragment = new StatusFragment();
+        handelFragment = new EmptyFragment();
+        mapFragment = new EmptyFragment();
+
+        transaction.add(R.id.main_fragment, statusFragment);
+        transaction.commit();
     }
 
     @SuppressWarnings("unchecked")
