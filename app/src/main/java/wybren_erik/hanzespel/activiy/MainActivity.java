@@ -16,7 +16,6 @@ import wybren_erik.hanzespel.RoadMap;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView mTextMessage;
     private RoadMap cityMap;
     private StatusFragment statusFragment;
     private EmptyFragment mapFragment;
