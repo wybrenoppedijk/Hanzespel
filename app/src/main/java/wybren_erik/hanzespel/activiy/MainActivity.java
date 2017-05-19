@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 
 import wybren_erik.hanzespel.City;
 import wybren_erik.hanzespel.Location;
@@ -18,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private RoadMap cityMap;
     private StatusFragment statusFragment;
     private EmptyFragment mapFragment;
-    private EmptyFragment handelFragment;
+    private MapFragment handelFragment;
     private Fragment currentFragment;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -26,21 +28,31 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            Fragment newFragment = null;
             switch (item.getItemId()) {
                 case R.id.navigation_status:
-                    transaction.replace(R.id.main_fragment, statusFragment);
-                    transaction.remove(currentFragment);
-                    currentFragment = statusFragment;
+                    newFragment = statusFragment;
+                    transaction.replace(R.id.main_fragment, newFragment);
+                    if (currentFragment != newFragment) {
+                        transaction.remove(currentFragment);
+                        currentFragment = newFragment;
+                    }
                     break;
                 case R.id.navigation_handel:
-                    transaction.replace(R.id.main_fragment, handelFragment);
-                    transaction.remove(currentFragment);
-                    currentFragment = handelFragment;
+                    newFragment = handelFragment;
+                    transaction.replace(R.id.main_fragment, newFragment);
+                    if (currentFragment != newFragment) {
+                        transaction.remove(currentFragment);
+                        currentFragment = newFragment;
+                    }
                     break;
                 case R.id.navigation_map:
-                    transaction.replace(R.id.main_fragment, mapFragment);
-                    transaction.remove(currentFragment);
-                    currentFragment = mapFragment;
+                    newFragment = mapFragment;
+                    transaction.replace(R.id.main_fragment, newFragment);
+                    if (currentFragment != newFragment) {
+                        transaction.remove(currentFragment);
+                        currentFragment = newFragment;
+                    }
                     break;
             }
             transaction.commit();
@@ -51,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
         initMap();
 
@@ -59,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
         statusFragment = new StatusFragment();
-        handelFragment = new EmptyFragment();
+        handelFragment = new MapFragment();
         mapFragment = new EmptyFragment();
 
         transaction.add(R.id.main_fragment, statusFragment);

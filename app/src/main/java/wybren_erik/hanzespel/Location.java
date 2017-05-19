@@ -2,19 +2,22 @@ package wybren_erik.hanzespel;
 
 public enum Location {
 
-    KAMPEN,
-    BERGEN,
-    LUBECK,
-    STRALSUND,
-    RIGA,
-    TALLIN,
-    VISBY,
-    AALBORG,
-    STOCKHOLM,
-    DANZIG,
-    TURKU;
+    KAMPEN("Kampen"),
+    BERGEN("Bergen"),
+    LUBECK("Lübeck"),
+    STRALSUND("Stralsund"),
+    RIGA("Riga"),
+    TALLIN("Tallin"),
+    VISBY("Visby"),
+    AALBORG("Aalborg"),
+    STOCKHOLM("Stockholm"),
+    DANZIG("Danzig"),
+    TURKU("Turku");
 
-    Location() {
+    private String locName;
+
+    Location(String visibleName) {
+        this.locName = visibleName;
     }
 
     public Product getProduct() {
@@ -43,6 +46,10 @@ public enum Location {
                 return Product.HOUT;
         }
         return Product.BIER; // Shouldn't happen
+    }
+
+    public String toString() {
+        return locName;
     }
 
 }
