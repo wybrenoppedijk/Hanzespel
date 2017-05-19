@@ -22,10 +22,10 @@ public class MapFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.map_fragment, container, false);
-        TextView boatNameTextView = (TextView) view.findViewById(R.id.map_menu_boat_name);
-        TextView boatLocationTextView = (TextView) view.findViewById(R.id.map_menu_current_location);
-        Button debugButton = (Button) view.findViewById(R.id.DEBUG_BUTTON);
+        final View view = inflater.inflate(R.layout.map_fragment, container, false);
+        final TextView boatNameTextView = (TextView) view.findViewById(R.id.map_menu_boat_name);
+        final TextView boatLocationTextView = (TextView) view.findViewById(R.id.map_menu_current_location);
+        final Button debugButton = (Button) view.findViewById(R.id.DEBUG_BUTTON);
 
         if(boat == null) boat = new Boat(new Inventory(), "Het Schip der Null");
         boatNameTextView.setText(boat.getName());
@@ -35,6 +35,7 @@ public class MapFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 boat.goToCity(new City(Location.BERGEN));
+                boatLocationTextView.setText(boat.getLocation().getName().toString());
             }
         });
 

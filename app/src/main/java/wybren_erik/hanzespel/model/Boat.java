@@ -34,6 +34,6 @@ public class Boat {
     }
 
     public void goToCity(City location) {
-        // TODO
+        this.location = location;
     }
 }

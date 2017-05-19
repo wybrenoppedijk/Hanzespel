@@ -1,5 +1,7 @@
 package wybren_erik.hanzespel;
 
+import java.util.Set;
+
 public enum Location {
 
     KAMPEN("Kampen"),
@@ -50,6 +52,16 @@ public enum Location {
 
     public String toString() {
         return locName;
+    }
+
+    /**
+     * Get the travel time to another location in milliseconds.
+     *
+     * @param to The location to go to.
+     * @return The travel time in ms.
+     */
+    public int getTravelTime(Location to) {
+        return 0; // TODO
     }
 
 }
