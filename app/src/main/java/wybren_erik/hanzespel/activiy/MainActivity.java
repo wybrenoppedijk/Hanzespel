@@ -3,6 +3,7 @@ package wybren_erik.hanzespel.activiy;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private StatusFragment statusFragment;
     private EmptyFragment mapFragment;
     private EmptyFragment handelFragment;
+    private Fragment currentFragment;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -27,12 +29,18 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_status:
                     transaction.replace(R.id.main_fragment, statusFragment);
+                    transaction.remove(currentFragment);
+                    currentFragment = statusFragment;
                     break;
                 case R.id.navigation_handel:
                     transaction.replace(R.id.main_fragment, handelFragment);
+                    transaction.remove(currentFragment);
+                    currentFragment = handelFragment;
                     break;
                 case R.id.navigation_map:
                     transaction.replace(R.id.main_fragment, mapFragment);
+                    transaction.remove(currentFragment);
+                    currentFragment = mapFragment;
                     break;
             }
             transaction.commit();
@@ -55,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         mapFragment = new EmptyFragment();
 
         transaction.add(R.id.main_fragment, statusFragment);
+        currentFragment = statusFragment;
         transaction.commit();
     }
 
