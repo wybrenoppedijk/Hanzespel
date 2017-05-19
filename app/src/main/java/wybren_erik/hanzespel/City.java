@@ -2,19 +2,19 @@ package wybren_erik.hanzespel;
 
 import wybren_erik.hanzespel.interfaces.Vertex;
 
-public class City implements Vertex<String> {
+public class City implements Vertex<Location> {
 
-    private String name;
+    private Location location;
     private Product product;
 
-    public City(String name, Product product) {
-        this.name = name;
-        this.product = product;
+    public City(Location name) {
+        this.location = name;
+        this.product = name.getProduct();
     }
 
     @Override
-    public String getName() {
-        return name;
+    public Location getName() {
+        return location;
     }
 
     public Product getProduct() {

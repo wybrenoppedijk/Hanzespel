@@ -4,7 +4,7 @@ class SaleFactor {
 
     static double getFactor(City c, Product p) {
         switch(c.getName()) {
-            case "Kampen":
+            case KAMPEN:
                 switch(p) {
                     case BIER:
                         return 0.8;
@@ -31,7 +31,7 @@ class SaleFactor {
                     // No default on purpose
                 }
                 break;
-            case "Bergen":
+            case BERGEN:
                 switch(p) {
                     case BIER:
                         return 1.4;
@@ -58,7 +58,7 @@ class SaleFactor {
                     // No default on purpose
                 }
                 break;
-            case "Lübeck":
+            case LUBECK:
                 switch(p) {
                     case BIER:
                         return 1.4;
@@ -85,7 +85,7 @@ class SaleFactor {
                     // No default on purpose
                 }
                 break;
-            case "Stralsund":
+            case STRALSUND:
                 switch(p) {
                     case BIER:
                         return 1.5;
@@ -112,7 +112,7 @@ class SaleFactor {
                     // No default on purpose
                 }
                 break;
-            case "Riga":
+            case RIGA:
                 switch(p) {
                     case BIER:
                         return 1.8;
@@ -139,7 +139,7 @@ class SaleFactor {
                     // No default on purpose
                 }
                 break;
-            case "Tallin":
+            case TALLIN:
                 switch(p) {
                     case BIER:
                         return 2.0;
@@ -166,7 +166,7 @@ class SaleFactor {
                     // No default on purpose
                 }
                 break;
-            case "Visby":
+            case VISBY:
                 switch(p) {
                     case BIER:
                         return 1.7;
@@ -193,7 +193,7 @@ class SaleFactor {
                     // No default on purpose
                 }
                 break;
-            case "Aalborg":
+            case AALBORG:
                 switch(p) {
                     case BIER:
                         return 1.3;
@@ -220,7 +220,7 @@ class SaleFactor {
                     // No default on purpose
                 }
                 break;
-            case "Stockholm":
+            case STOCKHOLM:
                 switch(p) {
                     case BIER:
                         return 1.8;
@@ -247,7 +247,7 @@ class SaleFactor {
                     // No default on purpose
                 }
                 break;
-            case "Danzig":
+            case DANZIG:
                 switch(p) {
                     case BIER:
                         return 1.6;
@@ -274,7 +274,7 @@ class SaleFactor {
                     // No default on purpose
                 }
                 break;
-            case "Turku":
+            case TURKU:
                 switch(p) {
                     case BIER:
                         return 2.0;

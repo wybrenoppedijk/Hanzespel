@@ -3,14 +3,12 @@ package wybren_erik.hanzespel.activiy;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import wybren_erik.hanzespel.City;
-import wybren_erik.hanzespel.Product;
+import wybren_erik.hanzespel.Location;
 import wybren_erik.hanzespel.R;
 import wybren_erik.hanzespel.RoadMap;
 
@@ -23,9 +21,6 @@ public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-
-
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -67,17 +62,17 @@ public class MainActivity extends AppCompatActivity {
     private void initMap() {
         cityMap = RoadMap.getInstance();
 
-        City kampen = new City("Kampen", Product.BIER);
-        City bergen = new City("Bergen", Product.STOKVIS);
-        City lubeck = new City("Lübeck", Product.ZOUT);
-        City stralsund = new City("Stralsund", Product.VATEN);
-        City riga = new City("Riga", Product.WAS);
-        City tallin = new City("Tallin", Product.BONT);
-        City visby = new City("Visby", Product.LAKEN);
-        City aalborg = new City("Aalborg", Product.VLEES);
-        City stockholm = new City("Stockholm", Product.IJZER);
-        City danzig = new City("Danzig", Product.GRAAN);
-        City turku = new City("Turku", Product.HOUT);
+        City kampen = new City(Location.KAMPEN);
+        City bergen = new City(Location.BERGEN);
+        City lubeck = new City(Location.LUBECK);
+        City stralsund = new City(Location.STRALSUND);
+        City riga = new City(Location.RIGA);
+        City tallin = new City(Location.TALLIN);
+        City visby = new City(Location.VISBY);
+        City aalborg = new City(Location.AALBORG);
+        City stockholm = new City(Location.STOCKHOLM);
+        City danzig = new City(Location.DANZIG);
+        City turku = new City(Location.TURKU);
 
         cityMap.addVertex(kampen);
         cityMap.addVertex(bergen);
