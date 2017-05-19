@@ -16,11 +16,20 @@ public class RoadMap implements Graph {
     private RoadMap() {
     }
 
+    /**
+     * Retrieve the roadmap instance
+     * @return  The Singleton instance of RoadMap
+     */
     public static RoadMap getInstance() {
         if(instance == null) instance = new RoadMap();
         return instance;
     }
 
+    /**
+     * Get the neighbours from a vertex.
+     * @param from The vertex of which the neighbours have to be returned.
+     * @return  A HashSet containing the neighbour Vertices of given Vertex.
+     */
     @Override
     public Set getNeighbours(Vertex from) {
         Set<Vertex> result = new HashSet<>();
@@ -34,6 +43,11 @@ public class RoadMap implements Graph {
         return result;
     }
 
+    /**
+     * Retrieve the edges connected to a vertex.
+     * @param from The vertex of which all outgoing edges have to be returned.
+     * @return  A HashSet containing all edges connected to given Vertex.
+     */
     @Override
     public Set getEdges(Vertex from) {
         Set<Edge> result = new HashSet<>();
@@ -47,6 +61,13 @@ public class RoadMap implements Graph {
         return result;
     }
 
+    /**
+     * Add an edge between to vertices.
+     * @param from The origin vertex
+     * @param to The destination vertex
+     * @param distance The weight of the edge
+     * @return  True if the edge has successfully been added, false if the edge already exists.
+     */
     @Override
     public boolean addEdge(Vertex from, Vertex to, int distance) {
         Road r = new Road(from, to, distance);
@@ -57,6 +78,11 @@ public class RoadMap implements Graph {
         return true;
     }
 
+    /**
+     * Add a Vertex to the RoadMap.
+     * @param newVertex The vertex to be added.
+     * @return  True if the Vertex was successfully added, false if the Vertex already exists.
+     */
     @Override
     public boolean addVertex(Vertex newVertex) {
         if (vertices.contains(newVertex)) return false;
@@ -65,6 +91,10 @@ public class RoadMap implements Graph {
         return true;
     }
 
+    /**
+     * Retrieve a list of all vertices.
+     * @return  A HashSet containing all cities in the roadmap.
+     */
     public Set<City> getCities() {
         Set<City> result = new HashSet<>();
         for(Vertex v : vertices) {
