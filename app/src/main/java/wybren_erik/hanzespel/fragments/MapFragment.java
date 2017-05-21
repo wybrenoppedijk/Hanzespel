@@ -12,12 +12,14 @@ import android.widget.TextView;
 import wybren_erik.hanzespel.City;
 import wybren_erik.hanzespel.Location;
 import wybren_erik.hanzespel.R;
+import wybren_erik.hanzespel.RoadMap;
 import wybren_erik.hanzespel.model.Boat;
 import wybren_erik.hanzespel.model.InventoryModel;
 import wybren_erik.hanzespel.model.Product;
 
 public class MapFragment extends Fragment {
 
+    private RoadMap roadMap;
     private Boat boat;
 
     @Nullable
@@ -27,6 +29,7 @@ public class MapFragment extends Fragment {
         final TextView boatNameTextView = (TextView) view.findViewById(R.id.map_menu_boat_name);
         final TextView boatLocationTextView = (TextView) view.findViewById(R.id.map_menu_current_location);
         final Button debugButton = (Button) view.findViewById(R.id.DEBUG_BUTTON);
+        roadMap = RoadMap.getInstance();
 
         if(boat == null) boat = new Boat(InventoryModel.getInstance(), "Het Schip der Null");
         boatNameTextView.setText(boat.getName());
@@ -35,7 +38,7 @@ public class MapFragment extends Fragment {
         debugButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boat.goToCity(new City(Location.BERGEN));
+                boat.goToCity(roadMap.getCity(Location.BERGEN));
                 boatLocationTextView.setText(boat.getLocation().getName().toString());
             }
         });

@@ -2,6 +2,7 @@ package wybren_erik.hanzespel.model;
 
 import wybren_erik.hanzespel.City;
 import wybren_erik.hanzespel.Location;
+import wybren_erik.hanzespel.RoadMap;
 
 public class Boat {
 
@@ -17,7 +18,7 @@ public class Boat {
 
     public Boat(InventoryModel inventoryModel, String name) {
         this.inventoryModel = inventoryModel;
-        this.location = new City(Location.KAMPEN);
+        this.location = RoadMap.getInstance().getCity(Location.KAMPEN);
         this.name = name;
     }
 

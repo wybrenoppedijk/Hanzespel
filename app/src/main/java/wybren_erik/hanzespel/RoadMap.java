@@ -92,6 +92,20 @@ public class RoadMap implements Graph {
     }
 
     /**
+     * Retrieve a City from a Location to prevent inefficient memory usage.
+     * @param name  Location of the city
+     * @return      City with location given
+     */
+    public City getCity(Location name) {
+        for(Vertex v : vertices) {
+            if(((Location) v.getName()).equals(name)) {
+                return (City) v;
+            }
+        }
+        return null; // Won't happen.
+    }
+
+    /**
      * Retrieve a list of all vertices.
      * @return  A HashSet containing all cities in the roadmap.
      */
