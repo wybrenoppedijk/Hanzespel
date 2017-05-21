@@ -1,9 +1,8 @@
 package wybren_erik.hanzespel.interfaces;
 
-import wybren_erik.hanzespel.City;
-
 public interface BoatListener {
 
-    City onTravel();
+    void onArrive();
+    void onArrivalTimeChanged(long newTimeUntilArrival);
 
 }

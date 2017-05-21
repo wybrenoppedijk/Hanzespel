@@ -59,7 +59,7 @@ public enum Location {
      * @return The travel time in ms.
      */
     public int getTravelTime(Location to) {
-        return 0; // TODO
+        return 2000; // TODO
     }
 
 }
