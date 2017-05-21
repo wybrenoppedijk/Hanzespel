@@ -1,6 +1,5 @@
 package wybren_erik.hanzespel.fragments;
 
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -16,19 +15,23 @@ import wybren_erik.hanzespel.model.Product;
 
 public class HandelFragment extends Fragment {
 
+    private boolean isInit = false;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_handel, container, false);
-        InventoryModel.getInstance().addProduct(new Product(ProductEnum.ZOUT, 3)); //For debug
-        InventoryModel.getInstance().addProduct(new Product(ProductEnum.STOKVIS, 3)); //For debug
-        InventoryModel.getInstance().addProduct(new Product(ProductEnum.BONT, 3)); //For debug
+        if(!isInit) {
+            InventoryModel.getInstance().addProduct(new Product(ProductEnum.ZOUT, 3)); //For debug
+            InventoryModel.getInstance().addProduct(new Product(ProductEnum.STOKVIS, 3)); //For debug
+            InventoryModel.getInstance().addProduct(new Product(ProductEnum.BONT, 3)); //For debug
+            isInit = true;
+        }
 
         InventoryAdapter adapter = new InventoryAdapter(getContext(), InventoryModel.getInstance().getProducts());
 
