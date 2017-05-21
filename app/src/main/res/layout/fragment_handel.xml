@@ -12,7 +12,7 @@
         android:layout_marginStart="24dp"
         android:textSize="24sp"/>
     <ListView
-        android:id="@+id/inventory"
+        android:id="@+id/handel_inventory_products"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"

@@ -1,7 +1,5 @@
 package wybren_erik.hanzespel;
 
-import java.util.Set;
-
 public enum Location {
 
     KAMPEN("Kampen"),
@@ -22,32 +20,32 @@ public enum Location {
         this.locName = visibleName;
     }
 
-    public Product getProduct() {
+    public ProductEnum getProduct() {
         switch (this) {
             case KAMPEN:
-                return Product.BIER;
+                return ProductEnum.BIER;
             case BERGEN:
-                return Product.STOKVIS;
+                return ProductEnum.STOKVIS;
             case LUBECK:
-                return Product.ZOUT;
+                return ProductEnum.ZOUT;
             case STRALSUND:
-                return Product.VATEN;
+                return ProductEnum.VATEN;
             case RIGA:
-                return Product.WAS;
+                return ProductEnum.WAS;
             case TALLIN:
-                return Product.BONT;
+                return ProductEnum.BONT;
             case VISBY:
-                return Product.LAKEN;
+                return ProductEnum.LAKEN;
             case AALBORG:
-                return Product.VLEES;
+                return ProductEnum.VLEES;
             case STOCKHOLM:
-                return Product.IJZER;
+                return ProductEnum.IJZER;
             case DANZIG:
-                return Product.GRAAN;
+                return ProductEnum.GRAAN;
             case TURKU:
-                return Product.HOUT;
+                return ProductEnum.HOUT;
         }
-        return Product.BIER; // Shouldn't happen
+        return ProductEnum.BIER; // Shouldn't happen
     }
 
     public String toString() {

@@ -1,6 +1,6 @@
 package wybren_erik.hanzespel;
 
-public enum Product {
+public enum ProductEnum {
     BIER(100),
     STOKVIS(300),
     ZOUT(150),
@@ -15,7 +15,7 @@ public enum Product {
 
     private int price;
 
-    Product(int price) {
+    ProductEnum(int price) {
         this.price = price;
     }
 

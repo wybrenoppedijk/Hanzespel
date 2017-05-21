@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import wybren_erik.hanzespel.ProductEnum;
 import wybren_erik.hanzespel.R;
 import wybren_erik.hanzespel.model.Product;
 
@@ -36,7 +35,7 @@ public class InventoryAdapter extends ArrayAdapter<Product> {
 
         TextView amount = (TextView) view.findViewById(R.id.handel_inventory_amount);
         TextView productName = (TextView) view.findViewById(R.id.handel_inventory_prouct_name);
-        ImageView icon = (ImageView) view.findViewById(R.id.icon);
+        ImageView icon = (ImageView) view.findViewById(R.id.handel_inventory_icon);
 
         icon.setImageResource(getProperImage(product));
         amount.setText("" + product.getAmount());
@@ -54,7 +53,7 @@ public class InventoryAdapter extends ArrayAdapter<Product> {
             case LAKEN: return R.mipmap.blanket;
             case WAS: return R.mipmap.wax;
             case BONT: return R.mipmap.fur;
-            case IJZER: return R.mipmap.ironBar;
+            case IJZER: return R.mipmap.iron_bar;
             case GRAAN: return R.mipmap.wheet;
             case HOUT: return R.mipmap.wood;
             default: return R.mipmap.ic_launcher;

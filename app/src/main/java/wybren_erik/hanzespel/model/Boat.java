@@ -5,18 +5,18 @@ import wybren_erik.hanzespel.Location;
 
 public class Boat {
 
-    private Inventory inventory;
+    private InventoryModel inventoryModel;
     private City location;
     private String name;
 
-    public Boat(Inventory inventory, City location, String name) {
-        this.inventory = inventory;
+    public Boat(InventoryModel inventoryModel, City location, String name) {
+        this.inventoryModel = inventoryModel;
         this.location = location;
         this.name = name;
     }
 
-    public Boat(Inventory inventory, String name) {
-        this.inventory = inventory;
+    public Boat(InventoryModel inventoryModel, String name) {
+        this.inventoryModel = inventoryModel;
         this.location = new City(Location.KAMPEN);
         this.name = name;
     }
@@ -25,8 +25,8 @@ public class Boat {
         return name;
     }
 
-    public Inventory getInventory() {
-        return inventory;
+    public InventoryModel getInventoryModel() {
+        return inventoryModel;
     }
 
     public City getLocation() {

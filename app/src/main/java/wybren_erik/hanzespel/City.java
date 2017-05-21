@@ -5,11 +5,11 @@ import wybren_erik.hanzespel.interfaces.Vertex;
 public class City implements Vertex<Location> {
 
     private Location location;
-    private Product product;
+    private ProductEnum productEnum;
 
     public City(Location name) {
         this.location = name;
-        this.product = name.getProduct();
+        this.productEnum = name.getProduct();
     }
 
     @Override
@@ -17,8 +17,8 @@ public class City implements Vertex<Location> {
         return location;
     }
 
-    public Product getProduct() {
-        return product;
+    public ProductEnum getProductEnum() {
+        return productEnum;
     }
 
 }

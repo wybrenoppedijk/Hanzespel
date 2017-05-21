@@ -14,6 +14,9 @@ import wybren_erik.hanzespel.City;
 import wybren_erik.hanzespel.Location;
 import wybren_erik.hanzespel.R;
 import wybren_erik.hanzespel.RoadMap;
+import wybren_erik.hanzespel.fragments.HandelFragment;
+import wybren_erik.hanzespel.fragments.MapFragment;
+import wybren_erik.hanzespel.fragments.StatusFragment;
 
 public class MainActivity extends AppCompatActivity {
 

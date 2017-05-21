@@ -1,4 +1,4 @@
-package wybren_erik.hanzespel.activiy;
+package wybren_erik.hanzespel.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,7 +13,8 @@ import wybren_erik.hanzespel.City;
 import wybren_erik.hanzespel.Location;
 import wybren_erik.hanzespel.R;
 import wybren_erik.hanzespel.model.Boat;
-import wybren_erik.hanzespel.model.Inventory;
+import wybren_erik.hanzespel.model.InventoryModel;
+import wybren_erik.hanzespel.model.Product;
 
 public class MapFragment extends Fragment {
 
@@ -27,7 +28,7 @@ public class MapFragment extends Fragment {
         final TextView boatLocationTextView = (TextView) view.findViewById(R.id.map_menu_current_location);
         final Button debugButton = (Button) view.findViewById(R.id.DEBUG_BUTTON);
 
-        if(boat == null) boat = new Boat(new Inventory(), "Het Schip der Null");
+        if(boat == null) boat = new Boat(InventoryModel.getInstance(), "Het Schip der Null");
         boatNameTextView.setText(boat.getName());
         boatLocationTextView.setText(boat.getLocation().getName().toString());
 

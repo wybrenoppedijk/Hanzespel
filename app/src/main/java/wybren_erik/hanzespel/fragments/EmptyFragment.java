@@ -1,4 +1,4 @@
-package wybren_erik.hanzespel.activiy;
+package wybren_erik.hanzespel.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
