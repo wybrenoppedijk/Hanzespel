@@ -12,23 +12,6 @@
         android:layout_marginStart="24dp"
         android:textSize="24sp"/>
 
-    <ImageView
-        android:id="@+id/status_inventory_icon"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_alignStart="@id/INTERNAL_inv_text"
-        android:layout_below="@id/INTERNAL_inv_text"
-        android:layout_marginTop="4dp"
-        app:srcCompat="@mipmap/status_icon" />
-
-    <TextView
-        android:layout_alignBottom="@id/status_inventory_icon"
-        android:text="TESTTESTTEST"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/status_inventory_icon"
-        android:textSize="18sp"
-        android:layout_marginStart="4dp"/>
 
     <TextView
         android:text="@string/position_string"
@@ -38,7 +21,7 @@
         android:layout_alignStart="@id/INTERNAL_inv_text"
         android:textSize="24sp"
         android:layout_marginTop="16dp"
-        android:layout_below="@id/status_inventory_icon" />
+        android:layout_below="@id/INTERNAL_inv_text" />
 
     <TextView
         android:text="TESTTESTTEST"
