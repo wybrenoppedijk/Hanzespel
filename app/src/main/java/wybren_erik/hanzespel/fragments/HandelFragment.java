@@ -26,9 +26,9 @@ public class HandelFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_handel, container, false);
-        InventoryModel.getInstance().addProduct(new Product(ProductEnum.ZOUT, 3));
-        InventoryModel.getInstance().addProduct(new Product(ProductEnum.STOKVIS, 3));
-        InventoryModel.getInstance().addProduct(new Product(ProductEnum.BONT, 3));
+        InventoryModel.getInstance().addProduct(new Product(ProductEnum.ZOUT, 3)); //For debug
+        InventoryModel.getInstance().addProduct(new Product(ProductEnum.STOKVIS, 3)); //For debug
+        InventoryModel.getInstance().addProduct(new Product(ProductEnum.BONT, 3)); //For debug
 
         InventoryAdapter adapter = new InventoryAdapter(getContext(), InventoryModel.getInstance().getProducts());
 

@@ -7,7 +7,9 @@
         android:id="@+id/handel_inventory_icon"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:src="@mipmap/beer" />
+        android:src="@mipmap/beer"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"/>
 
     <TextView
         android:id="@+id/handel_inventory_amount"
