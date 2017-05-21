@@ -19,8 +19,8 @@ public class MainActivity extends AppCompatActivity {
 
     private RoadMap cityMap;
     private StatusFragment statusFragment;
-    private EmptyFragment mapFragment;
-    private MapFragment handelFragment;
+    private HandelFragment handelFragment;
+    private MapFragment mapFragment;
     private Fragment currentFragment;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -73,8 +73,8 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
         statusFragment = new StatusFragment();
-        handelFragment = new MapFragment();
-        mapFragment = new EmptyFragment();
+        handelFragment = new HandelFragment();
+        mapFragment = new MapFragment();
 
         transaction.add(R.id.main_fragment, statusFragment);
         currentFragment = statusFragment;
