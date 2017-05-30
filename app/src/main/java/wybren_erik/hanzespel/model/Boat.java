@@ -15,6 +15,7 @@ public class Boat {
     private InventoryModel inventoryModel;
     private City location;
     private String name;
+    private static boolean inDock = true;
     private static Set<BoatListener> listeners = new HashSet<>();
 
     public Boat(InventoryModel inventoryModel, City location, String name) {
@@ -42,6 +43,7 @@ public class Boat {
     }
 
     public void goToCity(City location) {
+        inDock = false;
         Timer timer = new Timer();
         final long startTime = System.currentTimeMillis();
         final long delay = this.location.getName().getTravelTime(location.getName());
@@ -52,6 +54,7 @@ public class Boat {
                 if(System.currentTimeMillis() - startTime >= delay) {
                     for(BoatListener l : listeners) {
                         l.onArrive();
+                        inDock = true;
                     }
                     cancel();
                 }
@@ -67,4 +70,9 @@ public class Boat {
     public static void addListener(BoatListener l) {
         listeners.add(l);
     }
+
+    public static boolean isInDock() {
+        return inDock;
+    }
+
 }

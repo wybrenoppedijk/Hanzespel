@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -8,8 +9,8 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:src="@mipmap/beer"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="2dp"/>
+        android:layout_marginBottom="2dp"
+        android:layout_alignParentTop="true" />
 
     <TextView
         android:id="@+id/handel_inventory_amount"
@@ -36,9 +37,44 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/x"
-        android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/x"
         android:gravity="center"
-        android:text="Beer" />
+        android:text="Beer"
+        android:layout_alignTop="@+id/handel_inventory_icon" />
+
+    <Button
+        android:id="@+id/decreaseTradeItem"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/handel_inventory_prouct_name"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@+id/amountOfTradeItems"
+        android:gravity="center"
+        android:text="-"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/amountOfTradeItems"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="test"
+        android:gravity="center"
+        android:layout_toStartOf="@+id/increaseTradeItem"
+        android:layout_alignBottom="@+id/decreaseTradeItem"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
+
+    <Button
+        android:id="@+id/increaseTradeItem"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/handel_inventory_prouct_name"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:text="+"
+        android:textSize="14sp" />
 
 </RelativeLayout>

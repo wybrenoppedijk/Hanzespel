@@ -6,12 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import wybren_erik.hanzespel.R;
+import wybren_erik.hanzespel.model.Boat;
+import wybren_erik.hanzespel.model.InventoryModel;
 import wybren_erik.hanzespel.model.Product;
 
 /**
@@ -19,6 +22,9 @@ import wybren_erik.hanzespel.model.Product;
  */
 
 public class InventoryAdapter extends ArrayAdapter<Product> {
+
+    private int amountOfTradeItems = 0;
+
     public InventoryAdapter(@NonNull Context context, ArrayList<Product> products) {
         super(context, R.layout.list_item, products);
     }
@@ -31,15 +37,48 @@ public class InventoryAdapter extends ArrayAdapter<Product> {
         if (convertView == null) {
             view = inflater.inflate(R.layout.list_item, parent, false);
         }
-        Product product = getItem(position);
+        final Product product = getItem(position);
 
         TextView amount = (TextView) view.findViewById(R.id.handel_inventory_amount);
         TextView productName = (TextView) view.findViewById(R.id.handel_inventory_prouct_name);
         ImageView icon = (ImageView) view.findViewById(R.id.handel_inventory_icon);
 
+        Button decrease = (Button) view.findViewById(R.id.decreaseTradeItem);
+        final TextView amountOfTradeItemsTV = (TextView) view.findViewById(R.id.amountOfTradeItems);
+        Button increase = (Button) view.findViewById(R.id.increaseTradeItem);
+
         icon.setImageResource(getProperImage(product));
         amount.setText("" + product.getAmount());
         productName.setText(getProductName(product));
+
+        amountOfTradeItemsTV.setText("" + 0);
+
+
+        if (Boat.isInDock()) {
+
+            decrease.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (amountOfTradeItems > 0) {
+                        amountOfTradeItems--;
+                        amountOfTradeItemsTV.setText("" + amountOfTradeItems);
+                    }
+                }
+            });
+            increase.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (amountOfTradeItems < product.getAmount()) {
+                        amountOfTradeItems++;
+                        amountOfTradeItemsTV.setText("" + amountOfTradeItems);
+                    }
+                }
+            });
+        } else {
+            decrease.setVisibility(Button.GONE);
+            amountOfTradeItemsTV.setVisibility(TextView.GONE);
+            increase.setVisibility(Button.GONE);
+        }
 
         return view;
     }
