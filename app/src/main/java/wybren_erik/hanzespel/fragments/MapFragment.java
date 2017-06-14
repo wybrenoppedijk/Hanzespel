@@ -17,7 +17,6 @@ import wybren_erik.hanzespel.R;
 import wybren_erik.hanzespel.RoadMap;
 import wybren_erik.hanzespel.interfaces.BoatListener;
 import wybren_erik.hanzespel.model.Boat;
-import wybren_erik.hanzespel.model.InventoryModel;
 
 public class MapFragment extends Fragment implements BoatListener {
 
@@ -25,10 +24,9 @@ public class MapFragment extends Fragment implements BoatListener {
     TextView boatLocationTextView;
     Button confirmButton;
     boolean isInit = false;
-    private RoadMap roadMap;
     private Boat boat;
     private static City destination;
-    private static String travelText;
+    public static String travelText;
     private Spinner travelList;
     private static int position;
 
@@ -43,9 +41,9 @@ public class MapFragment extends Fragment implements BoatListener {
         travelList = (Spinner) view.findViewById(R.id.map_menu_travel_list);
         confirmButton = (Button) view.findViewById(R.id.map_menu_button_go);
 
-        roadMap = RoadMap.getInstance();
+        RoadMap roadMap = RoadMap.getInstance();
 
-        if (boat == null) boat = new Boat(InventoryModel.getInstance(), "Het Schip der Null");
+        if (boat == null) boat = Boat.getInstance();
         boatNameTextView.setText(boat.getName());
         if(Boat.isInDock()) boatLocationTextView.setText(boat.getLocation().getName().toString());
         else {
@@ -96,7 +94,7 @@ public class MapFragment extends Fragment implements BoatListener {
     }
 
     @Override
-    public void onArrivalTimeChanged() {
+    public void onArrivalTimeChanged(long timeUntilArrival) {
         // Not needed yet, TODO
     }
 }

@@ -3,6 +3,6 @@ package wybren_erik.hanzespel.interfaces;
 public interface BoatListener {
 
     void onArrive();
-    void onArrivalTimeChanged();
+    void onArrivalTimeChanged(long timeUntilArrival);
 
 }

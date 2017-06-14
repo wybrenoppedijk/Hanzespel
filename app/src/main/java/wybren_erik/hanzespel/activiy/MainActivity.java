@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements BoatListener{
     }
 
     @Override
-    public void onArrivalTimeChanged() {
+    public void onArrivalTimeChanged(long timeUntilArrival) {
         // Do nothing
     }
 
