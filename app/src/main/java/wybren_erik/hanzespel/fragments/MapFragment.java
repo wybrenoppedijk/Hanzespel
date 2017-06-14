@@ -63,7 +63,7 @@ public class MapFragment extends Fragment implements BoatListener {
     }
 
     @Override
-    public void onArrivalTimeChanged(long newTimeUntilArrival) {
+    public void onArrivalTimeChanged() {
         // Not needed yet, TODO
     }
 }

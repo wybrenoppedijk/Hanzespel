@@ -2,21 +2,41 @@ package wybren_erik.hanzespel.model;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import wybren_erik.hanzespel.City;
 import wybren_erik.hanzespel.Location;
+import wybren_erik.hanzespel.Road;
 import wybren_erik.hanzespel.RoadMap;
 import wybren_erik.hanzespel.interfaces.BoatListener;
 
 public class Boat {
 
+    private static boolean inDock = true;
+    private static Set<BoatListener> listeners = new HashSet<>();
+    private final Runnable arrivalTask = new Runnable() {
+        @Override
+        public void run() {
+            for (BoatListener l : listeners) {
+                l.onArrive();
+                inDock = true;
+            }
+        }
+    };
+    private final Runnable updateTask = new Runnable() {
+        @Override
+        public void run() {
+            for (BoatListener l : listeners) {
+                l.onArrivalTimeChanged();
+            }
+        }
+    };
+
     private InventoryModel inventoryModel;
     private City location;
     private String name;
-    private static boolean inDock = true;
-    private static Set<BoatListener> listeners = new HashSet<>();
 
     public Boat(InventoryModel inventoryModel, City location, String name) {
         this.inventoryModel = inventoryModel;
@@ -28,6 +48,14 @@ public class Boat {
         this.inventoryModel = inventoryModel;
         this.location = RoadMap.getInstance().getCity(Location.KAMPEN);
         this.name = name;
+    }
+
+    public static void addListener(BoatListener l) {
+        listeners.add(l);
+    }
+
+    public static boolean isInDock() {
+        return inDock;
     }
 
     public String getName() {
@@ -44,35 +72,19 @@ public class Boat {
 
     public void goToCity(City location) {
         inDock = false;
-        Timer timer = new Timer();
-        final long startTime = System.currentTimeMillis();
-        final long delay = this.location.getName().getTravelTime(location.getName());
+        final ScheduledExecutorService arrivalExecutor = Executors.newSingleThreadScheduledExecutor();
+        final ScheduledExecutorService updateExecutor = Executors.newSingleThreadScheduledExecutor();
+        int travelTime = 0;
 
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                if(System.currentTimeMillis() - startTime >= delay) {
-                    for(BoatListener l : listeners) {
-                        l.onArrive();
-                        inDock = true;
-                    }
-                    cancel();
-                }
-                for(BoatListener l : listeners) {
-                    l.onArrivalTimeChanged(delay - (System.currentTimeMillis() - startTime));
-                }
+        Set<Road> roads = RoadMap.getInstance().getEdges(this.location);
+        for (Road r : roads) {
+            if (r.toNode().equals(location)) {
+                travelTime = r.getWeight() * 10;
             }
-        };
+        }
 
-        timer.schedule(task, 0, 1000);
-    }
-
-    public static void addListener(BoatListener l) {
-        listeners.add(l);
-    }
-
-    public static boolean isInDock() {
-        return inDock;
+        arrivalExecutor.schedule(arrivalTask, travelTime, TimeUnit.SECONDS);
+        updateExecutor.scheduleAtFixedRate(updateTask, 1, 1, TimeUnit.MILLISECONDS);
     }
 
 }

@@ -14,24 +14,28 @@ import wybren_erik.hanzespel.City;
 import wybren_erik.hanzespel.Location;
 import wybren_erik.hanzespel.R;
 import wybren_erik.hanzespel.RoadMap;
+import wybren_erik.hanzespel.dialog.ArrivedDialog;
 import wybren_erik.hanzespel.fragments.HandelFragment;
 import wybren_erik.hanzespel.fragments.MapFragment;
 import wybren_erik.hanzespel.fragments.StatusFragment;
+import wybren_erik.hanzespel.interfaces.BoatListener;
+import wybren_erik.hanzespel.model.Boat;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements BoatListener {
 
     private RoadMap cityMap;
     private StatusFragment statusFragment;
     private HandelFragment handelFragment;
     private MapFragment mapFragment;
     private Fragment currentFragment;
+    private ArrivedDialog arrivedWindow;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            Fragment newFragment = null;
+            Fragment newFragment;
             switch (item.getItemId()) {
                 case R.id.navigation_status:
                     newFragment = statusFragment;
@@ -74,7 +78,9 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        Boat.addListener(this);
 
+        arrivedWindow = new ArrivedDialog();
         statusFragment = new StatusFragment();
         handelFragment = new HandelFragment();
         mapFragment = new MapFragment();
@@ -82,6 +88,21 @@ public class MainActivity extends AppCompatActivity {
         transaction.add(R.id.main_fragment, statusFragment);
         currentFragment = statusFragment;
         transaction.commit();
+    }
+
+    @Override
+    public void onArrive() {
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                arrivedWindow.show(getSupportFragmentManager(), "arrivedWindow");
+            }
+        });
+    }
+
+    @Override
+    public void onArrivalTimeChanged() {
+        // Do nothing
     }
 
     @SuppressWarnings("unchecked")
@@ -112,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
         cityMap.addVertex(danzig);
         cityMap.addVertex(turku);
 
-        cityMap.addEdge(kampen, bergen, 18);
+        cityMap.addEdge(kampen, bergen, 1); // TODO: THIS WAS 18 BUT DEBUG PURPOSES
         cityMap.addEdge(kampen, lubeck, 20);
         cityMap.addEdge(kampen, stralsund, 20);
         cityMap.addEdge(kampen, riga, 32);

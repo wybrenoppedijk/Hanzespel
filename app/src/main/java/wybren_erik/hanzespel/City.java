@@ -17,8 +17,4 @@ public class City implements Vertex<Location> {
         return location;
     }
 
-    public ProductEnum getProductEnum() {
-        return productEnum;
-    }
-
 }
