@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import wybren_erik.hanzespel.R;
 import wybren_erik.hanzespel.model.Boat;
@@ -23,7 +24,8 @@ import wybren_erik.hanzespel.model.Product;
 
 public class InventoryAdapter extends ArrayAdapter<Product> {
 
-    private int amountOfTradeItems = 0;
+    //private int amountOfTradeItems = 0;
+    private HashMap<Integer, Integer> amountOfTradeItems = new HashMap<>();
 
     public InventoryAdapter(@NonNull Context context, ArrayList<Product> products) {
         super(context, R.layout.list_item, products);
@@ -31,7 +33,7 @@ public class InventoryAdapter extends ArrayAdapter<Product> {
 
     @NonNull
     @Override
-    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+    public View getView(final int position, View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View view = convertView;
         if (convertView == null) {
@@ -59,18 +61,22 @@ public class InventoryAdapter extends ArrayAdapter<Product> {
             decrease.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (amountOfTradeItems > 0) {
-                        amountOfTradeItems--;
-                        amountOfTradeItemsTV.setText("" + amountOfTradeItems);
+                    if (hasmapDefaultValue(amountOfTradeItems, position) > 0) {
+                        int temp =hasmapDefaultValue(amountOfTradeItems, position);
+                        temp--;
+                        amountOfTradeItems.put(position, temp);
+                        amountOfTradeItemsTV.setText("" + hasmapDefaultValue(amountOfTradeItems, position));
                     }
                 }
             });
             increase.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (amountOfTradeItems < product.getAmount()) {
-                        amountOfTradeItems++;
-                        amountOfTradeItemsTV.setText("" + amountOfTradeItems);
+                    if (hasmapDefaultValue(amountOfTradeItems, position) < product.getAmount()) {
+                        int temp =hasmapDefaultValue(amountOfTradeItems, position);
+                        temp++;
+                        amountOfTradeItems.put(position, temp);
+                        amountOfTradeItemsTV.setText("" + hasmapDefaultValue(amountOfTradeItems, position));
                     }
                 }
             });
@@ -81,6 +87,14 @@ public class InventoryAdapter extends ArrayAdapter<Product> {
         }
 
         return view;
+    }
+
+    private int hasmapDefaultValue(HashMap<Integer, Integer> hashMap, int key){
+        if(!hashMap.containsKey(key)){
+            return 0;
+        } else {
+            return hashMap.get(key);
+        }
     }
 
     private int getProperImage(Product product) {
