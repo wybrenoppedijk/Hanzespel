@@ -13,7 +13,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import wybren_erik.hanzespel.ProductEnum;
 import wybren_erik.hanzespel.R;
+import wybren_erik.hanzespel.interfaces.ItemTradeHandler;
 import wybren_erik.hanzespel.model.Boat;
 import wybren_erik.hanzespel.model.InventoryModel;
 import wybren_erik.hanzespel.model.Product;
@@ -23,6 +25,10 @@ import wybren_erik.hanzespel.model.Product;
  */
 
 public class InventoryAdapter extends ArrayAdapter<Product> {
+
+    private static ItemTradeHandler listener;
+    private int totalAmountOfTradeValue;
+
 
     //private int amountOfTradeItems = 0;
     private HashMap<Integer, Integer> amountOfTradeItems = new HashMap<>();
@@ -66,6 +72,8 @@ public class InventoryAdapter extends ArrayAdapter<Product> {
                         temp--;
                         amountOfTradeItems.put(position, temp);
                         amountOfTradeItemsTV.setText("" + hasmapDefaultValue(amountOfTradeItems, position));
+                        totalAmountOfTradeValue -= getProductValue(product.getProductEnum());
+                        listener.onTotalAmountChangedListener(totalAmountOfTradeValue);
                     }
                 }
             });
@@ -77,6 +85,8 @@ public class InventoryAdapter extends ArrayAdapter<Product> {
                         temp++;
                         amountOfTradeItems.put(position, temp);
                         amountOfTradeItemsTV.setText("" + hasmapDefaultValue(amountOfTradeItems, position));
+                        totalAmountOfTradeValue += getProductValue(product.getProductEnum());
+                        listener.onTotalAmountChangedListener(totalAmountOfTradeValue);
                     }
                 }
             });
@@ -87,6 +97,13 @@ public class InventoryAdapter extends ArrayAdapter<Product> {
         }
 
         return view;
+    }
+    public static void addListener(ItemTradeHandler itemTradeHandler) {
+        listener = itemTradeHandler;
+    }
+
+    public int getProductValue(ProductEnum product){
+        return product.getPrice();
     }
 
     private int hasmapDefaultValue(HashMap<Integer, Integer> hashMap, int key){
@@ -128,6 +145,7 @@ public class InventoryAdapter extends ArrayAdapter<Product> {
             default: return "Error";
         }
     }
+
 
 }
 

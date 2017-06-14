@@ -14,14 +14,16 @@ import wybren_erik.hanzespel.City;
 import wybren_erik.hanzespel.Location;
 import wybren_erik.hanzespel.R;
 import wybren_erik.hanzespel.RoadMap;
+import wybren_erik.hanzespel.controller.InventoryAdapter;
 import wybren_erik.hanzespel.dialog.ArrivedDialog;
 import wybren_erik.hanzespel.fragments.HandelFragment;
 import wybren_erik.hanzespel.fragments.MapFragment;
 import wybren_erik.hanzespel.fragments.StatusFragment;
 import wybren_erik.hanzespel.interfaces.BoatListener;
+import wybren_erik.hanzespel.interfaces.ItemTradeHandler;
 import wybren_erik.hanzespel.model.Boat;
 
-public class MainActivity extends AppCompatActivity implements BoatListener {
+public class MainActivity extends AppCompatActivity implements BoatListener{
 
     private RoadMap cityMap;
     private StatusFragment statusFragment;
@@ -254,5 +256,4 @@ public class MainActivity extends AppCompatActivity implements BoatListener {
         cityMap.addEdge(turku, danzig, 10);
         cityMap.addEdge(turku, stralsund, 14);
     }
-
 }

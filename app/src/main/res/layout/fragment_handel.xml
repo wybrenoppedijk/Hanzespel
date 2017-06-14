@@ -14,12 +14,40 @@
     <ListView
         android:id="@+id/handel_inventory_products"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="300dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:layout_below="@id/INTERNAL_inv_text">
     </ListView>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Totaal bedrag:"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:id="@+id/textView2"
+        android:layout_below="@+id/handel_inventory_products"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/TradeProfitMoney"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"
+        android:textAlignment="center" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Verkoop"
+        android:layout_below="@+id/TradeProfitMoney"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
 
 
 </RelativeLayout>
