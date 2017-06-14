@@ -12,7 +12,8 @@ public enum Location {
     AALBORG("Aalborg"),
     STOCKHOLM("Stockholm"),
     DANZIG("Danzig"),
-    TURKU("Turku");
+    TURKU("Turku"),
+    SEA("Zee");
 
     private String locName;
 
@@ -76,6 +77,8 @@ public enum Location {
                 return DANZIG;
             case "turku":
                 return TURKU;
+            case "zee":
+                return SEA;
             default:
                 return KAMPEN;
         }

@@ -28,24 +28,31 @@ public class MapFragment extends Fragment implements BoatListener {
     private RoadMap roadMap;
     private Boat boat;
     private static City destination;
+    private static String travelText;
+    private Spinner travelList;
+    private static int position;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if (!isInit) {
-            Boat.addListener(this);
-        }
+        if (!isInit) Boat.addListener(this);
+
         final View view = inflater.inflate(R.layout.map_fragment, container, false);
         boatNameTextView = (TextView) view.findViewById(R.id.map_menu_boat_name);
         boatLocationTextView = (TextView) view.findViewById(R.id.map_menu_current_location);
-        final Spinner travelList = (Spinner) view.findViewById(R.id.map_menu_travel_list);
+        travelList = (Spinner) view.findViewById(R.id.map_menu_travel_list);
         confirmButton = (Button) view.findViewById(R.id.map_menu_button_go);
 
         roadMap = RoadMap.getInstance();
 
         if (boat == null) boat = new Boat(InventoryModel.getInstance(), "Het Schip der Null");
         boatNameTextView.setText(boat.getName());
-        boatLocationTextView.setText(boat.getLocation().getName().toString());
+        if(Boat.isInDock()) boatLocationTextView.setText(boat.getLocation().getName().toString());
+        else {
+            boatLocationTextView.setText(travelText);
+            travelList.setSelection(position);
+            travelList.setEnabled(false);
+        }
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.cities_vector, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -54,12 +61,18 @@ public class MapFragment extends Fragment implements BoatListener {
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(!Boat.isInDock()) return;
                 Object selectedLocation = travelList.getSelectedItem();
                 City destination = RoadMap.getInstance().getCity(Location.fromString((String) selectedLocation));
+
                 if(boat.getLocation().equals(travelList.getSelectedItem())) return;
                 boat.goToCity(destination);
-                boatLocationTextView.setText("Aan het reizen van " + boatLocationTextView.getText() + " naar " + (String) selectedLocation);
+
+                travelText = "Aan het reizen van " + boatLocationTextView.getText() + " naar " + selectedLocation;
+                boatLocationTextView.setText(MapFragment.travelText);
                 MapFragment.destination = destination;
+                position = travelList.getSelectedItemPosition();
+                travelList.setEnabled(false);
             }
         });
 
@@ -77,6 +90,7 @@ public class MapFragment extends Fragment implements BoatListener {
             @Override
             public void run() {
                 boatLocationTextView.setText(destination.getName().toString());
+                travelList.setEnabled(true);
             }
         });
     }
