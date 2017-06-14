@@ -52,14 +52,33 @@ public enum Location {
         return locName;
     }
 
-    /**
-     * Get the travel time to another location in milliseconds.
-     *
-     * @param to The location to go to.
-     * @return The travel time in ms.
-     */
-    public int getTravelTime(Location to) {
-        return 2000; // TODO
+    public static Location fromString(String name) {
+        switch(name.toLowerCase()) {
+            case "kampen":
+                return KAMPEN;
+            case "bergen":
+                return BERGEN;
+            case "lübeck":
+                return LUBECK;
+            case "stralsund":
+                return STRALSUND;
+            case "riga":
+                return RIGA;
+            case "tallin":
+                return TALLIN;
+            case "visby":
+                return VISBY;
+            case "aalborg":
+                return AALBORG;
+            case "stockholm":
+                return STOCKHOLM;
+            case "danzig":
+                return DANZIG;
+            case "turku":
+                return TURKU;
+            default:
+                return KAMPEN;
+        }
     }
 
 }

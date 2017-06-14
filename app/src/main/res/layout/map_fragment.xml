@@ -2,8 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-
-
     <TextView
         android:id="@+id/map_menu_boat_name"
         android:layout_width="wrap_content"
@@ -15,10 +13,20 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/map_menu_boat_name"/>
 
-    <Button
-        android:id="@+id/DEBUG_BUTTON"
+    <Spinner
+        android:id="@+id/map_menu_travel_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/map_menu_current_location" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/map_menu_current_location"
+        android:spinnerMode="dialog" />
+
+    <Button
+        android:id="@+id/map_menu_button_go"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vertrekken"
+        android:layout_below="@id/map_menu_travel_list"
+        android:layout_marginTop="20dp"/>
 
 </RelativeLayout>

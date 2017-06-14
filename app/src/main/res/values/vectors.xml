@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="cities_vector">
+        <item>Kampen</item>
+        <item>Bergen</item>
+        <item>Lübeck</item>
+        <item>Stralsund</item>
+        <item>Riga</item>
+        <item>Tallin</item>
+        <item>Visby</item>
+        <item>Aalborg</item>
+        <item>Stockholm</item>
+        <item>Danzig</item>
+        <item>Turku</item>
+    </string-array>
+</resources>

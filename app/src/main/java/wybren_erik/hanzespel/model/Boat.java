@@ -85,6 +85,7 @@ public class Boat {
 
         arrivalExecutor.schedule(arrivalTask, travelTime, TimeUnit.SECONDS);
         updateExecutor.scheduleAtFixedRate(updateTask, 1, 1, TimeUnit.MILLISECONDS);
+        this.location = location;
     }
 
 }
