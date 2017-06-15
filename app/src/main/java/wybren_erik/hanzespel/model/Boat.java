@@ -21,8 +21,13 @@ public class Boat {
     private final Runnable updateTask = new Runnable() {
         @Override
         public void run() {
-            for (BoatListener l : listeners) {
-                l.onArrivalTimeChanged(arrivalFuture.getDelay(TimeUnit.SECONDS));
+            System.out.println(arrivalFuture.getDelay(TimeUnit.SECONDS));
+            try {
+                for (BoatListener l : listeners) {
+                    l.onArrivalTimeChanged(arrivalFuture.getDelay(TimeUnit.SECONDS));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     };
@@ -30,10 +35,14 @@ public class Boat {
     private final Runnable arrivalTask = new Runnable() {
         @Override
         public void run() {
-            for (BoatListener l : listeners) {
-                l.onArrive();
-                inDock = true;
-                updateExecutor.shutdown();
+            try {
+                for (BoatListener l : listeners) {
+                    l.onArrive();
+                    inDock = true;
+                    updateExecutor.shutdown();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     };
@@ -92,6 +101,9 @@ public class Boat {
         System.out.println("Travel time: " + travelTime);
         updateExecutor.scheduleAtFixedRate(updateTask, 1, 1, TimeUnit.SECONDS);
         this.location = location;
+        for(BoatListener l : listeners) {
+            l.onDepart(travelTime);
+        }
     }
 
 }

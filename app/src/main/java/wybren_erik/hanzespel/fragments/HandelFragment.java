@@ -1,7 +1,9 @@
 package wybren_erik.hanzespel.fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +24,7 @@ import wybren_erik.hanzespel.model.Boat;
 import wybren_erik.hanzespel.model.InventoryModel;
 import wybren_erik.hanzespel.model.Product;
 
-public class HandelFragment extends Fragment implements ItemTradeHandler, BoatListener {
+public class HandelFragment extends Fragment implements ItemTradeHandler {
 
     private TextView totalAmountTV;
     private InventoryModel model = InventoryModel.getInstance();
@@ -31,8 +33,6 @@ public class HandelFragment extends Fragment implements ItemTradeHandler, BoatLi
     private int totalBuyValue = 0;
     private int totalBuyItems = 0;
     private HashMap<Product, Integer> productHashmap;
-    private ArrivedDialog arrivedDialog;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,7 +43,6 @@ public class HandelFragment extends Fragment implements ItemTradeHandler, BoatLi
         Boat.addListener(this);
 
         final SellAdapter sellAdapter = new SellAdapter(getContext(), InventoryModel.getInstance().getProducts());
-        arrivedDialog = new ArrivedDialog();
 
         ListView listView = (ListView) view.findViewById(R.id.handel_inventory_products);
         ImageView icon = (ImageView) view.findViewById(R.id.handel_buy_icon);
@@ -229,13 +228,4 @@ public class HandelFragment extends Fragment implements ItemTradeHandler, BoatLi
         totalAmountTV.setText("Totale Waarde: " + totalAmount);
     }
 
-    @Override
-    public void onArrive() {
-        arrivedDialog.show(getFragmentManager(), "arrivedDialog");
-    }
-
-    @Override
-    public void onArrivalTimeChanged(long timeUntilArrival) {
-        // Ignored
-    }
 }

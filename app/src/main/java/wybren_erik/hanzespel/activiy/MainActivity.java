@@ -14,16 +14,20 @@ import wybren_erik.hanzespel.City;
 import wybren_erik.hanzespel.Location;
 import wybren_erik.hanzespel.R;
 import wybren_erik.hanzespel.RoadMap;
+import wybren_erik.hanzespel.dialog.ArrivedDialog;
 import wybren_erik.hanzespel.fragments.HandelFragment;
 import wybren_erik.hanzespel.fragments.MapFragment;
 import wybren_erik.hanzespel.fragments.StatusFragment;
+import wybren_erik.hanzespel.interfaces.BoatListener;
+import wybren_erik.hanzespel.model.Boat;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements BoatListener {
 
     private StatusFragment statusFragment;
     private HandelFragment handelFragment;
     private MapFragment mapFragment;
     private Fragment currentFragment;
+    private ArrivedDialog arrivedDialog;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -68,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
+        Boat.addListener(this);
         initMap();
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -77,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         statusFragment = new StatusFragment();
         handelFragment = new HandelFragment();
         mapFragment = new MapFragment();
+        arrivedDialog = new ArrivedDialog();
 
         transaction.add(R.id.main_fragment, statusFragment);
         currentFragment = statusFragment;
@@ -122,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
         cityMap.addEdge(kampen, danzig, 25);
         cityMap.addEdge(kampen, turku, 34);
 
-        cityMap.addEdge(bergen, kampen, 18);
+        cityMap.addEdge(bergen, kampen, 1); // TODO: THIS WAS 18 BUT DEBUG PURPOSES
         cityMap.addEdge(bergen, lubeck, 18);
         cityMap.addEdge(bergen, stralsund, 15);
         cityMap.addEdge(bergen, riga, 30);
@@ -231,5 +237,20 @@ public class MainActivity extends AppCompatActivity {
         cityMap.addEdge(turku, stockholm, 5);
         cityMap.addEdge(turku, danzig, 10);
         cityMap.addEdge(turku, stralsund, 14);
+    }
+
+    @Override
+    public void onDepart(long travelTime) {
+        //Ignored
+    }
+
+    @Override
+    public void onArrive() {
+        arrivedDialog.show(getSupportFragmentManager(), "arrivedDialog");
+    }
+
+    @Override
+    public void onArrivalTimeChanged(long timeUntilArrival) {
+        // Ignored
     }
 }
