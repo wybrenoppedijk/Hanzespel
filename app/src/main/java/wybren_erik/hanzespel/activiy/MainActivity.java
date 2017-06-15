@@ -14,23 +14,16 @@ import wybren_erik.hanzespel.City;
 import wybren_erik.hanzespel.Location;
 import wybren_erik.hanzespel.R;
 import wybren_erik.hanzespel.RoadMap;
-import wybren_erik.hanzespel.controller.InventoryAdapter;
-import wybren_erik.hanzespel.dialog.ArrivedDialog;
 import wybren_erik.hanzespel.fragments.HandelFragment;
 import wybren_erik.hanzespel.fragments.MapFragment;
 import wybren_erik.hanzespel.fragments.StatusFragment;
-import wybren_erik.hanzespel.interfaces.BoatListener;
-import wybren_erik.hanzespel.interfaces.ItemTradeHandler;
-import wybren_erik.hanzespel.model.Boat;
 
-public class MainActivity extends AppCompatActivity implements BoatListener{
+public class MainActivity extends AppCompatActivity {
 
-    private RoadMap cityMap;
     private StatusFragment statusFragment;
     private HandelFragment handelFragment;
     private MapFragment mapFragment;
     private Fragment currentFragment;
-    private ArrivedDialog arrivedWindow;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -80,9 +73,7 @@ public class MainActivity extends AppCompatActivity implements BoatListener{
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        Boat.addListener(this);
 
-        arrivedWindow = new ArrivedDialog();
         statusFragment = new StatusFragment();
         handelFragment = new HandelFragment();
         mapFragment = new MapFragment();
@@ -92,24 +83,9 @@ public class MainActivity extends AppCompatActivity implements BoatListener{
         transaction.commit();
     }
 
-    @Override
-    public void onArrive() {
-        this.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                arrivedWindow.show(getSupportFragmentManager(), "arrivedWindow");
-            }
-        });
-    }
-
-    @Override
-    public void onArrivalTimeChanged(long timeUntilArrival) {
-        // Do nothing
-    }
-
     @SuppressWarnings("unchecked")
     private void initMap() {
-        cityMap = RoadMap.getInstance();
+        RoadMap cityMap = RoadMap.getInstance();
 
         City kampen = new City(Location.KAMPEN);
         City bergen = new City(Location.BERGEN);

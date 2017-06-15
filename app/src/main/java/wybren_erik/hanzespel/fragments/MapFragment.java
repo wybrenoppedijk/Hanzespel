@@ -15,6 +15,7 @@ import wybren_erik.hanzespel.City;
 import wybren_erik.hanzespel.Location;
 import wybren_erik.hanzespel.R;
 import wybren_erik.hanzespel.RoadMap;
+import wybren_erik.hanzespel.dialog.ArrivedDialog;
 import wybren_erik.hanzespel.interfaces.BoatListener;
 import wybren_erik.hanzespel.model.Boat;
 
@@ -29,6 +30,7 @@ public class MapFragment extends Fragment implements BoatListener {
     public static String travelText;
     private Spinner travelList;
     private static int position;
+    private ArrivedDialog arrivedDialog;
 
     @Nullable
     @Override
@@ -40,6 +42,7 @@ public class MapFragment extends Fragment implements BoatListener {
         boatLocationTextView = (TextView) view.findViewById(R.id.map_menu_current_location);
         travelList = (Spinner) view.findViewById(R.id.map_menu_travel_list);
         confirmButton = (Button) view.findViewById(R.id.map_menu_button_go);
+        arrivedDialog = new ArrivedDialog();
 
         RoadMap roadMap = RoadMap.getInstance();
 
@@ -89,6 +92,8 @@ public class MapFragment extends Fragment implements BoatListener {
             public void run() {
                 boatLocationTextView.setText(destination.getName().toString());
                 travelList.setEnabled(true);
+                arrivedDialog.show(getFragmentManager(), "arrivedWindow");
+
             }
         });
     }

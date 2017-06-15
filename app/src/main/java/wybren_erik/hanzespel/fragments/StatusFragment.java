@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.Locale;
 
 import wybren_erik.hanzespel.R;
+import wybren_erik.hanzespel.dialog.ArrivedDialog;
 import wybren_erik.hanzespel.interfaces.BoatListener;
 import wybren_erik.hanzespel.model.Boat;
 
@@ -22,11 +23,12 @@ public class StatusFragment extends Fragment implements BoatListener {
     private TextView arrivalTimeTextView;
     private ProgressBar arrivalTimeBar;
     private boolean isInit = false;
+    private ArrivedDialog arrivedDialog;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //if (!isInit) Boat.addListener(this);
+        if (!isInit) Boat.addListener(this);
 
         final View view = inflater.inflate(R.layout.status_fragment, container, false);
 
@@ -34,6 +36,7 @@ public class StatusFragment extends Fragment implements BoatListener {
         balanceTextView = (TextView) view.findViewById(R.id.status_balance_text);
         arrivalTimeTextView = (TextView) view.findViewById(R.id.status_arrival_text);
         arrivalTimeBar = (ProgressBar) view.findViewById(R.id.status_arrival_progressbar);
+        arrivedDialog = new ArrivedDialog();
 
         if (!Boat.isInDock()) {
             positionTextView.setText(MapFragment.travelText);
@@ -52,6 +55,7 @@ public class StatusFragment extends Fragment implements BoatListener {
             @Override
             public void run() {
                 positionTextView.setText(Boat.getInstance().getLocation().getName().toString());
+                arrivedDialog.show(getFragmentManager(), "arrivedDialog");
             }
         });
     }

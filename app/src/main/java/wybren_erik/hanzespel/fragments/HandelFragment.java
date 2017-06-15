@@ -12,15 +12,19 @@ import android.widget.TextView;
 import wybren_erik.hanzespel.ProductEnum;
 import wybren_erik.hanzespel.R;
 import wybren_erik.hanzespel.controller.InventoryAdapter;
+import wybren_erik.hanzespel.dialog.ArrivedDialog;
+import wybren_erik.hanzespel.interfaces.BoatListener;
 import wybren_erik.hanzespel.interfaces.ItemTradeHandler;
+import wybren_erik.hanzespel.model.Boat;
 import wybren_erik.hanzespel.model.InventoryModel;
 import wybren_erik.hanzespel.model.Product;
 
-public class HandelFragment extends Fragment implements ItemTradeHandler {
+public class HandelFragment extends Fragment implements ItemTradeHandler, BoatListener {
 
     private boolean isInit = false;
     private int totalValue = 0;
     TextView totalAmountTV;
+    private ArrivedDialog arrivedDialog;
 
 
     @Override
@@ -33,10 +37,12 @@ public class HandelFragment extends Fragment implements ItemTradeHandler {
             InventoryModel.getInstance().addProduct(new Product(ProductEnum.ZOUT, 3)); //For debug
             InventoryModel.getInstance().addProduct(new Product(ProductEnum.STOKVIS, 3)); //For debug
             InventoryModel.getInstance().addProduct(new Product(ProductEnum.BONT, 3)); //For debug
+            Boat.addListener(this);
             isInit = true;
         }
 
         InventoryAdapter adapter = new InventoryAdapter(getContext(), InventoryModel.getInstance().getProducts());
+        arrivedDialog = new ArrivedDialog();
 
         ListView listView = (ListView) view.findViewById(R.id.handel_inventory_products);
         listView.setAdapter(adapter);
@@ -49,5 +55,15 @@ public class HandelFragment extends Fragment implements ItemTradeHandler {
     public void onTotalAmountChangedListener(int totalAmount) {
         System.out.println(totalAmount);
         totalAmountTV.setText("Totale Waarde: " + totalAmount);
+    }
+
+    @Override
+    public void onArrive() {
+        arrivedDialog.show(getFragmentManager(), "arrivedDialog");
+    }
+
+    @Override
+    public void onArrivalTimeChanged(long timeUntilArrival) {
+        // Ignored
     }
 }

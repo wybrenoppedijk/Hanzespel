@@ -21,13 +21,11 @@ public class Boat {
     private final Runnable updateTask = new Runnable() {
         @Override
         public void run() {
-            System.out.println(arrivalFuture.getDelay(TimeUnit.SECONDS));
             for (BoatListener l : listeners) {
-                //l.onArrivalTimeChanged(arrivalFuture.getDelay(TimeUnit.SECONDS));
+                l.onArrivalTimeChanged(arrivalFuture.getDelay(TimeUnit.SECONDS));
             }
         }
     };
-    private ScheduledExecutorService arrivalExecutor;
     private ScheduledExecutorService updateExecutor;
     private final Runnable arrivalTask = new Runnable() {
         @Override
@@ -76,9 +74,10 @@ public class Boat {
         return location;
     }
 
+    @SuppressWarnings("unchecked")
     public void goToCity(City location) {
         inDock = false;
-        arrivalExecutor = Executors.newSingleThreadScheduledExecutor();
+        ScheduledExecutorService arrivalExecutor = Executors.newSingleThreadScheduledExecutor();
         updateExecutor = Executors.newSingleThreadScheduledExecutor();
         int travelTime = 0;
 
