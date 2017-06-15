@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/handel_inventory_icon"
+        android:id="@+id/handel_trade_icon"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:src="@mipmap/beer"
@@ -16,9 +16,9 @@
         android:id="@+id/handel_inventory_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/handel_inventory_icon"
+        android:layout_alignBottom="@+id/handel_trade_icon"
         android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/handel_inventory_icon"
+        android:layout_toEndOf="@+id/handel_trade_icon"
         android:gravity="center"
         android:text="4" />
 
@@ -40,7 +40,7 @@
         android:layout_toEndOf="@+id/x"
         android:gravity="center"
         android:text="Beer"
-        android:layout_alignTop="@+id/handel_inventory_icon" />
+        android:layout_alignTop="@+id/handel_trade_icon" />
 
     <Button
         android:id="@+id/decreaseTradeItem"

@@ -15,6 +15,7 @@ import wybren_erik.hanzespel.R;
 import wybren_erik.hanzespel.dialog.ArrivedDialog;
 import wybren_erik.hanzespel.interfaces.BoatListener;
 import wybren_erik.hanzespel.model.Boat;
+import wybren_erik.hanzespel.model.InventoryModel;
 
 public class StatusFragment extends Fragment implements BoatListener {
 
@@ -37,6 +38,9 @@ public class StatusFragment extends Fragment implements BoatListener {
         arrivalTimeTextView = (TextView) view.findViewById(R.id.status_arrival_text);
         arrivalTimeBar = (ProgressBar) view.findViewById(R.id.status_arrival_progressbar);
         arrivedDialog = new ArrivedDialog();
+
+        balanceTextView.setText("ƒ"+InventoryModel.getInstance().getMoney());
+
 
         if (!Boat.isInDock()) {
             positionTextView.setText(MapFragment.travelText);

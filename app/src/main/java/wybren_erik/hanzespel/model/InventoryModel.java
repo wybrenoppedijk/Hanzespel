@@ -38,12 +38,8 @@ public class InventoryModel {
         this.money += money;
     }
 
-    public void setMoney(int money) {
-        if (money < this.money){
-
-        } else {
-            this.money = money;
-        }
+    public void withdrawMoney(int money) {
+        this.money -= money;
     }
 }
 

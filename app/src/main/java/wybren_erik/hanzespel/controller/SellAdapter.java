@@ -17,7 +17,6 @@ import wybren_erik.hanzespel.ProductEnum;
 import wybren_erik.hanzespel.R;
 import wybren_erik.hanzespel.interfaces.ItemTradeHandler;
 import wybren_erik.hanzespel.model.Boat;
-import wybren_erik.hanzespel.model.InventoryModel;
 import wybren_erik.hanzespel.model.Product;
 
 /**
@@ -31,7 +30,7 @@ public class SellAdapter extends ArrayAdapter<Product> {
 
 
     //private int amountOfTradeItems = 0;
-    private HashMap<Integer, Integer> amountOfTradeItems = new HashMap<>();
+    private HashMap<Integer, Integer> amountOfTradeItems = new HashMap<>(); //ToDo Reset this one to null if dataset has changed.
 
     public SellAdapter(@NonNull Context context, ArrayList<Product> products) {
         super(context, R.layout.list_item, products);
@@ -49,7 +48,7 @@ public class SellAdapter extends ArrayAdapter<Product> {
 
         TextView amount = (TextView) view.findViewById(R.id.handel_inventory_amount);
         TextView productName = (TextView) view.findViewById(R.id.handel_inventory_prouct_name);
-        ImageView icon = (ImageView) view.findViewById(R.id.handel_inventory_icon);
+        ImageView icon = (ImageView) view.findViewById(R.id.handel_trade_icon);
 
         Button decrease = (Button) view.findViewById(R.id.decreaseTradeItem);
         final TextView amountOfTradeItemsTV = (TextView) view.findViewById(R.id.amountOfTradeItems);
