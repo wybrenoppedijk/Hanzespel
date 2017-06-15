@@ -24,7 +24,7 @@ import wybren_erik.hanzespel.model.Product;
  * Created by wybrenoppedijk on 21/05/2017.
  */
 
-public class InventoryAdapter extends ArrayAdapter<Product> {
+public class SellAdapter extends ArrayAdapter<Product> {
 
     private static ItemTradeHandler listener;
     private int totalAmountOfTradeValue;
@@ -33,7 +33,7 @@ public class InventoryAdapter extends ArrayAdapter<Product> {
     //private int amountOfTradeItems = 0;
     private HashMap<Integer, Integer> amountOfTradeItems = new HashMap<>();
 
-    public InventoryAdapter(@NonNull Context context, ArrayList<Product> products) {
+    public SellAdapter(@NonNull Context context, ArrayList<Product> products) {
         super(context, R.layout.list_item, products);
     }
 

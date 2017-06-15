@@ -13,7 +13,7 @@ import java.util.HashMap;
 
 import wybren_erik.hanzespel.ProductEnum;
 import wybren_erik.hanzespel.R;
-import wybren_erik.hanzespel.controller.InventoryAdapter;
+import wybren_erik.hanzespel.controller.SellAdapter;
 import wybren_erik.hanzespel.dialog.ArrivedDialog;
 import wybren_erik.hanzespel.interfaces.BoatListener;
 import wybren_erik.hanzespel.interfaces.ItemTradeHandler;
@@ -35,7 +35,7 @@ public class HandelFragment extends Fragment implements ItemTradeHandler, BoatLi
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_handel, container, false);
-        InventoryAdapter.addListener(this);
+        SellAdapter.addListener(this);
 
         if (!isInit) {
             InventoryModel.getInstance().addProduct(new Product(ProductEnum.ZOUT, 3)); //For debug
@@ -45,12 +45,12 @@ public class HandelFragment extends Fragment implements ItemTradeHandler, BoatLi
             isInit = true;
         }
 
-        final InventoryAdapter adapter = new InventoryAdapter(getContext(), InventoryModel.getInstance().getProducts());
+        final SellAdapter sellAdapter = new SellAdapter(getContext(), InventoryModel.getInstance().getProducts());
         arrivedDialog = new ArrivedDialog();
 
         ListView listView = (ListView) view.findViewById(R.id.handel_inventory_products);
         Button sellButton = (Button) view.findViewById(R.id.sell_button);
-        listView.setAdapter(adapter);
+        listView.setAdapter(sellAdapter);
         totalAmountTV = (TextView) view.findViewById(R.id.TradeProfitMoney);
 
         sellButton.setOnClickListener(new View.OnClickListener() {
@@ -59,7 +59,7 @@ public class HandelFragment extends Fragment implements ItemTradeHandler, BoatLi
                 if (productHashmap != null) {
                     model.addMoney(totalValue);
                     updateProductsInventory();
-                    adapter.notifyDataSetChanged();
+                    sellAdapter.notifyDataSetChanged();
                 }
             }
         });
