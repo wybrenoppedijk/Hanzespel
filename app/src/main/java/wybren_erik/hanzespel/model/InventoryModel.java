@@ -25,8 +25,25 @@ public class InventoryModel {
         this.products.add(product);
     }
 
+
     public ArrayList<Product> getProducts() {
         return products;
+    }
+
+    public int getMoney() {
+        return money;
+    }
+
+    public void addMoney(int money) {
+        this.money += money;
+    }
+
+    public void setMoney(int money) {
+        if (money < this.money){
+
+        } else {
+            this.money = money;
+        }
     }
 }
 

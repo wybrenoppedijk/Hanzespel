@@ -1,13 +1,15 @@
 package wybren_erik.hanzespel.fragments;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.HashMap;
 
 import wybren_erik.hanzespel.ProductEnum;
 import wybren_erik.hanzespel.R;
@@ -21,9 +23,11 @@ import wybren_erik.hanzespel.model.Product;
 
 public class HandelFragment extends Fragment implements ItemTradeHandler, BoatListener {
 
+    TextView totalAmountTV;
+    InventoryModel model = InventoryModel.getInstance();
     private boolean isInit = false;
     private int totalValue = 0;
-    TextView totalAmountTV;
+    private HashMap<Product, Integer> productHashmap;
     private ArrivedDialog arrivedDialog;
 
 
@@ -33,7 +37,7 @@ public class HandelFragment extends Fragment implements ItemTradeHandler, BoatLi
         View view = inflater.inflate(R.layout.fragment_handel, container, false);
         InventoryAdapter.addListener(this);
 
-        if(!isInit) {
+        if (!isInit) {
             InventoryModel.getInstance().addProduct(new Product(ProductEnum.ZOUT, 3)); //For debug
             InventoryModel.getInstance().addProduct(new Product(ProductEnum.STOKVIS, 3)); //For debug
             InventoryModel.getInstance().addProduct(new Product(ProductEnum.BONT, 3)); //For debug
@@ -41,19 +45,44 @@ public class HandelFragment extends Fragment implements ItemTradeHandler, BoatLi
             isInit = true;
         }
 
-        InventoryAdapter adapter = new InventoryAdapter(getContext(), InventoryModel.getInstance().getProducts());
+        final InventoryAdapter adapter = new InventoryAdapter(getContext(), InventoryModel.getInstance().getProducts());
         arrivedDialog = new ArrivedDialog();
 
         ListView listView = (ListView) view.findViewById(R.id.handel_inventory_products);
+        Button sellButton = (Button) view.findViewById(R.id.sell_button);
         listView.setAdapter(adapter);
         totalAmountTV = (TextView) view.findViewById(R.id.TradeProfitMoney);
-        System.out.println("DEBUG!");
+
+        sellButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (productHashmap != null) {
+                    model.addMoney(totalValue);
+                    updateProductsInventory();
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        });
+
         return view;
     }
 
+    private void updateProductsInventory() {
+
+        for (HashMap.Entry<Product, Integer> entry : productHashmap.entrySet()) {
+            for (int i = 0; i < model.getProducts().size(); i++) {
+                if (model.getProducts().get(i) == entry.getKey()) {
+                    model.getProducts().add(i, new Product(model.getProducts().get(i).getProductEnum(), model.getProducts().get(i).getAmount() - entry.getValue()));
+                    break;
+                }
+            }
+        }
+    }
+
     @Override
-    public void onTotalAmountChangedListener(int totalAmount) {
-        System.out.println(totalAmount);
+    public void onTotalAmountChangedListener(int totalAmount, HashMap<Product, Integer> hashMap) {
+        totalValue = totalAmount;
+        productHashmap = hashMap;
         totalAmountTV.setText("Totale Waarde: " + totalAmount);
     }
 

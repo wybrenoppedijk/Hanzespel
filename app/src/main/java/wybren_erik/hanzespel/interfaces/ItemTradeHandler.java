@@ -1,6 +1,10 @@
 package wybren_erik.hanzespel.interfaces;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import wybren_erik.hanzespel.ProductEnum;
+import wybren_erik.hanzespel.model.Product;
 
 /**
  * Created by wybrenoppedijk on 14/06/2017.
@@ -8,5 +12,5 @@ import wybren_erik.hanzespel.ProductEnum;
 
 public interface ItemTradeHandler {
 
-    void onTotalAmountChangedListener(int totalAmount);
+    void onTotalAmountChangedListener(int totalAmount, HashMap<Product, Integer> hashMap);
 }

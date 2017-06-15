@@ -73,7 +73,7 @@ public class InventoryAdapter extends ArrayAdapter<Product> {
                         amountOfTradeItems.put(position, temp);
                         amountOfTradeItemsTV.setText("" + hasmapDefaultValue(amountOfTradeItems, position));
                         totalAmountOfTradeValue -= getProductValue(product.getProductEnum());
-                        listener.onTotalAmountChangedListener(totalAmountOfTradeValue);
+                        listener.onTotalAmountChangedListener(totalAmountOfTradeValue, translateToProductsHashMap(amountOfTradeItems));
                     }
                 }
             });
@@ -86,7 +86,7 @@ public class InventoryAdapter extends ArrayAdapter<Product> {
                         amountOfTradeItems.put(position, temp);
                         amountOfTradeItemsTV.setText("" + hasmapDefaultValue(amountOfTradeItems, position));
                         totalAmountOfTradeValue += getProductValue(product.getProductEnum());
-                        listener.onTotalAmountChangedListener(totalAmountOfTradeValue);
+                        listener.onTotalAmountChangedListener(totalAmountOfTradeValue, translateToProductsHashMap(amountOfTradeItems));
                     }
                 }
             });
@@ -144,6 +144,16 @@ public class InventoryAdapter extends ArrayAdapter<Product> {
             case HOUT: return "Hout";
             default: return "Error";
         }
+    }
+    
+    private HashMap<Product, Integer> translateToProductsHashMap(HashMap<Integer, Integer> hashMap) {
+        HashMap<Product, Integer> productHasmap = new HashMap<>();
+        for (HashMap.Entry<Integer, Integer> entry : hashMap.entrySet()) {
+            int position = entry.getKey();
+            int value = entry.getValue();
+            productHasmap.put(getItem(position), value);
+        }
+        return productHasmap;
     }
 
 
