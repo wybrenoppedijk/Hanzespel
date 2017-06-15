@@ -40,7 +40,6 @@ public class HandelFragment extends Fragment implements ItemTradeHandler {
         View view = inflater.inflate(R.layout.fragment_handel, container, false);
         SellAdapter.addListener(this);
 
-        Boat.addListener(this);
 
         final SellAdapter sellAdapter = new SellAdapter(getContext(), InventoryModel.getInstance().getProducts());
 
