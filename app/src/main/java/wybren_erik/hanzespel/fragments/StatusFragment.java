@@ -1,5 +1,6 @@
 package wybren_erik.hanzespel.fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,6 +19,7 @@ import wybren_erik.hanzespel.model.Boat;
 
 public class StatusFragment extends Fragment implements BoatListener {
 
+    private static Activity activity;
     private TextView positionTextView;
     private TextView balanceTextView;
     private TextView arrivalTimeTextView;
@@ -28,7 +30,10 @@ public class StatusFragment extends Fragment implements BoatListener {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if (!isInit) Boat.addListener(this);
+        if (!isInit) {
+            Boat.addListener(this);
+            activity = getActivity();
+        }
 
         final View view = inflater.inflate(R.layout.status_fragment, container, false);
 
@@ -50,22 +55,32 @@ public class StatusFragment extends Fragment implements BoatListener {
 
 
     @Override
+    public void onDepart(final long travelTime) {
+        StatusFragment.activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                arrivalTimeBar.setMax((int) travelTime);
+            }
+        });
+    }
+
+    @Override
     public void onArrive() {
-        getActivity().runOnUiThread(new Runnable() {
+        StatusFragment.activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 positionTextView.setText(Boat.getInstance().getLocation().getName().toString());
-                arrivedDialog.show(getFragmentManager(), "arrivedDialog");
             }
         });
     }
 
     @Override
     public void onArrivalTimeChanged(final long timeUntilArrival) {
-        getActivity().runOnUiThread(new Runnable() {
+        StatusFragment.activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                //arrivalTimeTextView.setText(String.format(Locale.ENGLISH, "%02d:%02d", timeUntilArrival / 60, timeUntilArrival % 60));
+                arrivalTimeTextView.setText(String.format(Locale.ENGLISH, "%02d:%02d", timeUntilArrival / 60, timeUntilArrival % 60));
+                arrivalTimeBar.setProgress((int) timeUntilArrival);
             }
         });
     }

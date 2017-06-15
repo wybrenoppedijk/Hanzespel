@@ -1,7 +1,9 @@
 package wybren_erik.hanzespel.fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,15 +23,13 @@ import wybren_erik.hanzespel.model.Boat;
 import wybren_erik.hanzespel.model.InventoryModel;
 import wybren_erik.hanzespel.model.Product;
 
-public class HandelFragment extends Fragment implements ItemTradeHandler, BoatListener {
+public class HandelFragment extends Fragment implements ItemTradeHandler {
 
     TextView totalAmountTV;
     InventoryModel model = InventoryModel.getInstance();
     private boolean isInit = false;
     private int totalValue = 0;
     private HashMap<Product, Integer> productHashmap;
-    private ArrivedDialog arrivedDialog;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,12 +41,10 @@ public class HandelFragment extends Fragment implements ItemTradeHandler, BoatLi
             InventoryModel.getInstance().addProduct(new Product(ProductEnum.ZOUT, 3)); //For debug
             InventoryModel.getInstance().addProduct(new Product(ProductEnum.STOKVIS, 3)); //For debug
             InventoryModel.getInstance().addProduct(new Product(ProductEnum.BONT, 3)); //For debug
-            Boat.addListener(this);
             isInit = true;
         }
 
         final SellAdapter sellAdapter = new SellAdapter(getContext(), InventoryModel.getInstance().getProducts());
-        arrivedDialog = new ArrivedDialog();
 
         ListView listView = (ListView) view.findViewById(R.id.handel_inventory_products);
         Button sellButton = (Button) view.findViewById(R.id.sell_button);
@@ -86,13 +84,4 @@ public class HandelFragment extends Fragment implements ItemTradeHandler, BoatLi
         totalAmountTV.setText("Totale Waarde: " + totalAmount);
     }
 
-    @Override
-    public void onArrive() {
-        arrivedDialog.show(getFragmentManager(), "arrivedDialog");
-    }
-
-    @Override
-    public void onArrivalTimeChanged(long timeUntilArrival) {
-        // Ignored
-    }
 }

@@ -1,8 +1,10 @@
 package wybren_erik.hanzespel.fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,21 +23,25 @@ import wybren_erik.hanzespel.model.Boat;
 
 public class MapFragment extends Fragment implements BoatListener {
 
+    public static String travelText;
+    private static City destination;
+    private static int position;
+    private static Activity activity;
     TextView boatNameTextView;
     TextView boatLocationTextView;
     Button confirmButton;
     boolean isInit = false;
     private Boat boat;
-    private static City destination;
-    public static String travelText;
     private Spinner travelList;
-    private static int position;
     private ArrivedDialog arrivedDialog;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if (!isInit) Boat.addListener(this);
+        if (!isInit) {
+            Boat.addListener(this);
+            activity = getActivity();
+        }
 
         final View view = inflater.inflate(R.layout.map_fragment, container, false);
         boatNameTextView = (TextView) view.findViewById(R.id.map_menu_boat_name);
@@ -48,7 +54,7 @@ public class MapFragment extends Fragment implements BoatListener {
 
         if (boat == null) boat = Boat.getInstance();
         boatNameTextView.setText(boat.getName());
-        if(Boat.isInDock()) boatLocationTextView.setText(boat.getLocation().getName().toString());
+        if (Boat.isInDock()) boatLocationTextView.setText(boat.getLocation().getName().toString());
         else {
             boatLocationTextView.setText(travelText);
             travelList.setSelection(position);
@@ -62,11 +68,11 @@ public class MapFragment extends Fragment implements BoatListener {
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!Boat.isInDock()) return;
+                if (!Boat.isInDock()) return;
                 Object selectedLocation = travelList.getSelectedItem();
                 City destination = RoadMap.getInstance().getCity(Location.fromString((String) selectedLocation));
 
-                if(boat.getLocation().equals(travelList.getSelectedItem())) return;
+                if (boat.getLocation().equals(travelList.getSelectedItem())) return;
                 boat.goToCity(destination);
 
                 travelText = "Aan het reizen van " + boatLocationTextView.getText() + " naar " + selectedLocation;
@@ -86,14 +92,17 @@ public class MapFragment extends Fragment implements BoatListener {
     }
 
     @Override
+    public void onDepart(long travelTime) {
+        // Ignored
+    }
+
+    @Override
     public void onArrive() {
-        this.getActivity().runOnUiThread(new Runnable() {
+        MapFragment.activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 boatLocationTextView.setText(destination.getName().toString());
                 travelList.setEnabled(true);
-                arrivedDialog.show(getFragmentManager(), "arrivedWindow");
-
             }
         });
     }
