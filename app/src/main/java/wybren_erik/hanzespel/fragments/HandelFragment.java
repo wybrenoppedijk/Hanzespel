@@ -59,7 +59,7 @@ public class HandelFragment extends Fragment implements ItemTradeHandler {
             increaseButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (totalBuyValue + (boat.getLocation().getName().getProduct().getPrice() * totalBuyItems) < model.getMoney()) {
+                    if (totalBuyValue + (boat.getLocation().getName().getProduct().getPrice() * (totalBuyItems + 1)) <= model.getMoney()) {
                         totalBuyItems++;
                         amountBuyItems.setText("" + totalBuyItems);
                         totalPrice.setText("ƒ" + boat.getLocation().getName().getProduct().getPrice() * totalBuyItems);

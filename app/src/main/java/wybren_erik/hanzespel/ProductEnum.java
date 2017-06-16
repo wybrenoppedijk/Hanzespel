@@ -22,5 +22,14 @@ public enum ProductEnum {
     public int getPrice() {
         return price;
     }
+
+    @Override
+    public String toString() {
+        return format(super.toString());
+    }
+
+    private String format(String s) {
+        return s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
+    }
 }
 

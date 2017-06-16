@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class InventoryModel {
     private static InventoryModel inventoryModel = null;
     private ArrayList<Product> products = new ArrayList<Product>();
-    private int money = 400;
+    private int money = 500;
 
     private InventoryModel() {
     }

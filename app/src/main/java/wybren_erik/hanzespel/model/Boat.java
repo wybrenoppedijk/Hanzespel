@@ -18,6 +18,7 @@ public class Boat {
     private static boolean inDock = true;
     private static Set<BoatListener> listeners = new HashSet<>();
     private static Boat instance;
+    private static ScheduledFuture<?> arrivalFuture;
     private final Runnable updateTask = new Runnable() {
         @Override
         public void run() {
@@ -46,7 +47,6 @@ public class Boat {
             }
         }
     };
-    private ScheduledFuture<?> arrivalFuture;
     private InventoryModel inventoryModel;
     private City location;
     private String name;
@@ -75,6 +75,10 @@ public class Boat {
         return inDock;
     }
 
+    public static int timeUntilArrival() {
+        return (int) arrivalFuture.getDelay(TimeUnit.SECONDS);
+    }
+
     public String getName() {
         return name;
     }
@@ -101,7 +105,7 @@ public class Boat {
         System.out.println("Travel time: " + travelTime);
         updateExecutor.scheduleAtFixedRate(updateTask, 1, 1, TimeUnit.SECONDS);
         this.location = location;
-        for(BoatListener l : listeners) {
+        for (BoatListener l : listeners) {
             l.onDepart(travelTime);
         }
     }

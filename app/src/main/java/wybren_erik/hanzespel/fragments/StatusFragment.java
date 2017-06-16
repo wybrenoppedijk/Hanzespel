@@ -20,13 +20,14 @@ import wybren_erik.hanzespel.model.InventoryModel;
 
 public class StatusFragment extends Fragment implements BoatListener {
 
-    private static Activity activity;
+    private Activity activity;
     private TextView positionTextView;
     private TextView balanceTextView;
     private TextView arrivalTimeTextView;
     private ProgressBar arrivalTimeBar;
     private boolean isInit = false;
     private ArrivedDialog arrivedDialog;
+    private static int travelTime;
 
     @Nullable
     @Override
@@ -49,8 +50,13 @@ public class StatusFragment extends Fragment implements BoatListener {
 
         if (!Boat.isInDock()) {
             positionTextView.setText(MapFragment.travelText);
+            arrivalTimeTextView.setText(String.format(Locale.ENGLISH, "%02d:%02d", Boat.timeUntilArrival() / 60, Boat.timeUntilArrival() % 60));
+            arrivalTimeBar.setMax(travelTime);
+            arrivalTimeBar.setProgress(Boat.timeUntilArrival());
         } else {
             positionTextView.setText(Boat.getInstance().getLocation().getName().toString());
+            arrivalTimeBar.setProgress(arrivalTimeBar.getMax());
+            arrivalTimeTextView.setText("Gearriveerd op bestemming");
         }
 
         isInit = true;
@@ -60,17 +66,18 @@ public class StatusFragment extends Fragment implements BoatListener {
 
     @Override
     public void onDepart(final long travelTime) {
-        StatusFragment.activity.runOnUiThread(new Runnable() {
+        activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 arrivalTimeBar.setMax((int) travelTime);
+                StatusFragment.travelTime = (int) travelTime;
             }
         });
     }
 
     @Override
     public void onArrive() {
-        StatusFragment.activity.runOnUiThread(new Runnable() {
+        activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 positionTextView.setText(Boat.getInstance().getLocation().getName().toString());
@@ -80,7 +87,7 @@ public class StatusFragment extends Fragment implements BoatListener {
 
     @Override
     public void onArrivalTimeChanged(final long timeUntilArrival) {
-        StatusFragment.activity.runOnUiThread(new Runnable() {
+        activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 arrivalTimeTextView.setText(String.format(Locale.ENGLISH, "%02d:%02d", timeUntilArrival / 60, timeUntilArrival % 60));
