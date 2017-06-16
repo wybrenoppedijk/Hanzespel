@@ -1,8 +1,8 @@
 package wybren_erik.hanzespel;
 
-class SaleFactor {
+public class SaleFactor {
 
-    static double getFactor(City c, ProductEnum p) {
+    public static double getFactor(City c, ProductEnum p) {
         switch(c.getName()) {
             case KAMPEN:
                 switch(p) {

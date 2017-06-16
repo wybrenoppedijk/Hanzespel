@@ -15,6 +15,7 @@ import java.util.HashMap;
 
 import wybren_erik.hanzespel.ProductEnum;
 import wybren_erik.hanzespel.R;
+import wybren_erik.hanzespel.SaleFactor;
 import wybren_erik.hanzespel.interfaces.ItemTradeHandler;
 import wybren_erik.hanzespel.model.Boat;
 import wybren_erik.hanzespel.model.Product;
@@ -102,7 +103,7 @@ public class SellAdapter extends ArrayAdapter<Product> {
     }
 
     public int getProductValue(ProductEnum product){
-        return product.getPrice();
+        return (int) (product.getPrice() * SaleFactor.getFactor(Boat.getInstance().getLocation(), product));
     }
 
     private int hasmapDefaultValue(HashMap<Integer, Integer> hashMap, int key){

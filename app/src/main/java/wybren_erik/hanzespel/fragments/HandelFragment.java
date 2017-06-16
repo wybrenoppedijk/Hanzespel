@@ -1,9 +1,7 @@
 package wybren_erik.hanzespel.fragments;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +14,8 @@ import java.util.HashMap;
 
 import wybren_erik.hanzespel.ProductEnum;
 import wybren_erik.hanzespel.R;
+import wybren_erik.hanzespel.SaleFactor;
 import wybren_erik.hanzespel.controller.SellAdapter;
-import wybren_erik.hanzespel.dialog.ArrivedDialog;
-import wybren_erik.hanzespel.interfaces.BoatListener;
 import wybren_erik.hanzespel.interfaces.ItemTradeHandler;
 import wybren_erik.hanzespel.model.Boat;
 import wybren_erik.hanzespel.model.InventoryModel;
@@ -52,19 +49,20 @@ public class HandelFragment extends Fragment implements ItemTradeHandler {
         Button increaseButton = (Button) view.findViewById(R.id.increaseBuyItem);
         Button decreaseButton = (Button) view.findViewById(R.id.decreaseBuyItem);
 
-
         icon.setImageResource(getProperImage(Boat.getInstance().getLocation().getName().getProduct()));
-        itemName.setText(getProductName(Boat.getInstance().getLocation().getName().getProduct()));
-        price.setText("ƒ" + Boat.getInstance().getLocation().getName().getProduct().getPrice());
+        itemName.setText(Boat.getInstance().getLocation().getName().getProduct().toString());
+        price.setText("ƒ " + Boat.getInstance().getLocation().getName().getProduct().getPrice());
+
+        final Boat boat = Boat.getInstance();
 
         if (Boat.isInDock()) {
             increaseButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (totalBuyValue + (Boat.getInstance().getLocation().getName().getProduct().getPrice() * totalBuyItems) < model.getMoney()) {
+                    if (totalBuyValue + (boat.getLocation().getName().getProduct().getPrice() * totalBuyItems) < model.getMoney()) {
                         totalBuyItems++;
                         amountBuyItems.setText("" + totalBuyItems);
-                        totalPrice.setText("ƒ" + Boat.getInstance().getLocation().getName().getProduct().getPrice()*totalBuyItems);
+                        totalPrice.setText("ƒ" + boat.getLocation().getName().getProduct().getPrice() * totalBuyItems);
                     }
                 }
             });
@@ -75,7 +73,7 @@ public class HandelFragment extends Fragment implements ItemTradeHandler {
                     if (totalBuyItems > 0) {
                         totalBuyItems--;
                         amountBuyItems.setText("" + totalBuyItems);
-                        totalPrice.setText("ƒ" + Boat.getInstance().getLocation().getName().getProduct().getPrice()*totalBuyItems);
+                        totalPrice.setText("ƒ" + Boat.getInstance().getLocation().getName().getProduct().getPrice() * totalBuyItems);
                     }
                 }
             });
@@ -91,9 +89,6 @@ public class HandelFragment extends Fragment implements ItemTradeHandler {
 
             //ToDo Show placeholder later on.
         }
-
-
-
 
         Button buy = (Button) view.findViewById(R.id.buy_button);
 
@@ -190,33 +185,6 @@ public class HandelFragment extends Fragment implements ItemTradeHandler {
                 return R.mipmap.wood;
             default:
                 return R.mipmap.ic_launcher;
-        }
-    }
-
-    private String getProductName(ProductEnum product) {
-        switch (product) {
-            case BIER:
-                return "Bier";
-            case STOKVIS:
-                return "Stokvis";
-            case ZOUT:
-                return "Zout";
-            case VATEN:
-                return "Vate";
-            case LAKEN:
-                return "Laken";
-            case WAS:
-                return "Was";
-            case BONT:
-                return "Bont";
-            case IJZER:
-                return "IJzer";
-            case GRAAN:
-                return "Graan";
-            case HOUT:
-                return "Hout";
-            default:
-                return "Error";
         }
     }
 
