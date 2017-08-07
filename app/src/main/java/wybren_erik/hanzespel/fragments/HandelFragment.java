@@ -51,7 +51,7 @@ public class HandelFragment extends Fragment implements ItemTradeHandler {
 
         icon.setImageResource(getProperImage(Boat.getInstance().getLocation().getName().getProduct()));
         itemName.setText(Boat.getInstance().getLocation().getName().getProduct().toString());
-        price.setText("ƒ " + Boat.getInstance().getLocation().getName().getProduct().getPrice());
+        price.setText("Ð " + Boat.getInstance().getLocation().getName().getProduct().getPrice());
 
         final Boat boat = Boat.getInstance();
 
@@ -62,7 +62,7 @@ public class HandelFragment extends Fragment implements ItemTradeHandler {
                     if (totalBuyValue + (boat.getLocation().getName().getProduct().getPrice() * (totalBuyItems + 1)) <= model.getMoney()) {
                         totalBuyItems++;
                         amountBuyItems.setText("" + totalBuyItems);
-                        totalPrice.setText("ƒ" + boat.getLocation().getName().getProduct().getPrice() * totalBuyItems);
+                        totalPrice.setText("Ð " + boat.getLocation().getName().getProduct().getPrice() * totalBuyItems);
                     }
                 }
             });
@@ -73,7 +73,7 @@ public class HandelFragment extends Fragment implements ItemTradeHandler {
                     if (totalBuyItems > 0) {
                         totalBuyItems--;
                         amountBuyItems.setText("" + totalBuyItems);
-                        totalPrice.setText("ƒ" + Boat.getInstance().getLocation().getName().getProduct().getPrice() * totalBuyItems);
+                        totalPrice.setText("Ð " + Boat.getInstance().getLocation().getName().getProduct().getPrice() * totalBuyItems);
                     }
                 }
             });
