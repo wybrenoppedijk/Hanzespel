@@ -22,7 +22,6 @@ public class Boat {
     private final Runnable updateTask = new Runnable() {
         @Override
         public void run() {
-            System.out.println(arrivalFuture.getDelay(TimeUnit.SECONDS));
             try {
                 for (BoatListener l : listeners) {
                     l.onArrivalTimeChanged(arrivalFuture.getDelay(TimeUnit.SECONDS));
@@ -50,6 +49,7 @@ public class Boat {
     private InventoryModel inventoryModel;
     private City location;
     private String name;
+    private City destination;
 
     private Boat(InventoryModel inventoryModel, String name) {
         this.inventoryModel = inventoryModel;
@@ -85,6 +85,14 @@ public class Boat {
 
     public City getLocation() {
         return location;
+    }
+
+    public City getDestination() {
+        return destination;
+    }
+
+    public void setDestination(City destination) {
+        this.destination = destination;
     }
 
     @SuppressWarnings("unchecked")

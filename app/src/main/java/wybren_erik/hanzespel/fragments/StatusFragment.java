@@ -45,7 +45,7 @@ public class StatusFragment extends Fragment implements BoatListener {
         arrivalTimeBar = (ProgressBar) view.findViewById(R.id.status_arrival_progressbar);
         arrivedDialog = new ArrivedDialog();
 
-        balanceTextView.setText("ƒ"+InventoryModel.getInstance().getMoney());
+        balanceTextView.setText("Ð "+InventoryModel.getInstance().getMoney());
 
 
         if (!Boat.isInDock()) {

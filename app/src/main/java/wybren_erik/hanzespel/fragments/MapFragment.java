@@ -18,13 +18,13 @@ import wybren_erik.hanzespel.Location;
 import wybren_erik.hanzespel.R;
 import wybren_erik.hanzespel.RoadMap;
 import wybren_erik.hanzespel.dialog.ArrivedDialog;
+import wybren_erik.hanzespel.dialog.ConfirmDialog;
 import wybren_erik.hanzespel.interfaces.BoatListener;
 import wybren_erik.hanzespel.model.Boat;
 
 public class MapFragment extends Fragment implements BoatListener {
 
     public static String travelText;
-    private static City destination;
     private static int position;
     private static Activity activity;
     TextView boatNameTextView;
@@ -34,6 +34,7 @@ public class MapFragment extends Fragment implements BoatListener {
     private Boat boat;
     private Spinner travelList;
     private ArrivedDialog arrivedDialog;
+    private ConfirmDialog confirmDialog;
 
     @Nullable
     @Override
@@ -49,8 +50,7 @@ public class MapFragment extends Fragment implements BoatListener {
         travelList = (Spinner) view.findViewById(R.id.map_menu_travel_list);
         confirmButton = (Button) view.findViewById(R.id.map_menu_button_go);
         arrivedDialog = new ArrivedDialog();
-
-        RoadMap roadMap = RoadMap.getInstance();
+        confirmDialog = new ConfirmDialog();
 
         if (boat == null) boat = Boat.getInstance();
         boatNameTextView.setText(boat.getName());
@@ -73,13 +73,10 @@ public class MapFragment extends Fragment implements BoatListener {
                 City destination = RoadMap.getInstance().getCity(Location.fromString((String) selectedLocation));
 
                 if (boat.getLocation().equals(travelList.getSelectedItem())) return;
-                boat.goToCity(destination);
+                boat.setDestination(destination);
+                confirmDialog.show(getFragmentManager(), "travel_confirmation");
 
-                travelText = "Aan het reizen van " + boatLocationTextView.getText() + " naar " + selectedLocation;
-                boatLocationTextView.setText(MapFragment.travelText);
-                MapFragment.destination = destination;
                 position = travelList.getSelectedItemPosition();
-                travelList.setEnabled(false);
             }
         });
 
@@ -87,13 +84,12 @@ public class MapFragment extends Fragment implements BoatListener {
         return view;
     }
 
-    public void assignBoat(Boat boat) {
-        this.boat = boat;
-    }
-
     @Override
     public void onDepart(long travelTime) {
-        // Ignored
+        travelList.setEnabled(false);
+        confirmButton.setEnabled(false);
+        travelText = "Aan het reizen van " + boatLocationTextView.getText() + " naar " + boat.getDestination().toString();
+        boatLocationTextView.setText(MapFragment.travelText);
     }
 
     @Override
@@ -101,8 +97,9 @@ public class MapFragment extends Fragment implements BoatListener {
         MapFragment.activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                boatLocationTextView.setText(destination.getName().toString());
+                boatLocationTextView.setText(boat.getDestination().toString());
                 travelList.setEnabled(true);
+                confirmButton.setEnabled(true);
             }
         });
     }

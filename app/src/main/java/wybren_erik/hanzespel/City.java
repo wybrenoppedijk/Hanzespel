@@ -17,4 +17,9 @@ public class City implements Vertex<Location> {
         return location;
     }
 
+    @Override
+    public String toString() {
+        return location.toString();
+    }
+
 }
