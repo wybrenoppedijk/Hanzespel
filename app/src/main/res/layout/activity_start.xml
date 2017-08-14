@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/INTERNAL_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="72dp"
+        android:fontFamily="cursive"
+        android:padding="10dp"
+        android:text="Hanzespel"
+        android:textSize="78sp" />
+
+    <EditText
+        android:id="@+id/welcome_name"
+        android:layout_width="256dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/INTERNAL_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:hint="Naam van het schip" />
+
+    <Button
+        android:id="@+id/welcome_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/INTERNAL_title"
+        android:layout_marginTop="24dp"
+        android:layout_toEndOf="@id/welcome_name"
+        android:layout_toRightOf="@id/welcome_name"
+        android:text="Start" />
+
+</RelativeLayout>

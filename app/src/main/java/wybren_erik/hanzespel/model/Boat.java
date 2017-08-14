@@ -47,19 +47,26 @@ public class Boat {
         }
     };
     private InventoryModel inventoryModel;
-    private City location;
+    private City location = RoadMap.getInstance().getCity(Location.KAMPEN);
     private String name;
     private City destination;
 
     private Boat(InventoryModel inventoryModel, String name) {
         this.inventoryModel = inventoryModel;
         this.location = RoadMap.getInstance().getCity(Location.KAMPEN);
+        this.destination = RoadMap.getInstance().getCity(Location.KAMPEN);
         this.name = name;
     }
 
     public static Boat getInstance() {
         if (instance == null)
             instance = new Boat(InventoryModel.getInstance(), "Het schip der null");
+        return instance;
+    }
+
+    public static Boat getInstance(String name) {
+        if (instance == null)
+            instance = new Boat(InventoryModel.getInstance(), name);
         return instance;
     }
 

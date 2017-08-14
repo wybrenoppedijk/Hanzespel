@@ -20,6 +20,7 @@ import wybren_erik.hanzespel.model.InventoryModel;
 
 public class StatusFragment extends Fragment implements BoatListener {
 
+    private static int travelTime;
     private Activity activity;
     private TextView positionTextView;
     private TextView balanceTextView;
@@ -27,7 +28,6 @@ public class StatusFragment extends Fragment implements BoatListener {
     private ProgressBar arrivalTimeBar;
     private boolean isInit = false;
     private ArrivedDialog arrivedDialog;
-    private static int travelTime;
 
     @Nullable
     @Override
@@ -45,7 +45,7 @@ public class StatusFragment extends Fragment implements BoatListener {
         arrivalTimeBar = (ProgressBar) view.findViewById(R.id.status_arrival_progressbar);
         arrivedDialog = new ArrivedDialog();
 
-        balanceTextView.setText("Ð "+InventoryModel.getInstance().getMoney());
+        balanceTextView.setText("Ð " + InventoryModel.getInstance().getMoney());
 
 
         if (!Boat.isInDock()) {
@@ -54,7 +54,8 @@ public class StatusFragment extends Fragment implements BoatListener {
             arrivalTimeBar.setMax(travelTime);
             arrivalTimeBar.setProgress(Boat.timeUntilArrival());
         } else {
-            positionTextView.setText(Boat.getInstance().getLocation().getName().toString());
+            positionTextView.setText(
+                    Boat.getInstance().getLocation().toString());
             arrivalTimeBar.setProgress(arrivalTimeBar.getMax());
             arrivalTimeTextView.setText("Gearriveerd op bestemming");
         }
