@@ -18,6 +18,7 @@ import wybren_erik.hanzespel.R;
 import wybren_erik.hanzespel.RoadMap;
 import wybren_erik.hanzespel.dialog.RulesDialog;
 import wybren_erik.hanzespel.model.Boat;
+import wybren_erik.hanzespel.model.Game;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -25,6 +26,8 @@ public class StartActivity extends AppCompatActivity {
     private Button startButton;
     private RulesDialog rulesDialog;
     private Intent mainActivityIntent;
+    //private static long TOTAL_GAME_TIME = 0x5265C0; // One and a half hours
+    private static long TOTAL_GAME_TIME = 0xEA60;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,6 +49,7 @@ public class StartActivity extends AppCompatActivity {
                 initMap();
                 String name = nameField.getText().toString();
                 Boat.make(name);
+                Game.start(TOTAL_GAME_TIME);
                 startActivity(mainActivityIntent);
             }
         });

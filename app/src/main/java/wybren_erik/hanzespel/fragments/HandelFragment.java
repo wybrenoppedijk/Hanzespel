@@ -1,5 +1,6 @@
 package wybren_erik.hanzespel.fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,27 +9,33 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.HashMap;
+import java.util.Locale;
 
 import wybren_erik.hanzespel.ProductEnum;
 import wybren_erik.hanzespel.R;
-import wybren_erik.hanzespel.SaleFactor;
 import wybren_erik.hanzespel.controller.SellAdapter;
+import wybren_erik.hanzespel.interfaces.GameListener;
 import wybren_erik.hanzespel.interfaces.ItemTradeHandler;
 import wybren_erik.hanzespel.model.Boat;
+import wybren_erik.hanzespel.model.Game;
 import wybren_erik.hanzespel.model.InventoryModel;
 import wybren_erik.hanzespel.model.Product;
 
-public class HandelFragment extends Fragment implements ItemTradeHandler {
+public class HandelFragment extends Fragment implements ItemTradeHandler, GameListener {
 
     private TextView totalAmountTV;
+    private TextView totalGameTimeTV;
+    private ProgressBar totalGameTimePB;
     private InventoryModel model = InventoryModel.getInstance();
     private boolean isInit = false;
     private int totalInventoryValue = 0;
     private int totalBuyValue = 0;
     private int totalBuyItems = 0;
+    private Activity activity;
     private HashMap<Product, Integer> productHashmap;
 
     @Override
@@ -36,7 +43,8 @@ public class HandelFragment extends Fragment implements ItemTradeHandler {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_handel, container, false);
         SellAdapter.addListener(this);
-
+        Game.addListener(this);
+        activity = getActivity();
 
         final SellAdapter sellAdapter = new SellAdapter(getContext(), InventoryModel.getInstance().getProducts());
 
@@ -48,9 +56,15 @@ public class HandelFragment extends Fragment implements ItemTradeHandler {
         final TextView totalPrice = (TextView) view.findViewById(R.id.total_buy_amount);
         Button increaseButton = (Button) view.findViewById(R.id.increaseBuyItem);
         Button decreaseButton = (Button) view.findViewById(R.id.decreaseBuyItem);
+        totalGameTimeTV = (TextView) view.findViewById(R.id.handel_total_time_text);
+        totalGameTimePB = (ProgressBar) view.findViewById(R.id.handel_total_time_progressbar);
 
         icon.setImageResource(getProperImage(Boat.getInstance().getLocation().getName().getProduct()));
         itemName.setText(Boat.getInstance().getLocation().getName().getProduct().toString());
+
+        long remainingTime = Game.getRemainingGameTime();
+        totalGameTimeTV.setText(String.format(Locale.ENGLISH, "%02d:%02d", (remainingTime / 1000) / 60, (remainingTime / 1000) % 60));
+        totalGameTimePB.setMax((int) Game.getTotalGameTime());
         price.setText("Ð " + Boat.getInstance().getLocation().getName().getProduct().getPrice());
 
         final Boat boat = Boat.getInstance();
@@ -193,6 +207,22 @@ public class HandelFragment extends Fragment implements ItemTradeHandler {
         totalInventoryValue = totalAmount;
         productHashmap = hashMap;
         totalAmountTV.setText("Totale Waarde: " + totalAmount);
+    }
+
+    @Override
+    public void onGameTimeChanged(final long newTime) {
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                totalGameTimeTV.setText(String.format(Locale.ENGLISH, "%02d:%02d", (newTime / 1000) / 60, (newTime / 1000) % 60));
+                totalGameTimePB.setProgress((int) newTime);
+            }
+        });
+    }
+
+    @Override
+    public void onGameEnd() {
+
     }
 
 }

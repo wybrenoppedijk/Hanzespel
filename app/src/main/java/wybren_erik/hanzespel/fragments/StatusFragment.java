@@ -15,10 +15,12 @@ import java.util.Locale;
 import wybren_erik.hanzespel.R;
 import wybren_erik.hanzespel.dialog.ArrivedDialog;
 import wybren_erik.hanzespel.interfaces.BoatListener;
+import wybren_erik.hanzespel.interfaces.GameListener;
 import wybren_erik.hanzespel.model.Boat;
+import wybren_erik.hanzespel.model.Game;
 import wybren_erik.hanzespel.model.InventoryModel;
 
-public class StatusFragment extends Fragment implements BoatListener {
+public class StatusFragment extends Fragment implements BoatListener, GameListener {
 
     private static int travelTime;
 
@@ -26,17 +28,19 @@ public class StatusFragment extends Fragment implements BoatListener {
     private TextView positionTextView;
     private TextView balanceTextView;
     private TextView arrivalTimeTextView;
+    private TextView totalTimeTextView;
     private TextView nameTextView;
 
     private ProgressBar arrivalTimeBar;
+    private ProgressBar totalTimeBar;
     private boolean isInit = false;
-    private ArrivedDialog arrivedDialog;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (!isInit) {
             Boat.addListener(this);
+            Game.addListener(this);
             activity = getActivity();
         }
 
@@ -45,14 +49,17 @@ public class StatusFragment extends Fragment implements BoatListener {
         positionTextView = (TextView) view.findViewById(R.id.status_position_text);
         balanceTextView = (TextView) view.findViewById(R.id.status_balance_text);
         arrivalTimeTextView = (TextView) view.findViewById(R.id.status_arrival_text);
+        totalTimeTextView = (TextView) view.findViewById(R.id.status_total_time_text);
         nameTextView = (TextView) view.findViewById(R.id.status_name_text);
 
         arrivalTimeBar = (ProgressBar) view.findViewById(R.id.status_arrival_progressbar);
-        arrivedDialog = new ArrivedDialog();
+        totalTimeBar = (ProgressBar) view.findViewById(R.id.status_total_time_progressbar);
 
         balanceTextView.setText("Ð " + InventoryModel.getInstance().getMoney());
         nameTextView.setText(Boat.getInstance().getName());
-
+        totalTimeBar.setMax((int) Game.getTotalGameTime());
+        long remainingTime = Game.getRemainingGameTime();
+        totalTimeTextView.setText(String.format(Locale.ENGLISH, "%02d:%02d", (remainingTime / 1000) / 60, (remainingTime / 1000) % 60));
 
         if (!Boat.isInDock()) {
             positionTextView.setText(MapFragment.travelText);
@@ -88,6 +95,8 @@ public class StatusFragment extends Fragment implements BoatListener {
             @Override
             public void run() {
                 positionTextView.setText(Boat.getInstance().getLocation().getName().toString());
+                arrivalTimeBar.setProgress(arrivalTimeBar.getMax());
+                arrivalTimeTextView.setText("Gearriveerd op bestemming");
             }
         });
     }
@@ -101,5 +110,21 @@ public class StatusFragment extends Fragment implements BoatListener {
                 arrivalTimeBar.setProgress((int) timeUntilArrival);
             }
         });
+    }
+
+    @Override
+    public void onGameTimeChanged(final long newTime) {
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                totalTimeTextView.setText(String.format(Locale.ENGLISH, "%02d:%02d", (newTime / 1000) / 60, (newTime / 1000) % 60));
+                totalTimeBar.setProgress((int) newTime);
+            }
+        });
+    }
+
+    @Override
+    public void onGameEnd() {
+
     }
 }

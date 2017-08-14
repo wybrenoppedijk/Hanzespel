@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/map_menu_boat_name"
@@ -11,7 +12,7 @@
         android:id="@+id/map_menu_current_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/map_menu_boat_name"/>
+        android:layout_below="@id/map_menu_boat_name" />
 
     <Spinner
         android:id="@+id/map_menu_travel_list"
@@ -25,8 +26,31 @@
         android:id="@+id/map_menu_button_go"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Vertrekken"
         android:layout_below="@id/map_menu_travel_list"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:text="Vertrekken" />
+
+    <ProgressBar
+        android:id="@+id/map_total_time_progressbar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="12dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginStart="24dp"
+        android:max="10"
+        android:progress="10"
+        android:progressTint="@color/red" />
+
+    <TextView
+        android:id="@+id/map_total_time_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/map_total_time_progressbar"
+        android:layout_centerHorizontal="true"
+        android:textSize="14sp" />
 
 </RelativeLayout>

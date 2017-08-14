@@ -4,36 +4,42 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.util.Locale;
 
 import wybren_erik.hanzespel.City;
 import wybren_erik.hanzespel.Location;
 import wybren_erik.hanzespel.R;
 import wybren_erik.hanzespel.RoadMap;
-import wybren_erik.hanzespel.dialog.ArrivedDialog;
 import wybren_erik.hanzespel.dialog.ConfirmDialog;
 import wybren_erik.hanzespel.interfaces.BoatListener;
+import wybren_erik.hanzespel.interfaces.GameListener;
 import wybren_erik.hanzespel.model.Boat;
+import wybren_erik.hanzespel.model.Game;
 
-public class MapFragment extends Fragment implements BoatListener {
+public class MapFragment extends Fragment implements BoatListener, GameListener {
 
     public static String travelText;
     private static int position;
-    private static Activity activity;
-    TextView boatNameTextView;
-    TextView boatLocationTextView;
-    Button confirmButton;
-    boolean isInit = false;
+    private Activity activity;
+
+    private TextView boatNameTextView;
+    private TextView boatLocationTextView;
+    private TextView totalTimeTextView;
+    private ProgressBar totalTimeBar;
+    private Button confirmButton;
+    private boolean isInit = false;
+
     private Boat boat;
     private Spinner travelList;
-    private ArrivedDialog arrivedDialog;
     private ConfirmDialog confirmDialog;
 
     @Nullable
@@ -41,6 +47,7 @@ public class MapFragment extends Fragment implements BoatListener {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (!isInit) {
             Boat.addListener(this);
+            Game.addListener(this);
             activity = getActivity();
         }
 
@@ -49,11 +56,17 @@ public class MapFragment extends Fragment implements BoatListener {
         boatLocationTextView = (TextView) view.findViewById(R.id.map_menu_current_location);
         travelList = (Spinner) view.findViewById(R.id.map_menu_travel_list);
         confirmButton = (Button) view.findViewById(R.id.map_menu_button_go);
-        arrivedDialog = new ArrivedDialog();
+        totalTimeBar = (ProgressBar) view.findViewById(R.id.map_total_time_progressbar);
+        totalTimeTextView = (TextView) view.findViewById(R.id.map_total_time_text);
+
         confirmDialog = new ConfirmDialog();
 
         if (boat == null) boat = Boat.getInstance();
         boatNameTextView.setText(boat.getName());
+        totalTimeBar.setMax((int) Game.getTotalGameTime());
+        long remainingTime = Game.getRemainingGameTime();
+        totalTimeTextView.setText(String.format(Locale.ENGLISH, "%02d:%02d", (remainingTime / 1000) / 60, (remainingTime / 1000) % 60));
+
         if (Boat.isInDock()) boatLocationTextView.setText(boat.getLocation().getName().toString());
         else {
             boatLocationTextView.setText(travelText);
@@ -94,7 +107,7 @@ public class MapFragment extends Fragment implements BoatListener {
 
     @Override
     public void onArrive() {
-        MapFragment.activity.runOnUiThread(new Runnable() {
+        activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 boatLocationTextView.setText(boat.getDestination().toString());
@@ -107,5 +120,21 @@ public class MapFragment extends Fragment implements BoatListener {
     @Override
     public void onArrivalTimeChanged(long timeUntilArrival) {
         // Not needed yet, TODO
+    }
+
+    @Override
+    public void onGameTimeChanged(final long newTime) {
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                totalTimeTextView.setText(String.format(Locale.ENGLISH, "%02d:%02d", (newTime / 1000) / 60, (newTime / 1000) % 60));
+                totalTimeBar.setProgress((int) newTime);
+            }
+        });
+    }
+
+    @Override
+    public void onGameEnd() {
+
     }
 }
