@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/INTERNAL_inv_text"
-        android:text="@string/inventory_string"
+        android:id="@+id/status_name_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="24dp"
-        android:layout_marginStart="24dp"
-        android:textSize="24sp"/>
-
+        android:fontFamily="cursive"
+        android:textSize="72sp" />
 
     <TextView
         android:text="@string/position_string"
         android:id="@+id/INTERNAL_pos_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@id/INTERNAL_inv_text"
+        android:layout_marginStart="24dp"
         android:textSize="24sp"
         android:layout_marginTop="16dp"
-        android:layout_below="@id/INTERNAL_inv_text" />
+        android:layout_below="@id/status_name_text"
+        android:layout_marginLeft="24dp" />
 
     <TextView
-        android:text="TESTTESTTEST"
         android:id="@+id/status_position_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@id/INTERNAL_inv_text"
+        android:layout_alignStart="@id/INTERNAL_pos_text"
         android:textSize="18sp"
         android:layout_marginTop="4dp"
-        android:layout_below="@id/INTERNAL_pos_text" />
+        android:layout_below="@id/INTERNAL_pos_text"
+        android:layout_alignLeft="@id/INTERNAL_pos_text" />
 
     <TextView
         android:text="@string/arrival_string"
         android:id="@+id/INTERNAL_arrival_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@id/INTERNAL_inv_text"
+        android:layout_alignStart="@id/INTERNAL_pos_text"
         android:textSize="24sp"
         android:layout_marginTop="16dp"
-        android:layout_below="@id/status_position_text" />
+        android:layout_below="@id/status_position_text"
+        android:layout_alignLeft="@id/INTERNAL_pos_text" />
 
     <ProgressBar
         android:progress="267149"
@@ -56,7 +56,6 @@
         android:max="@integer/max_travel_time_ms" />
 
     <TextView
-        android:text="4:27.149"
         android:id="@+id/status_arrival_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -69,19 +68,20 @@
         android:id="@+id/INTERNAL_bal_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@id/INTERNAL_inv_text"
+        android:layout_alignStart="@id/INTERNAL_pos_text"
         android:textSize="24sp"
         android:layout_marginTop="16dp"
-        android:layout_below="@id/status_arrival_text" />
+        android:layout_below="@id/status_arrival_text"
+        android:layout_alignLeft="@id/INTERNAL_pos_text" />
 
     <TextView
-        android:text="0"
         android:id="@+id/status_balance_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@id/INTERNAL_inv_text"
+        android:layout_alignStart="@id/INTERNAL_pos_text"
         android:textSize="16sp"
         android:layout_marginTop="4dp"
-        android:layout_below="@id/INTERNAL_bal_text" />
+        android:layout_below="@id/INTERNAL_bal_text"
+        android:layout_alignLeft="@id/INTERNAL_pos_text" />
 
 </RelativeLayout>

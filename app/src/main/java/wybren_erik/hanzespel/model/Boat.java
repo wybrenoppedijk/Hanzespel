@@ -64,12 +64,6 @@ public class Boat {
         return instance;
     }
 
-    public static Boat getInstance(String name) {
-        if (instance == null)
-            instance = new Boat(InventoryModel.getInstance(), name);
-        return instance;
-    }
-
     public static void make(String name) {
         instance = new Boat(InventoryModel.getInstance(), name);
     }

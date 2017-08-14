@@ -21,10 +21,13 @@ import wybren_erik.hanzespel.model.InventoryModel;
 public class StatusFragment extends Fragment implements BoatListener {
 
     private static int travelTime;
+
     private Activity activity;
     private TextView positionTextView;
     private TextView balanceTextView;
     private TextView arrivalTimeTextView;
+    private TextView nameTextView;
+
     private ProgressBar arrivalTimeBar;
     private boolean isInit = false;
     private ArrivedDialog arrivedDialog;
@@ -42,10 +45,13 @@ public class StatusFragment extends Fragment implements BoatListener {
         positionTextView = (TextView) view.findViewById(R.id.status_position_text);
         balanceTextView = (TextView) view.findViewById(R.id.status_balance_text);
         arrivalTimeTextView = (TextView) view.findViewById(R.id.status_arrival_text);
+        nameTextView = (TextView) view.findViewById(R.id.status_name_text);
+
         arrivalTimeBar = (ProgressBar) view.findViewById(R.id.status_arrival_progressbar);
         arrivedDialog = new ArrivedDialog();
 
         balanceTextView.setText("Ð " + InventoryModel.getInstance().getMoney());
+        nameTextView.setText(Boat.getInstance().getName());
 
 
         if (!Boat.isInDock()) {

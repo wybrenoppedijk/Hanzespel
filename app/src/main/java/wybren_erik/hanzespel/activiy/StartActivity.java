@@ -45,8 +45,7 @@ public class StartActivity extends AppCompatActivity {
             public void onClick(View v) {
                 initMap();
                 String name = nameField.getText().toString();
-                Boat.getInstance(name);
-                //rulesDialog.show(getSupportFragmentManager(), "rules_dialog");
+                Boat.make(name);
                 startActivity(mainActivityIntent);
             }
         });
