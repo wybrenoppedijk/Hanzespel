@@ -62,7 +62,7 @@ public class StartActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (count > 3) startButton.setEnabled(true);
+                if (s.length() > 3) startButton.setEnabled(true);
                 else startButton.setEnabled(false);
             }
 

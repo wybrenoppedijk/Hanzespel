@@ -151,7 +151,7 @@ public class SellAdapter extends ArrayAdapter<Product> {
         for (HashMap.Entry<Integer, Integer> entry : hashMap.entrySet()) {
             int position = entry.getKey();
             int value = entry.getValue();
-            productHasmap.put(getItem(position), value);
+            productHasmap.put(getItem(position), value); //todo Bug on this line
         }
         return productHasmap;
     }
