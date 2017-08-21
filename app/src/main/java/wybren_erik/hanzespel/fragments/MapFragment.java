@@ -78,6 +78,12 @@ public class MapFragment extends Fragment implements BoatListener, GameListener 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         travelList.setAdapter(adapter);
 
+        if (boat.getLocation().toString().equals(travelList.getSelectedItem().toString())){
+            confirmButton.setEnabled(false);
+        } else {
+            confirmButton.setEnabled(true);
+        }
+
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
