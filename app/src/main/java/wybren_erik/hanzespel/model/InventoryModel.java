@@ -38,6 +38,10 @@ public class InventoryModel {
         this.money += money;
     }
 
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
     public void withdrawMoney(int money) {
         this.money -= money;
     }
