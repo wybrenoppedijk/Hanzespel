@@ -1,5 +1,7 @@
 package wybren_erik.hanzespel.controller;
 
+import android.util.Log;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashSet;
@@ -8,110 +10,110 @@ import java.util.Set;
 
 import wybren_erik.hanzespel.interfaces.InterventionListener;
 
-/**
- * Created by wybrenoppedijk on 21/08/2017.
- */
-
 public class Intervention {
-    private Method positiveInterventions[] =  NegativeIntervention.class.getDeclaredMethods();
-    private Method negativeInterventions[] = PositiveInterventions.class.getDeclaredMethods();
+
+    private static final String TAG = "Intervention";
     private static Set<InterventionListener> handler = new HashSet<>();
 
+    @SuppressWarnings("TryWithIdenticalCatches")
     public Intervention() {
-        int interventionType;
         Random rand = new Random();
-        int randomNum = rand.nextInt((100 - 1) + 1) + 1;
-        if (randomNum > 0 && randomNum <= 75 ) {
-            return;
-        } else if (randomNum > 75 && randomNum <= 90){
-            randomNum = rand.nextInt((5 - 1) + 1) + 1;
-            try {
-                negativeInterventions[randomNum].invoke(null);
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
+        int randomNum = rand.nextInt(150);
+        Log.d(TAG, "Generated random number " + randomNum + " for intervention chances.");
+
+        if (randomNum <= 0 || randomNum > 75) {
+            if (randomNum > 75 && randomNum <= 90) {
+                randomNum = rand.nextInt(4);
+                try {
+                    Method[] negativeInterventions = NegativeInterventions.class.getDeclaredMethods();
+                    negativeInterventions[randomNum].invoke(new NegativeInterventions());
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                randomNum = rand.nextInt(3);
+                try {
+                    Method[] positiveInterventions = PositiveInterventions.class.getDeclaredMethods();
+                    positiveInterventions[randomNum].invoke(new PositiveInterventions());
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (InvocationTargetException e) {
+                    e.printStackTrace();
+                }
             }
-            return;
-        }
-        else {
-            randomNum = rand.nextInt((4 - 1) + 1) + 1;
-            try {
-                positiveInterventions[randomNum].invoke(null);
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
-            }
-            return;
         }
     }
 
-    public static void addListener(InterventionListener listener){
+    public static void addListener(InterventionListener listener) {
         handler.add(listener);
     }
 
-    private class NegativeIntervention{
-        private void pirateship(){
-            for (InterventionListener l: handler
-                 ) {
+    @SuppressWarnings("unused")
+    private class NegativeInterventions {
+        void pirateship() {
+            for (InterventionListener l : handler
+                    ) {
                 l.pirateship();
             }
         }
 
-        private void boatLeak(){
-            for (InterventionListener l: handler
+        void boatLeak() {
+            for (InterventionListener l : handler
                     ) {
                 l.boatLeak();
             }
         }
 
-        private void crewOverboard() {
-            for (InterventionListener l: handler
+        void crewOverboard() {
+            for (InterventionListener l : handler
                     ) {
                 l.crewOverboard();
             }
         }
 
-        private void badWeaather(){
-            for (InterventionListener l: handler
+        void badWeaather() {
+            for (InterventionListener l : handler
                     ) {
                 l.badWeather();
             }
         }
 
-        private void bandit(){
-            for (InterventionListener l: handler
+        void bandit() {
+            for (InterventionListener l : handler
                     ) {
                 l.bandit();
             }
         }
     }
 
-    private class PositiveInterventions{
+    @SuppressWarnings("unused")
+    private class PositiveInterventions {
 
-        void goodWeather(){
-            for (InterventionListener l: handler
+        void goodWeather() {
+            for (InterventionListener l : handler
                     ) {
                 l.goodWeather();
             }
         }
 
-        void increaseOfValue(){
-            for (InterventionListener l: handler
+        void increaseOfValue() {
+            for (InterventionListener l : handler
                     ) {
                 l.foundHiddenChest();
             }
         }
 
-        void defeatPirateShip(){
-            for (InterventionListener l: handler
+        void defeatPirateShip() {
+            for (InterventionListener l : handler
                     ) {
                 l.defeatPirateShip();
             }
         }
-        void shortCut(){
-            for (InterventionListener l: handler
+
+        void shortCut() {
+            for (InterventionListener l : handler
                     ) {
                 l.shortCut();
             }

@@ -26,8 +26,8 @@ public class StartActivity extends AppCompatActivity {
     private Button startButton;
     private RulesDialog rulesDialog;
     private Intent mainActivityIntent;
-    //private static long TOTAL_GAME_TIME = 0x5265C0; // One and a half hours
-    private static long TOTAL_GAME_TIME = 0xEA60;
+    private static long TOTAL_GAME_TIME = 0x5265C0; // One and a half hours
+    //private static long TOTAL_GAME_TIME = 0xEA60; // One minute, for debug
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

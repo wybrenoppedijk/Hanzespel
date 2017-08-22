@@ -54,14 +54,13 @@ public class Boat implements InterventionListener{
             }
         }
     };
-    private InventoryModel inventoryModel;
+
     private City location = RoadMap.getInstance().getCity(Location.KAMPEN);
     private String name;
     private City destination;
 
-    private Boat(InventoryModel inventoryModel, String name) {
+    private Boat(String name) {
         Intervention.addListener(this);
-        this.inventoryModel = inventoryModel;
         this.location = RoadMap.getInstance().getCity(Location.KAMPEN);
         this.destination = RoadMap.getInstance().getCity(Location.KAMPEN);
         this.name = name;
@@ -69,12 +68,12 @@ public class Boat implements InterventionListener{
 
     public static Boat getInstance() {
         if (instance == null)
-            instance = new Boat(InventoryModel.getInstance(), "Het schip der null");
+            instance = new Boat("Het schip der null");
         return instance;
     }
 
     public static void make(String name) {
-        instance = new Boat(InventoryModel.getInstance(), name);
+        instance = new Boat(name);
     }
 
     public static void addListener(BoatListener l) {
@@ -109,7 +108,6 @@ public class Boat implements InterventionListener{
     public void goToCity(City location) {
 
         inDock = false;
-        Intervention inteverntion = new Intervention();
 
         ScheduledExecutorService arrivalExecutor = Executors.newSingleThreadScheduledExecutor();
         updateExecutor = Executors.newSingleThreadScheduledExecutor();

@@ -2,13 +2,9 @@ package wybren_erik.hanzespel.model;
 
 import wybren_erik.hanzespel.ProductEnum;
 
-/**
- * Created by wybrenoppedijk on 21/05/2017.
- */
-
 public class Product {
-    private ProductEnum productEnum;
     private int amount;
+    private ProductEnum productEnum;
 
     public Product(ProductEnum productEnum, int amount) {
         this.productEnum = productEnum;
@@ -23,12 +19,29 @@ public class Product {
         return amount;
     }
 
-    public void setProductEnum(ProductEnum productEnum) {
-        this.productEnum = productEnum;
+    public void add() {
+        ++amount;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
+    public void add(int amount) {
+        this.amount += amount;
+    }
+
+    public void deduct() {
+        --amount;
+    }
+
+    void deduct(int amount) {
+        this.amount -= amount;
+    }
+
+    public void setZero() {
+        amount = 0;
+    }
+
+    @Override
+    public String toString() {
+        return productEnum.toString();
     }
 
 }

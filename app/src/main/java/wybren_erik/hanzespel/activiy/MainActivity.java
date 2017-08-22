@@ -97,6 +97,11 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
     }
 
     @Override
+    public void onBackPressed() {
+        // Do nothing
+    }
+
+    @Override
     public void onDepart(long travelTime) {
         //Ignored
     }

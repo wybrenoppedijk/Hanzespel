@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/firstLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,6 +22,17 @@
             android:text="@string/inventory_string"
             android:textSize="24sp" />
 
+        <TextView
+            android:id="@+id/handel_bal_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="24dp"
+            android:textSize="24sp"
+            android:textAlignment="textEnd"
+            tools:ignore="RelativeOverlap" />
+
         <ListView
             android:id="@+id/handel_inventory_products"
             android:layout_width="match_parent"
@@ -37,7 +49,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/handel_inventory_products"
-            android:layout_centerHorizontal="true"
             android:layout_marginLeft="24dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="15dp"
@@ -50,7 +61,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView2"
-            android:layout_centerHorizontal="true"
             android:layout_marginLeft="24dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="12dp"
@@ -61,10 +71,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/TradeProfitMoney"
-            android:layout_centerHorizontal="true"
             android:layout_marginLeft="24dp"
             android:text="Verkoop" />
-    </LinearLayout>
+    </RelativeLayout>
 
     <View
         android:id="@+id/secondView"

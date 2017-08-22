@@ -31,9 +31,7 @@ public class MapFragment extends Fragment implements BoatListener, GameListener 
     private static int position;
     private Activity activity;
 
-    private TextView boatNameTextView;
-    private TextView boatLocationTextView;
-    private TextView totalTimeTextView;
+    private TextView boatNameTextView, boatLocationTextView, totalTimeTextView;
     private ProgressBar totalTimeBar;
     private Button confirmButton;
     private boolean isInit = false;
@@ -79,7 +77,7 @@ public class MapFragment extends Fragment implements BoatListener, GameListener 
         travelList.setAdapter(adapter);
 
         if (boat.getLocation().toString().equals(travelList.getSelectedItem().toString())){
-            confirmButton.setEnabled(false);
+            //confirmButton.setEnabled(false);
         } else {
             confirmButton.setEnabled(true);
         }
