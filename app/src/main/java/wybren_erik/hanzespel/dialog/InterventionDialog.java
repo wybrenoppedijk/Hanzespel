@@ -9,6 +9,7 @@ import android.support.v7.app.AlertDialog;
 
 public class InterventionDialog extends DialogFragment {
     public String text;
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

@@ -8,13 +8,13 @@ import wybren_erik.hanzespel.ProductEnum;
 
 public class InventoryModel {
     private static InventoryModel inventoryModel = null;
+    private final String TAG = "Inventory";
     private ArrayList<Product> products = new ArrayList<>();
     private int money;
-    private final String TAG = "Inventory";
 
     private InventoryModel() {
         money = 500;
-        for(ProductEnum p : ProductEnum.values()) {
+        for (ProductEnum p : ProductEnum.values()) {
             products.add(new Product(p, 0));
         }
     }
@@ -49,24 +49,24 @@ public class InventoryModel {
     public void push(Product product) {
         boolean didChange = false;
 
-        for(Product p : products) {
+        for (Product p : products) {
             // If product was already in inventory
-            if(p.getProductEnum().equals(product.getProductEnum())) {
+            if (p.getProductEnum().equals(product.getProductEnum())) {
                 p.add(product.getAmount());
                 didChange = true;
             } // Else do nothing, probably different product
         } // If it wasn't and it didn't change; do change
-        if(!didChange) {
+        if (!didChange) {
             products.add(product);
         }
     }
 
     public void remove(ArrayList<Product> products) {
 
-        for(Product thisProduct : this.products) {
-            for(Product newProduct : products) {
+        for (Product thisProduct : this.products) {
+            for (Product newProduct : products) {
                 // If product types are the same deduct new from this
-                if(thisProduct.getProductEnum().equals(newProduct.getProductEnum())) {
+                if (thisProduct.getProductEnum().equals(newProduct.getProductEnum())) {
                     thisProduct.deduct(newProduct.getAmount());
                 }
             }
@@ -76,7 +76,7 @@ public class InventoryModel {
 
     public void debugInventory() {
         Log.d(TAG, "*****INVENTORY DEBUG PRINT:");
-        for(Product p : products) {
+        for (Product p : products) {
             Log.d(TAG, "*****" + p.toString() + ": " + p.getAmount());
         }
     }

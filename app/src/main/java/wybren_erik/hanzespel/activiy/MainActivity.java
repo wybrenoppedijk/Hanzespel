@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
     private Fragment currentFragment;
     private ArrivedDialog arrivedDialog;
     private RulesDialog rulesDialog;
-    private  InterventionDialog interventionDialog = new InterventionDialog();
+    private InterventionDialog interventionDialog = new InterventionDialog();
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {

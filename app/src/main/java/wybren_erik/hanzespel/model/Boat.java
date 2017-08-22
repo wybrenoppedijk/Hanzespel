@@ -1,12 +1,10 @@
 package wybren_erik.hanzespel.model;
 
 import java.util.HashSet;
-import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
 import wybren_erik.hanzespel.City;
@@ -14,15 +12,11 @@ import wybren_erik.hanzespel.Location;
 import wybren_erik.hanzespel.Road;
 import wybren_erik.hanzespel.RoadMap;
 import wybren_erik.hanzespel.controller.Intervention;
-import wybren_erik.hanzespel.dialog.InterventionDialog;
 import wybren_erik.hanzespel.interfaces.BoatListener;
 import wybren_erik.hanzespel.interfaces.InterventionListener;
 
-public class Boat implements InterventionListener{
+public class Boat implements InterventionListener {
 
-    private int additionalTime= 0;
-    private int lessTime = 0;
-    private InventoryModel model = InventoryModel.getInstance();
     private static boolean inDock = true;
     private static Set<BoatListener> listeners = new HashSet<>();
     private static Boat instance;
@@ -39,6 +33,9 @@ public class Boat implements InterventionListener{
             }
         }
     };
+    private int additionalTime = 0;
+    private int lessTime = 0;
+    private InventoryModel model = InventoryModel.getInstance();
     private ScheduledExecutorService updateExecutor;
     private final Runnable arrivalTask = new Runnable() {
         @Override

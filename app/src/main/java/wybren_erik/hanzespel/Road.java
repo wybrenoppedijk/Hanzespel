@@ -1,7 +1,7 @@
 package wybren_erik.hanzespel;
 
-import wybren_erik.hanzespel.interfaces.*;
 import wybren_erik.hanzespel.interfaces.Edge;
+import wybren_erik.hanzespel.interfaces.Vertex;
 
 public class Road implements Edge {
     private int weight;

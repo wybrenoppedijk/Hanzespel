@@ -18,17 +18,19 @@ public class RoadMap implements Graph {
 
     /**
      * Retrieve the roadmap instance
-     * @return  The Singleton instance of RoadMap
+     *
+     * @return The Singleton instance of RoadMap
      */
     public static RoadMap getInstance() {
-        if(instance == null) instance = new RoadMap();
+        if (instance == null) instance = new RoadMap();
         return instance;
     }
 
     /**
      * Get the neighbours from a vertex.
+     *
      * @param from The vertex of which the neighbours have to be returned.
-     * @return  A HashSet containing the neighbour Vertices of given Vertex.
+     * @return A HashSet containing the neighbour Vertices of given Vertex.
      */
     @Override
     public Set getNeighbours(Vertex from) {
@@ -45,8 +47,9 @@ public class RoadMap implements Graph {
 
     /**
      * Retrieve the edges connected to a vertex.
+     *
      * @param from The vertex of which all outgoing edges have to be returned.
-     * @return  A HashSet containing all edges connected to given Vertex.
+     * @return A HashSet containing all edges connected to given Vertex.
      */
     @Override
     public Set getEdges(Vertex from) {
@@ -63,10 +66,11 @@ public class RoadMap implements Graph {
 
     /**
      * Add an edge between to vertices.
-     * @param from The origin vertex
-     * @param to The destination vertex
+     *
+     * @param from     The origin vertex
+     * @param to       The destination vertex
      * @param distance The weight of the edge
-     * @return  True if the edge has successfully been added, false if the edge already exists.
+     * @return True if the edge has successfully been added, false if the edge already exists.
      */
     @Override
     public boolean addEdge(Vertex from, Vertex to, int distance) {
@@ -80,8 +84,9 @@ public class RoadMap implements Graph {
 
     /**
      * Add a Vertex to the RoadMap.
+     *
      * @param newVertex The vertex to be added.
-     * @return  True if the Vertex was successfully added, false if the Vertex already exists.
+     * @return True if the Vertex was successfully added, false if the Vertex already exists.
      */
     @Override
     public boolean addVertex(Vertex newVertex) {
@@ -93,12 +98,13 @@ public class RoadMap implements Graph {
 
     /**
      * Retrieve a City from a Location to prevent inefficient memory usage.
-     * @param name  Location of the city
-     * @return      City with location given
+     *
+     * @param name Location of the city
+     * @return City with location given
      */
     public City getCity(Location name) {
-        for(Vertex v : vertices) {
-            if(((Location) v.getName()).equals(name)) {
+        for (Vertex v : vertices) {
+            if (v.getName().equals(name)) {
                 return (City) v;
             }
         }
@@ -107,11 +113,12 @@ public class RoadMap implements Graph {
 
     /**
      * Retrieve a list of all vertices.
-     * @return  A HashSet containing all cities in the roadmap.
+     *
+     * @return A HashSet containing all cities in the roadmap.
      */
     public Set<City> getCities() {
         Set<City> result = new HashSet<>();
-        for(Vertex v : vertices) {
+        for (Vertex v : vertices) {
             result.add((City) v);
         }
         return result;

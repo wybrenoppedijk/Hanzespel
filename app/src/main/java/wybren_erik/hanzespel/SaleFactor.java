@@ -3,9 +3,9 @@ package wybren_erik.hanzespel;
 public class SaleFactor {
 
     public static double getFactor(City c, ProductEnum p) {
-        switch(c.getName()) {
+        switch (c.getName()) {
             case KAMPEN:
-                switch(p) {
+                switch (p) {
                     case BIER:
                         return 0.8;
                     case STOKVIS:
@@ -32,7 +32,7 @@ public class SaleFactor {
                 }
                 break;
             case BERGEN:
-                switch(p) {
+                switch (p) {
                     case BIER:
                         return 1.4;
                     case STOKVIS:
@@ -59,7 +59,7 @@ public class SaleFactor {
                 }
                 break;
             case LUBECK:
-                switch(p) {
+                switch (p) {
                     case BIER:
                         return 1.4;
                     case STOKVIS:
@@ -86,7 +86,7 @@ public class SaleFactor {
                 }
                 break;
             case STRALSUND:
-                switch(p) {
+                switch (p) {
                     case BIER:
                         return 1.5;
                     case STOKVIS:
@@ -113,7 +113,7 @@ public class SaleFactor {
                 }
                 break;
             case RIGA:
-                switch(p) {
+                switch (p) {
                     case BIER:
                         return 1.8;
                     case STOKVIS:
@@ -140,7 +140,7 @@ public class SaleFactor {
                 }
                 break;
             case TALLIN:
-                switch(p) {
+                switch (p) {
                     case BIER:
                         return 2.0;
                     case STOKVIS:
@@ -167,7 +167,7 @@ public class SaleFactor {
                 }
                 break;
             case VISBY:
-                switch(p) {
+                switch (p) {
                     case BIER:
                         return 1.7;
                     case STOKVIS:
@@ -194,7 +194,7 @@ public class SaleFactor {
                 }
                 break;
             case AALBORG:
-                switch(p) {
+                switch (p) {
                     case BIER:
                         return 1.3;
                     case STOKVIS:
@@ -221,7 +221,7 @@ public class SaleFactor {
                 }
                 break;
             case STOCKHOLM:
-                switch(p) {
+                switch (p) {
                     case BIER:
                         return 1.8;
                     case STOKVIS:
@@ -248,7 +248,7 @@ public class SaleFactor {
                 }
                 break;
             case DANZIG:
-                switch(p) {
+                switch (p) {
                     case BIER:
                         return 1.6;
                     case STOKVIS:
@@ -275,7 +275,7 @@ public class SaleFactor {
                 }
                 break;
             case TURKU:
-                switch(p) {
+                switch (p) {
                     case BIER:
                         return 2.0;
                     case STOKVIS:

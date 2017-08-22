@@ -21,6 +21,37 @@ public enum Location {
         this.locName = visibleName;
     }
 
+    public static Location fromString(String name) {
+        switch (name.toLowerCase()) {
+            case "kampen":
+                return KAMPEN;
+            case "bergen":
+                return BERGEN;
+            case "lübeck":
+                return LUBECK;
+            case "stralsund":
+                return STRALSUND;
+            case "riga":
+                return RIGA;
+            case "tallin":
+                return TALLIN;
+            case "visby":
+                return VISBY;
+            case "aalborg":
+                return AALBORG;
+            case "stockholm":
+                return STOCKHOLM;
+            case "danzig":
+                return DANZIG;
+            case "turku":
+                return TURKU;
+            case "zee":
+                return SEA;
+            default:
+                return KAMPEN;
+        }
+    }
+
     public ProductEnum getProduct() {
         switch (this) {
             case KAMPEN:
@@ -51,37 +82,6 @@ public enum Location {
 
     public String toString() {
         return locName;
-    }
-
-    public static Location fromString(String name) {
-        switch(name.toLowerCase()) {
-            case "kampen":
-                return KAMPEN;
-            case "bergen":
-                return BERGEN;
-            case "lübeck":
-                return LUBECK;
-            case "stralsund":
-                return STRALSUND;
-            case "riga":
-                return RIGA;
-            case "tallin":
-                return TALLIN;
-            case "visby":
-                return VISBY;
-            case "aalborg":
-                return AALBORG;
-            case "stockholm":
-                return STOCKHOLM;
-            case "danzig":
-                return DANZIG;
-            case "turku":
-                return TURKU;
-            case "zee":
-                return SEA;
-            default:
-                return KAMPEN;
-        }
     }
 
 }

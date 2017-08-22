@@ -22,11 +22,11 @@ import wybren_erik.hanzespel.model.Game;
 
 public class StartActivity extends AppCompatActivity {
 
+    private static long TOTAL_GAME_TIME = 0x5265C0; // One and a half hours
     private EditText nameField;
     private Button startButton;
     private RulesDialog rulesDialog;
     private Intent mainActivityIntent;
-    private static long TOTAL_GAME_TIME = 0x5265C0; // One and a half hours
     //private static long TOTAL_GAME_TIME = 0xEA60; // One minute, for debug
 
     @Override
