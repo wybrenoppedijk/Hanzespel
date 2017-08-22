@@ -31,5 +31,32 @@ public enum ProductEnum {
     private String format(String s) {
         return s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
     }
+
+    public int getIcon() {
+        switch (this) {
+            case BIER:
+                return R.mipmap.beer;
+            case STOKVIS:
+                return R.mipmap.fish;
+            case ZOUT:
+                return R.mipmap.salt;
+            case VATEN:
+                return R.mipmap.barrel;
+            case LAKEN:
+                return R.mipmap.blanket;
+            case WAS:
+                return R.mipmap.wax;
+            case BONT:
+                return R.mipmap.fur;
+            case IJZER:
+                return R.mipmap.iron_bar;
+            case GRAAN:
+                return R.mipmap.wheet;
+            case HOUT:
+                return R.mipmap.wood;
+            default:
+                return R.mipmap.ic_launcher;
+        }
+    }
 }
 

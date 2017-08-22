@@ -44,4 +44,8 @@ public class Product {
         return productEnum.toString();
     }
 
+    public int getIcon() {
+        return productEnum.getIcon();
+    }
+
 }

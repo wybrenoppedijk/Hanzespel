@@ -25,7 +25,7 @@ public class SellAdapter extends ArrayAdapter<Product> {
 
     public static ArrayList<Product> productsToBeSold = new ArrayList<>();
     private static ItemTradeHandler listener;
-    private int totalAmountOfTradeValue;
+    public static int totalAmountOfTradeValue;
 
     public SellAdapter(@NonNull Context context, ArrayList<Product> products) {
         super(context, R.layout.list_item, products);
@@ -61,7 +61,7 @@ public class SellAdapter extends ArrayAdapter<Product> {
         final Button increase = (Button) view.findViewById(R.id.increaseTradeItem);
 
         // Define UI
-        icon.setImageResource(getProperImage(product));
+        icon.setImageResource(product.getIcon());
         amount.setText("" + productFromInventory.getAmount()); // Make sure to use correct product here
         productName.setText(productFromInventory.toString());
         amountOfTradeItemsTV.setText("0");
@@ -116,33 +116,6 @@ public class SellAdapter extends ArrayAdapter<Product> {
 
     private int getProductValue(ProductEnum product) {
         return (int) (product.getPrice() * SaleFactor.getFactor(Boat.getInstance().getLocation(), product));
-    }
-
-    private int getProperImage(Product product) {
-        switch (product.getProductEnum()) {
-            case BIER:
-                return R.mipmap.beer;
-            case STOKVIS:
-                return R.mipmap.fish;
-            case ZOUT:
-                return R.mipmap.salt;
-            case VATEN:
-                return R.mipmap.barrel;
-            case LAKEN:
-                return R.mipmap.blanket;
-            case WAS:
-                return R.mipmap.wax;
-            case BONT:
-                return R.mipmap.fur;
-            case IJZER:
-                return R.mipmap.iron_bar;
-            case GRAAN:
-                return R.mipmap.wheet;
-            case HOUT:
-                return R.mipmap.wood;
-            default:
-                return R.mipmap.ic_launcher;
-        }
     }
 
 }

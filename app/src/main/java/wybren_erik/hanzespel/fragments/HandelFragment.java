@@ -75,7 +75,7 @@ public class HandelFragment extends Fragment implements ItemTradeHandler, GameLi
         final Button sellButton = (Button) view.findViewById(R.id.sell_button);
 
         // Define UI
-        icon.setImageResource(getProperImage(Boat.getInstance().getLocation().getName().getProduct()));
+        icon.setImageResource(Boat.getInstance().getLocation().getName().getProduct().getIcon());
         itemName.setText(Boat.getInstance().getLocation().getName().getProduct().toString());
         balance.setText(totalMoney + " Ð");
         buyButton.setEnabled(false);
@@ -165,39 +165,14 @@ public class HandelFragment extends Fragment implements ItemTradeHandler, GameLi
                 balance.setText(totalMoney + " Ð");
                 model.remove(SellAdapter.productsToBeSold);
                 SellAdapter.productsToBeSold.clear();
+                totalAmountTV.setText("0 Ð");
+                SellAdapter.totalAmountOfTradeValue = 0;
 
                 model.debugInventory();
             }
         });
 
         return view;
-    }
-
-    private int getProperImage(ProductEnum product) {
-        switch (product) {
-            case BIER:
-                return R.mipmap.beer;
-            case STOKVIS:
-                return R.mipmap.fish;
-            case ZOUT:
-                return R.mipmap.salt;
-            case VATEN:
-                return R.mipmap.barrel;
-            case LAKEN:
-                return R.mipmap.blanket;
-            case WAS:
-                return R.mipmap.wax;
-            case BONT:
-                return R.mipmap.fur;
-            case IJZER:
-                return R.mipmap.iron_bar;
-            case GRAAN:
-                return R.mipmap.wheet;
-            case HOUT:
-                return R.mipmap.wood;
-            default:
-                return R.mipmap.ic_launcher;
-        }
     }
 
     @Override
