@@ -18,7 +18,7 @@ public class Intervention {
     @SuppressWarnings("TryWithIdenticalCatches")
     public Intervention() {
         Random rand = new Random();
-        int randomNum = rand.nextInt(150);
+        int randomNum = rand.nextInt(110);
         Log.d(TAG, "Generated random number " + randomNum + " for intervention chances.");
 
         if (randomNum <= 0 || randomNum > 75) {

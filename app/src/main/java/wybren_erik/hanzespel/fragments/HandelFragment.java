@@ -13,13 +13,12 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import java.util.HashSet;
 import java.util.Locale;
-import java.util.Set;
 
 import wybren_erik.hanzespel.ProductEnum;
 import wybren_erik.hanzespel.R;
 import wybren_erik.hanzespel.controller.SellAdapter;
+import wybren_erik.hanzespel.exception.InventoryFullException;
 import wybren_erik.hanzespel.interfaces.GameListener;
 import wybren_erik.hanzespel.interfaces.ItemTradeHandler;
 import wybren_erik.hanzespel.model.Boat;
@@ -92,7 +91,7 @@ public class HandelFragment extends Fragment implements ItemTradeHandler, GameLi
                 @Override
                 public void onClick(View v) {
                     int newTotalPrice = boat.getLocation().getName().getProduct().getPrice() * (totalAmountOfItemsBought + 1);
-                    if (newTotalPrice <= totalMoney) {
+                    if (newTotalPrice <= totalMoney && model.getOccupation() + totalAmountOfItemsBought < 4) {
                         totalAmountOfItemsBought++;
                         amountBuyItems.setText("" + totalAmountOfItemsBought);
                         totalPrice.setText("Ð " + boat.getLocation().getName().getProduct().getPrice() * totalAmountOfItemsBought);
@@ -126,6 +125,8 @@ public class HandelFragment extends Fragment implements ItemTradeHandler, GameLi
             price.setVisibility(TextView.GONE);
             increaseButton.setVisibility(Button.GONE);
             decreaseButton.setVisibility(Button.GONE);
+            sellButton.setEnabled(false);
+            buyButton.setEnabled(false);
         }
 
         buyButton.setOnClickListener(new View.OnClickListener() {
@@ -135,10 +136,15 @@ public class HandelFragment extends Fragment implements ItemTradeHandler, GameLi
 
                     ProductEnum productEnum = Boat.getInstance().getLocation().getName().getProduct();
                     Product product = new Product(productEnum, totalAmountOfItemsBought);
+                    try {
+                        model.push(product);
+                    } catch (InventoryFullException e) {
+                        e.printStackTrace();
+                        return;
+                    }
                     int price = productEnum.getPrice() * totalAmountOfItemsBought;
                     model.withdrawMoney(price);
                     totalMoney = model.getMoney();
-                    model.push(product);
 
                     // Update UI
                     sellAdapter.notifyDataSetChanged();

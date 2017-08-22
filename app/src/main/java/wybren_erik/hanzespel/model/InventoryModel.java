@@ -5,12 +5,14 @@ import android.util.Log;
 import java.util.ArrayList;
 
 import wybren_erik.hanzespel.ProductEnum;
+import wybren_erik.hanzespel.exception.InventoryFullException;
 
 public class InventoryModel {
     private static InventoryModel inventoryModel = null;
     private final String TAG = "Inventory";
     private ArrayList<Product> products = new ArrayList<>();
     private int money;
+    private int occupation;
 
     private InventoryModel() {
         money = 500;
@@ -46,19 +48,23 @@ public class InventoryModel {
         this.money -= money;
     }
 
-    public void push(Product product) {
+    public void push(Product product) throws InventoryFullException {
         boolean didChange = false;
 
         for (Product p : products) {
             // If product was already in inventory
             if (p.getProductEnum().equals(product.getProductEnum())) {
-                p.add(product.getAmount());
+                int amount = product.getAmount();
+                p.add(amount);
+                occupation += amount;
                 didChange = true;
             } // Else do nothing, probably different product
         } // If it wasn't and it didn't change; do change
         if (!didChange) {
             products.add(product);
         }
+
+        if (occupation > 4) throw new InventoryFullException();
     }
 
     public void remove(ArrayList<Product> products) {
@@ -67,11 +73,17 @@ public class InventoryModel {
             for (Product newProduct : products) {
                 // If product types are the same deduct new from this
                 if (thisProduct.getProductEnum().equals(newProduct.getProductEnum())) {
-                    thisProduct.deduct(newProduct.getAmount());
+                    int amount = newProduct.getAmount();
+                    thisProduct.deduct(amount);
+                    occupation -= amount;
                 }
             }
         }
 
+    }
+
+    public int getOccupation() {
+        return occupation;
     }
 
     public void debugInventory() {
