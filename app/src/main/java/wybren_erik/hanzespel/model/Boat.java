@@ -1,5 +1,6 @@
 package wybren_erik.hanzespel.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.Executors;
@@ -147,7 +148,8 @@ public class Boat implements InterventionListener {
 
     @Override
     public void pirateship() {
-
+        InventoryModel inv = InventoryModel.getInstance();
+        inv.removeHalf();
     }
 
     @Override
