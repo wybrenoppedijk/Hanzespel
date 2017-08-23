@@ -7,7 +7,6 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -15,15 +14,11 @@ import android.widget.LinearLayout;
 import wybren_erik.hanzespel.City;
 import wybren_erik.hanzespel.R;
 import wybren_erik.hanzespel.dialog.ConfirmDialog;
-import wybren_erik.hanzespel.interfaces.OnDestenationClickHandler;
+import wybren_erik.hanzespel.interfaces.OnDestinationClickHandler;
 import wybren_erik.hanzespel.model.Boat;
 
-/**
- * Created by wybrenoppedijk on 22/08/2017.
- */
-
 public class MapsCustomView extends LinearLayout implements View.OnClickListener {
-    private static OnDestenationClickHandler onDestenationClickHandler;
+    private static OnDestinationClickHandler onDestinationClickHandler;
     Paint locationText;
     Paint travelTimeText;
     Paint border;
@@ -31,7 +26,6 @@ public class MapsCustomView extends LinearLayout implements View.OnClickListener
     int travelTime;
     Boat boat;
     boolean enabled = true;
-    ConfirmDialog confirmDialog;
 
     public MapsCustomView(Context context) {
         super(context);
@@ -48,8 +42,8 @@ public class MapsCustomView extends LinearLayout implements View.OnClickListener
         init();
     }
 
-    public static void addListener(OnDestenationClickHandler listener) {
-        onDestenationClickHandler = listener;
+    public static void addListener(OnDestinationClickHandler listener) {
+        onDestinationClickHandler = listener;
     }
 
     public void init() {
@@ -58,6 +52,7 @@ public class MapsCustomView extends LinearLayout implements View.OnClickListener
         border = new Paint();
         locationText = new Paint();
         travelTimeText = new Paint();
+        setOnClickListener(this);
 
         border.setColor(Color.BLACK);
         border.setStyle(Paint.Style.STROKE);
@@ -81,23 +76,22 @@ public class MapsCustomView extends LinearLayout implements View.OnClickListener
         super.onDraw(canvas);
         boat = Boat.getInstance();
 
-        if (!boat.isInDock()) {
-            enabled = false;
-        } else {
-            enabled = true;
-        }
-        if (boat.getLocation().toString().equals(travelDestination)) {
-            enabled = false;
-        } else {
-            enabled= true;
-        }
+        enabled = Boat.isInDock() && !boat.getLocation().toString().equals(travelDestination.toString());
         if (enabled) {
             setBackgroundResource(R.drawable.rounded_rectangle);
         } else {
             setBackgroundResource(R.drawable.rounded_rectangle_disabled);
         }
 
-        canvas.drawText(travelDestination.toString(), canvas.getWidth() / 2, canvas.getHeight() / 4, locationText);
+        canvas.
+                drawText(
+                        travelDestination.
+                                toString(),
+                        canvas.
+                                getWidth() / 2,
+                        canvas.
+                                getHeight() / 4,
+                        locationText);
         canvas.drawText(travelTime + "s", canvas.getWidth() / 2, canvas.getHeight() / 4 + 50, travelTimeText);
 
     }
@@ -114,25 +108,22 @@ public class MapsCustomView extends LinearLayout implements View.OnClickListener
 
     @Override
     public void setEnabled(boolean enabled) {
-        if (!enabled) {
-            this.enabled = false;
-            System.out.println(this.enabled);
-            invalidate();
-        }
+        this.enabled = enabled;
+        invalidate();
     }
 
     @Override
     public void onClick(View v) {
-        Log.d("CustomView", "Click");
-        System.out.println("WHAT THE FUCK");
         if (enabled) {
             if (Boat.isInDock()) {
                 if (!boat.getLocation().equals(travelDestination)) {
-                    onDestenationClickHandler.onClickListener(travelDestination);
+                    onDestinationClickHandler.onClickListener(travelDestination);
                     invalidate();
                 }
             }
         }
 
     }
+
+
 }

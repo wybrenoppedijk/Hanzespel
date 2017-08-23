@@ -27,7 +27,7 @@ import wybren_erik.hanzespel.model.InventoryModel;
 import wybren_erik.hanzespel.model.Product;
 
 @SuppressLint("SetTextI18n")
-public class HandelFragment extends Fragment implements ItemTradeHandler, GameListener {
+public class HandelFragment extends Fragment implements ItemTradeHandler, GameListener { // TODO: Load stuff on background thread. Tablet currently skips 42 frames on load.
 
     private TextView totalAmountTV, totalGameTimeTV;
     private ProgressBar totalGameTimePB;

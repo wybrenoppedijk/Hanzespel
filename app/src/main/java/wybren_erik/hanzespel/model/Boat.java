@@ -117,7 +117,7 @@ public class Boat implements InterventionListener {
 
         inDock = false;
 
-        Intervention intervention = new Intervention(); //todo is nodig? was weggehaald?
+        new Intervention();
 
         ScheduledExecutorService arrivalExecutor = Executors.newSingleThreadScheduledExecutor();
         updateExecutor = Executors.newSingleThreadScheduledExecutor();
