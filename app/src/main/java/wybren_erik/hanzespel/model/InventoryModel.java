@@ -86,6 +86,14 @@ public class InventoryModel {
         return occupation;
     }
 
+    public void removeHalf() {
+        ArrayList<Product> toBeRemoved = new ArrayList<>();
+        for(Product p : products) {
+            toBeRemoved.add(new Product(p.getProductEnum(), p.getAmount() / 2));
+        }
+        remove(toBeRemoved);
+    }
+
     public void debugInventory() {
         Log.d(TAG, "*****INVENTORY DEBUG PRINT:");
         for (Product p : products) {
