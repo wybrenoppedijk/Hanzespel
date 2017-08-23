@@ -34,6 +34,7 @@ public class ConfirmDialog extends DialogFragment {
             public void onClick(DialogInterface dialog, int which) {
                 boat.goToCity(destination);
                 dialog.dismiss();
+
             }
         });
         builder.setNegativeButton("Annuleren", new DialogInterface.OnClickListener() {

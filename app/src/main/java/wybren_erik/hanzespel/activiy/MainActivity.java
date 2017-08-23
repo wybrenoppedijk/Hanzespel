@@ -103,7 +103,10 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
 
     @Override
     public void onDepart(long travelTime) {
-        //Ignored
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        currentFragment = statusFragment;
+        transaction.add(R.id.main_fragment, statusFragment);
+        transaction.commit();
     }
 
     @Override
