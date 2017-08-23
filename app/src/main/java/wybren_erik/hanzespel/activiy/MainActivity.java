@@ -117,6 +117,7 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
         currentFragment = statusFragment;
         t.replace(R.id.main_fragment, handelFragment);
         t.commit();
+
     }
 
     @Override

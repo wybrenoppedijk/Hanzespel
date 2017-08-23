@@ -36,13 +36,14 @@ public class InventoryModel {
         return money;
     }
 
-    void setMoney(int money) {
+    public void setMoney(int money) {
         this.money = money;
     }
 
     public void addMoney(int money) {
         this.money += money;
     }
+
 
     public void withdrawMoney(int money) {
         this.money -= money;
