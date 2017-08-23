@@ -6,6 +6,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
@@ -105,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
     public void onDepart(long travelTime) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         currentFragment = statusFragment;
-        transaction.add(R.id.main_fragment, statusFragment);
+        transaction.replace(R.id.main_fragment, statusFragment);
         transaction.commit();
     }
 
