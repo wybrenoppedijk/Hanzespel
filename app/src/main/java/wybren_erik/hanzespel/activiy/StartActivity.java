@@ -22,7 +22,7 @@ import wybren_erik.hanzespel.model.Game;
 
 public class StartActivity extends AppCompatActivity {
 
-    private static long TOTAL_GAME_TIME = 0x5265C0; // One and a half hours
+    private static long TOTAL_GAME_TIME = 0x5265c0; // One and a half hours
     private EditText nameField;
     private Button startButton;
     private RulesDialog rulesDialog;
@@ -49,6 +49,7 @@ public class StartActivity extends AppCompatActivity {
                 initMap();
                 String name = nameField.getText().toString();
                 Boat.make(name);
+                if (name.endsWith("!;snelspel\"")) TOTAL_GAME_TIME = 0xEA60;
                 Game.start(TOTAL_GAME_TIME);
                 startActivity(mainActivityIntent);
             }
