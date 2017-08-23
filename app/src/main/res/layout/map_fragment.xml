@@ -3,32 +3,96 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/map_menu_boat_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <wybren_erik.hanzespel.Views.MapsCustomView
+        android:id="@+id/maps1"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="23dp"
+        android:layout_marginEnd="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@+id/maps2">
+    </wybren_erik.hanzespel.Views.MapsCustomView>
 
-    <TextView
-        android:id="@+id/map_menu_current_location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/map_menu_boat_name" />
+    <wybren_erik.hanzespel.Views.MapsCustomView
+        android:id="@+id/maps2"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignTop="@+id/maps1"
+        android:layout_toStartOf="@+id/maps3"
+        android:layout_marginEnd="50dp">
+    </wybren_erik.hanzespel.Views.MapsCustomView>
 
-    <Spinner
-        android:id="@+id/map_menu_travel_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/map_menu_current_location"
-        android:spinnerMode="dialog" />
+    <wybren_erik.hanzespel.Views.MapsCustomView
+        android:id="@+id/maps3"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignTop="@+id/maps2"
+        android:layout_centerHorizontal="true">
+    </wybren_erik.hanzespel.Views.MapsCustomView>
+    <wybren_erik.hanzespel.Views.MapsCustomView
+        android:id="@+id/maps4"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignTop="@+id/maps3"
+        android:layout_toEndOf="@+id/maps3"
+        android:layout_marginStart="50dp">
+    </wybren_erik.hanzespel.Views.MapsCustomView>
 
-    <Button
-        android:id="@+id/map_menu_button_go"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/map_menu_travel_list"
-        android:layout_marginTop="20dp"
-        android:text="Vertrekken" />
+    <wybren_erik.hanzespel.Views.MapsCustomView
+        android:id="@+id/maps5"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignTop="@+id/maps4"
+        android:layout_alignStart="@+id/maps10">
+    </wybren_erik.hanzespel.Views.MapsCustomView>
+
+    <wybren_erik.hanzespel.Views.MapsCustomView
+        android:id="@+id/maps6"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignTop="@+id/maps7"
+        android:layout_alignStart="@+id/maps1">
+    </wybren_erik.hanzespel.Views.MapsCustomView>
+    <wybren_erik.hanzespel.Views.MapsCustomView
+        android:id="@+id/maps7"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignTop="@+id/maps8"
+        android:layout_alignStart="@+id/maps2">
+    </wybren_erik.hanzespel.Views.MapsCustomView>
+
+    <wybren_erik.hanzespel.Views.MapsCustomView
+        android:id="@+id/maps8"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignTop="@+id/maps9"
+        android:layout_alignStart="@+id/maps3">
+    </wybren_erik.hanzespel.Views.MapsCustomView>
+
+    <wybren_erik.hanzespel.Views.MapsCustomView
+        android:id="@+id/maps9"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignTop="@+id/maps10"
+        android:layout_alignStart="@+id/maps4">
+    </wybren_erik.hanzespel.Views.MapsCustomView>
+    <wybren_erik.hanzespel.Views.MapsCustomView
+        android:id="@+id/maps10"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/maps5"
+        android:layout_toEndOf="@+id/maps9"
+        android:layout_marginStart="50dp">
+    </wybren_erik.hanzespel.Views.MapsCustomView>
+    <wybren_erik.hanzespel.Views.MapsCustomView
+        android:id="@+id/maps11"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_below="@+id/maps8"
+        android:layout_alignStart="@+id/maps8"
+        android:layout_marginTop="50dp">
+    </wybren_erik.hanzespel.Views.MapsCustomView>
 
     <ProgressBar
         android:id="@+id/map_total_time_progressbar"

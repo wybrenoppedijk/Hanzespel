@@ -101,10 +101,23 @@ public class Boat implements InterventionListener {
         this.destination = destination;
     }
 
+    public int getTimeTO(City destination){
+        int travelTime = 0;
+        Set<Road> roads = RoadMap.getInstance().getEdges(this.location);
+        for (Road r : roads) {
+            if (r.toNode().equals(destination)) {
+                travelTime = r.getWeight() * 10;
+            }
+        }
+        return travelTime;
+    }
+
     @SuppressWarnings("unchecked")
     public void goToCity(City location) {
 
         inDock = false;
+
+        Intervention intervention = new Intervention(); //todo is nodig? was weggehaald?
 
         ScheduledExecutorService arrivalExecutor = Executors.newSingleThreadScheduledExecutor();
         updateExecutor = Executors.newSingleThreadScheduledExecutor();
