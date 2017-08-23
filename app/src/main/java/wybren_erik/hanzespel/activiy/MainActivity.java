@@ -6,7 +6,6 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
@@ -33,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
     private ArrivedDialog arrivedDialog;
     private RulesDialog rulesDialog;
     private InterventionDialog interventionDialog = new InterventionDialog();
+    private BottomNavigationView navigation;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
         Boat.addListener(this);
         Intervention.addListener(this);
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
@@ -113,6 +113,10 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
     @Override
     public void onArrive() {
         arrivedDialog.show(getSupportFragmentManager(), "arrivedDialog");
+        FragmentTransaction t = getSupportFragmentManager().beginTransaction();
+        currentFragment = statusFragment;
+        t.replace(R.id.main_fragment, handelFragment);
+        t.commit();
     }
 
     @Override

@@ -104,7 +104,6 @@ public class MapFragment extends Fragment implements GameListener, OnDestination
         maps11.setEnabled(enabled);
 
         ArrayList<City> cities = new ArrayList(RoadMap.getInstance().getCities());
-        Log.d("TAG", "Init city locations...");
         maps1.setDestination(cities.get(0));
         maps2.setDestination(cities.get(1));
         maps3.setDestination(cities.get(2));
@@ -116,7 +115,6 @@ public class MapFragment extends Fragment implements GameListener, OnDestination
         maps9.setDestination(cities.get(8));
         maps10.setDestination(cities.get(9));
         maps11.setDestination(cities.get(10));
-        Log.d("TAG", "Completed!");
 
         maps1.setTravelTime(boat.getTimeTO(cities.get(0)));
         maps2.setTravelTime(boat.getTimeTO(cities.get(1)));

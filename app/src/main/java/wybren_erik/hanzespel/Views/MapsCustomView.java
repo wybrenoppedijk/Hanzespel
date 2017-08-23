@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import wybren_erik.hanzespel.City;
 import wybren_erik.hanzespel.R;
 import wybren_erik.hanzespel.dialog.ConfirmDialog;
+import wybren_erik.hanzespel.interfaces.BoatListener;
 import wybren_erik.hanzespel.interfaces.OnDestinationClickHandler;
 import wybren_erik.hanzespel.model.Boat;
 
@@ -83,15 +84,7 @@ public class MapsCustomView extends LinearLayout implements View.OnClickListener
             setBackgroundResource(R.drawable.rounded_rectangle_disabled);
         }
 
-        canvas.
-                drawText(
-                        travelDestination.
-                                toString(),
-                        canvas.
-                                getWidth() / 2,
-                        canvas.
-                                getHeight() / 4,
-                        locationText);
+        canvas.drawText(travelDestination.toString(), canvas.getWidth() / 2, canvas.getHeight() / 4, locationText);
         canvas.drawText(travelTime + "s", canvas.getWidth() / 2, canvas.getHeight() / 4 + 50, travelTimeText);
 
     }
@@ -124,6 +117,4 @@ public class MapsCustomView extends LinearLayout implements View.OnClickListener
         }
 
     }
-
-
 }
