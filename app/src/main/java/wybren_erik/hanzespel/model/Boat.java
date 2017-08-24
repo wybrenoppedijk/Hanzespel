@@ -179,7 +179,7 @@ public class Boat implements InterventionListener {
 
         if (model.getMoney() < 300) {
             model.addMoney(200);
-        } else if (model.getMoney() =< 500) {
+        } else if (model.getMoney() <= 500) {
             model.setMoney(300);
         } else if (model.getMoney() > 500) {
             model.setMoney(model.getMoney() / 5 * 4);
