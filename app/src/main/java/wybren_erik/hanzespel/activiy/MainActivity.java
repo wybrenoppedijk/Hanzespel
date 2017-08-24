@@ -13,17 +13,21 @@ import android.view.WindowManager;
 import wybren_erik.hanzespel.R;
 import wybren_erik.hanzespel.controller.Intervention;
 import wybren_erik.hanzespel.dialog.ArrivedDialog;
+import wybren_erik.hanzespel.dialog.GameAlmostOverDialog;
+import wybren_erik.hanzespel.dialog.GameFinishedDialog;
 import wybren_erik.hanzespel.dialog.InterventionDialog;
 import wybren_erik.hanzespel.dialog.RulesDialog;
 import wybren_erik.hanzespel.fragments.HandelFragment;
 import wybren_erik.hanzespel.fragments.MapFragment;
 import wybren_erik.hanzespel.fragments.StatusFragment;
 import wybren_erik.hanzespel.interfaces.BoatListener;
+import wybren_erik.hanzespel.interfaces.GameListener;
 import wybren_erik.hanzespel.interfaces.InterventionListener;
 import wybren_erik.hanzespel.model.Boat;
+import wybren_erik.hanzespel.model.Game;
 import wybren_erik.hanzespel.model.InventoryModel;
 
-public class MainActivity extends AppCompatActivity implements BoatListener, InterventionListener {
+public class MainActivity extends AppCompatActivity implements BoatListener, InterventionListener, GameListener {
 
     private StatusFragment statusFragment;
     private HandelFragment handelFragment;
@@ -32,6 +36,8 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
     private ArrivedDialog arrivedDialog;
     private RulesDialog rulesDialog;
     private InterventionDialog interventionDialog = new InterventionDialog();
+    private GameFinishedDialog endGameDialog = new GameFinishedDialog();
+    private GameAlmostOverDialog almostEndGameDialog = new GameAlmostOverDialog();
     private BottomNavigationView navigation;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -79,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
         setContentView(R.layout.activity_main);
         Boat.addListener(this);
         Intervention.addListener(this);
+        Game.addListener(this);
 
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -184,5 +191,33 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
     public void shortCut() {
         interventionDialog.text = "U heeft een kortere route gevonden, U bent eerder op uw bestemming.";
         interventionDialog.show(getSupportFragmentManager(), "interventionDialog");
+    }
+
+    @Override
+    public void onGameTimeChanged(long newTime) {
+        // Ignored
+    }
+
+    @Override
+    public void onGameEnd() {
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                endGameDialog.show(getSupportFragmentManager(), "game_over");
+                // Disable navigation and set active fragment to StatusFragment.
+                navigation.setEnabled(false);
+                navigation.setOnNavigationItemSelectedListener(null);
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                currentFragment = statusFragment;
+                transaction.detach(currentFragment);
+                transaction.attach(statusFragment);
+                transaction.commit();
+            }
+        });
+    }
+
+    @Override
+    public void onWarnGameEnd() {
+        almostEndGameDialog.show(getSupportFragmentManager(), "game_almost_over");
     }
 }

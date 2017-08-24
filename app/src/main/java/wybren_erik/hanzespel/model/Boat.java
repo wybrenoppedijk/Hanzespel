@@ -38,6 +38,7 @@ public class Boat implements InterventionListener {
     private int lessTime = 0;
     private InventoryModel model = InventoryModel.getInstance();
     private ScheduledExecutorService updateExecutor;
+    private ScheduledExecutorService arrivalExecutor;
     private final Runnable arrivalTask = new Runnable() {
         @Override
         public void run() {
@@ -120,7 +121,7 @@ public class Boat implements InterventionListener {
 
         new Intervention();
 
-        ScheduledExecutorService arrivalExecutor = Executors.newSingleThreadScheduledExecutor();
+        arrivalExecutor = Executors.newSingleThreadScheduledExecutor();
         updateExecutor = Executors.newSingleThreadScheduledExecutor();
         int travelTime = 0;
 
@@ -140,6 +141,12 @@ public class Boat implements InterventionListener {
         }
         lessTime = 0;
         additionalTime = 0;
+    }
+
+    public void sink() {
+        updateExecutor.shutdownNow();
+        arrivalExecutor.shutdownNow();
+        arrivalFuture.cancel(true);
     }
     // 0 = nothing
     // 1 = negative

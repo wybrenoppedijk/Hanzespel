@@ -194,7 +194,12 @@ public class HandelFragment extends Fragment implements ItemTradeHandler, GameLi
 
     @Override
     public void onGameEnd() {
+        // Ignored
+    }
 
+    @Override
+    public void onWarnGameEnd() {
+        // Ignored
     }
 
     @Override

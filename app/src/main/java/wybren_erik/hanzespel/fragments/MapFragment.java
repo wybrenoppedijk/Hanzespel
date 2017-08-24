@@ -142,7 +142,12 @@ public class MapFragment extends Fragment implements GameListener, OnDestination
 
     @Override
     public void onGameEnd() {
+        // Ignored
+    }
 
+    @Override
+    public void onWarnGameEnd() {
+        // Ignored
     }
 
     @Override

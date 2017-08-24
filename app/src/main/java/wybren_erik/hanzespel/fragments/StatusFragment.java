@@ -11,9 +11,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.Locale;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import wybren_erik.hanzespel.R;
-import wybren_erik.hanzespel.dialog.ArrivedDialog;
 import wybren_erik.hanzespel.interfaces.BoatListener;
 import wybren_erik.hanzespel.interfaces.GameListener;
 import wybren_erik.hanzespel.model.Boat;
@@ -126,6 +127,11 @@ public class StatusFragment extends Fragment implements BoatListener, GameListen
 
     @Override
     public void onGameEnd() {
+        // Ignored
+    }
 
+    @Override
+    public void onWarnGameEnd() {
+        // Ignored
     }
 }

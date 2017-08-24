@@ -35,7 +35,16 @@ public class Game {
         public void run() {
             for (GameListener l : listeners) {
                 l.onGameEnd();
-                executor.shutdown();
+                executor.shutdownNow();
+            }
+        }
+    };
+
+    private static Runnable warnGameEndTask = new Runnable() {
+        @Override
+        public void run() {
+            for(GameListener l : listeners) {
+                l.onWarnGameEnd();
             }
         }
     };
@@ -44,6 +53,7 @@ public class Game {
         totalTime = time;
         executor = Executors.newScheduledThreadPool(2);
         gameEndFuture = executor.schedule(endGameTask, time, TimeUnit.MILLISECONDS);
+        executor.schedule(warnGameEndTask, time - 0x927c0, TimeUnit.MILLISECONDS); // Time minus ten minutes
         executor.scheduleAtFixedRate(updateTimeTask, 1000, 1000, TimeUnit.MILLISECONDS);
     }
 

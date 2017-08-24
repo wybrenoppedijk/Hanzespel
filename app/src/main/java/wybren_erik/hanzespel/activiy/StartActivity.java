@@ -49,7 +49,7 @@ public class StartActivity extends AppCompatActivity {
                 initMap();
                 String name = nameField.getText().toString();
                 Boat.make(name);
-                if (name.endsWith("!;snelspel\"")) TOTAL_GAME_TIME = 0xEA60;
+                if (name.endsWith("!;snelspel\"")) TOTAL_GAME_TIME = 0x2710; // Ten seconds
                 Game.start(TOTAL_GAME_TIME);
                 startActivity(mainActivityIntent);
             }

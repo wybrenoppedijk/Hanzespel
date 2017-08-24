@@ -40,6 +40,7 @@ public class GameFinishedDialog extends DialogFragment {
                 }
             });
         }
+        Boat.getInstance().sink(); // Destroy boat
         return builder.create();
     }
 }
