@@ -1,6 +1,5 @@
 package wybren_erik.hanzespel.model;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.Executors;
@@ -38,7 +37,6 @@ public class Boat implements InterventionListener {
     private int lessTime = 0;
     private InventoryModel model = InventoryModel.getInstance();
     private ScheduledExecutorService updateExecutor;
-    private ScheduledExecutorService arrivalExecutor;
     private final Runnable arrivalTask = new Runnable() {
         @Override
         public void run() {
@@ -53,7 +51,7 @@ public class Boat implements InterventionListener {
             }
         }
     };
-
+    private ScheduledExecutorService arrivalExecutor;
     private City location = RoadMap.getInstance().getCity(Location.KAMPEN);
     private String name;
     private City destination;
@@ -63,6 +61,8 @@ public class Boat implements InterventionListener {
         this.location = RoadMap.getInstance().getCity(Location.KAMPEN);
         this.destination = RoadMap.getInstance().getCity(Location.KAMPEN);
         this.name = name;
+        arrivalExecutor = Executors.newSingleThreadScheduledExecutor();
+        updateExecutor = Executors.newSingleThreadScheduledExecutor();
     }
 
     public static Boat getInstance() {
@@ -103,7 +103,7 @@ public class Boat implements InterventionListener {
         this.destination = destination;
     }
 
-    public int getTimeTO(City destination){
+    public int getTimeTO(City destination) {
         int travelTime = 0;
         Set<Road> roads = RoadMap.getInstance().getEdges(this.location);
         for (Road r : roads) {
@@ -120,9 +120,6 @@ public class Boat implements InterventionListener {
         inDock = false;
 
         new Intervention();
-
-        arrivalExecutor = Executors.newSingleThreadScheduledExecutor();
-        updateExecutor = Executors.newSingleThreadScheduledExecutor();
         int travelTime = 0;
 
         Set<Road> roads = RoadMap.getInstance().getEdges(this.location);
@@ -146,7 +143,7 @@ public class Boat implements InterventionListener {
     public void sink() {
         updateExecutor.shutdownNow();
         arrivalExecutor.shutdownNow();
-        arrivalFuture.cancel(true);
+        if (arrivalFuture != null) arrivalFuture.cancel(true);
     }
     // 0 = nothing
     // 1 = negative
