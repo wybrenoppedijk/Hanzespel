@@ -106,7 +106,7 @@ public class Boat implements InterventionListener {
         Set<Road> roads = RoadMap.getInstance().getEdges(this.location);
         for (Road r : roads) {
             if (r.toNode().equals(destination)) {
-                travelTime = r.getWeight() * 10;
+                travelTime = r.getWeight() * 8;
             }
         }
         return travelTime;
@@ -119,14 +119,7 @@ public class Boat implements InterventionListener {
         inDock = false;
 
         new Intervention();
-        int travelTime = 0;
-
-        Set<Road> roads = RoadMap.getInstance().getEdges(this.location);
-        for (Road r : roads) {
-            if (r.toNode().equals(location)) {
-                travelTime = r.getWeight() * 10 + additionalTime - lessTime;
-            }
-        }
+        int travelTime = getTimeTO(location);
 
         arrivalFuture = arrivalExecutor.schedule(arrivalTask, travelTime, TimeUnit.SECONDS);
         System.out.println("Travel time: " + travelTime);

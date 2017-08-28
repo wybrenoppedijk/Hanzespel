@@ -235,7 +235,7 @@ public class SaleFactor {
                     case BONT:
                         return 1.1;
                     case LAKEN:
-                        return 1.6;
+                        return 1.1;
                     case VLEES:
                         return 1.3;
                     case IJZER:

@@ -164,7 +164,7 @@ public class StartActivity extends AppCompatActivity {
         cityMap.addEdge(tallin, stralsund, 15);
         cityMap.addEdge(tallin, visby, 6);
         cityMap.addEdge(tallin, aalborg, 19);
-        cityMap.addEdge(tallin, stockholm, 6);
+        cityMap.addEdge(tallin, stockholm, 14);
         cityMap.addEdge(tallin, danzig, 11);
         cityMap.addEdge(tallin, turku, 4);
 
@@ -194,7 +194,7 @@ public class StartActivity extends AppCompatActivity {
         cityMap.addEdge(stockholm, bergen, 26);
         cityMap.addEdge(stockholm, lubeck, 15);
         cityMap.addEdge(stockholm, riga, 9);
-        cityMap.addEdge(stockholm, tallin, 6);
+        cityMap.addEdge(stockholm, tallin, 14);
         cityMap.addEdge(stockholm, visby, 4);
         cityMap.addEdge(stockholm, aalborg, 18);
         cityMap.addEdge(stockholm, stralsund, 12);
