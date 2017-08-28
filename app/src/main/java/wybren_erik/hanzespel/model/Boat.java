@@ -61,8 +61,6 @@ public class Boat implements InterventionListener {
         this.location = RoadMap.getInstance().getCity(Location.KAMPEN);
         this.destination = RoadMap.getInstance().getCity(Location.KAMPEN);
         this.name = name;
-        arrivalExecutor = Executors.newSingleThreadScheduledExecutor();
-        updateExecutor = Executors.newSingleThreadScheduledExecutor();
     }
 
     public static Boat getInstance() {
@@ -116,7 +114,8 @@ public class Boat implements InterventionListener {
 
     @SuppressWarnings("unchecked")
     public void goToCity(City location) {
-
+        arrivalExecutor = Executors.newSingleThreadScheduledExecutor();
+        updateExecutor = Executors.newSingleThreadScheduledExecutor();
         inDock = false;
 
         new Intervention();
@@ -141,8 +140,10 @@ public class Boat implements InterventionListener {
     }
 
     public void sink() {
-        updateExecutor.shutdownNow();
-        arrivalExecutor.shutdownNow();
+        if (!inDock) {
+            updateExecutor.shutdownNow();
+            arrivalExecutor.shutdownNow();
+        }
         if (arrivalFuture != null) arrivalFuture.cancel(true);
     }
     // 0 = nothing

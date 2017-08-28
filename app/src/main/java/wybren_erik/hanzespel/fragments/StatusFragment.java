@@ -67,7 +67,7 @@ public class StatusFragment extends Fragment implements BoatListener, GameListen
             arrivalTimeTextView.setText(String.format(Locale.ENGLISH, "%02d:%02d", Boat.timeUntilArrival() / 60, Boat.timeUntilArrival() % 60));
             arrivalTimeBar.setMax(travelTime);
             arrivalTimeBar.setProgress(Boat.timeUntilArrival());
-            positionTextView.setText("Ergens midden op de oceaan");
+            positionTextView.setText("Ergens op zee");
         } else {
             positionTextView.setText(
                     Boat.getInstance().getLocation().toString());
