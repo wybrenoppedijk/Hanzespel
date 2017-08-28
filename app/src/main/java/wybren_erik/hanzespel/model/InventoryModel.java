@@ -15,7 +15,7 @@ public class InventoryModel {
     private int occupation;
 
     private InventoryModel() {
-        money = 500;
+        money = 400;
         for (ProductEnum p : ProductEnum.values()) {
             products.add(new Product(p, 0));
         }
@@ -65,7 +65,7 @@ public class InventoryModel {
             products.add(product);
         }
 
-        if (occupation > 4) throw new InventoryFullException();
+        if (occupation > 6) throw new InventoryFullException();
     }
 
     public void remove(ArrayList<Product> products) {

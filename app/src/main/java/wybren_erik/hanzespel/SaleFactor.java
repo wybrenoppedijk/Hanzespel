@@ -9,25 +9,25 @@ public class SaleFactor {
                     case BIER:
                         return 0.8;
                     case STOKVIS:
-                        return 1.0;
+                        return 1.2;
                     case ZOUT:
                         return 1.3;
                     case VATEN:
-                        return 1.4;
+                        return 1.3;
                     case WAS:
                         return 1.0;
                     case BONT:
-                        return 1.2;
+                        return 1.1;
                     case LAKEN:
-                        return 1.4;
+                        return 1.3;
                     case VLEES:
                         return 1.0;
                     case IJZER:
-                        return 1.4;
+                        return 1.2;
                     case GRAAN:
                         return 1;
                     case HOUT:
-                        return 1.3;
+                        return 1.1;
                     // No default on purpose
                 }
                 break;
@@ -44,7 +44,7 @@ public class SaleFactor {
                     case WAS:
                         return 1.3;
                     case BONT:
-                        return 1.7;
+                        return 1.0;
                     case LAKEN:
                         return 1.2;
                     case VLEES:
@@ -67,15 +67,15 @@ public class SaleFactor {
                     case ZOUT:
                         return 0.8;
                     case VATEN:
-                        return 1.5;
+                        return 1.4;
                     case WAS:
                         return 1.4;
                     case BONT:
                         return 1.4;
                     case LAKEN:
-                        return 1.5;
+                        return 1.3;
                     case VLEES:
-                        return 1.4;
+                        return 1.3;
                     case IJZER:
                         return 1.3;
                     case GRAAN:
@@ -117,7 +117,7 @@ public class SaleFactor {
                     case BIER:
                         return 1.8;
                     case STOKVIS:
-                        return 1.3;
+                        return 1.4;
                     case ZOUT:
                         return 1.2;
                     case VATEN:
@@ -162,14 +162,14 @@ public class SaleFactor {
                     case GRAAN:
                         return 1.3;
                     case HOUT:
-                        return 1.4;
+                        return 1.3;
                     // No default on purpose
                 }
                 break;
             case VISBY:
                 switch (p) {
                     case BIER:
-                        return 1.7;
+                        return 1.5;
                     case STOKVIS:
                         return 1.2;
                     case ZOUT:
@@ -223,9 +223,9 @@ public class SaleFactor {
             case STOCKHOLM:
                 switch (p) {
                     case BIER:
-                        return 1.8;
+                        return 1.7;
                     case STOKVIS:
-                        return 1.4;
+                        return 1.3;
                     case ZOUT:
                         return 1.2;
                     case VATEN:
@@ -293,7 +293,7 @@ public class SaleFactor {
                     case VLEES:
                         return 1.3;
                     case IJZER:
-                        return 1.4;
+                        return 1.3;
                     case GRAAN:
                         return 1.6;
                     case HOUT:

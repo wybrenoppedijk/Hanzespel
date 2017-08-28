@@ -119,14 +119,14 @@ public class StartActivity extends AppCompatActivity {
         cityMap.addEdge(bergen, riga, 30);
         cityMap.addEdge(bergen, tallin, 28);
         cityMap.addEdge(bergen, visby, 22);
-        cityMap.addEdge(bergen, aalborg, 10);
+        cityMap.addEdge(bergen, aalborg, 17);
         cityMap.addEdge(bergen, stockholm, 26);
         cityMap.addEdge(bergen, danzig, 21);
         cityMap.addEdge(bergen, turku, 29);
 
         cityMap.addEdge(lubeck, kampen, 20);
         cityMap.addEdge(lubeck, bergen, 18);
-        cityMap.addEdge(lubeck, stralsund, 4);
+        cityMap.addEdge(lubeck, stralsund, 7);
         cityMap.addEdge(lubeck, riga, 17);
         cityMap.addEdge(lubeck, tallin, 18);
         cityMap.addEdge(lubeck, visby, 6);
@@ -137,13 +137,13 @@ public class StartActivity extends AppCompatActivity {
 
         cityMap.addEdge(stralsund, kampen, 20);
         cityMap.addEdge(stralsund, bergen, 15);
-        cityMap.addEdge(stralsund, lubeck, 4);
+        cityMap.addEdge(stralsund, lubeck, 7);
         cityMap.addEdge(stralsund, riga, 13);
         cityMap.addEdge(stralsund, tallin, 15);
         cityMap.addEdge(stralsund, visby, 9);
         cityMap.addEdge(stralsund, aalborg, 6);
         cityMap.addEdge(stralsund, stockholm, 12);
-        cityMap.addEdge(stralsund, danzig, 8);
+        cityMap.addEdge(stralsund, danzig, 14);
         cityMap.addEdge(stralsund, turku, 14);
 
         cityMap.addEdge(riga, kampen, 32);
@@ -151,28 +151,28 @@ public class StartActivity extends AppCompatActivity {
         cityMap.addEdge(riga, lubeck, 17);
         cityMap.addEdge(riga, stralsund, 13);
         cityMap.addEdge(riga, tallin, 5);
-        cityMap.addEdge(riga, visby, 6);
+        cityMap.addEdge(riga, visby, 15);
         cityMap.addEdge(riga, aalborg, 20);
         cityMap.addEdge(riga, stockholm, 9);
         cityMap.addEdge(riga, danzig, 5);
-        cityMap.addEdge(riga, turku, 7);
+        cityMap.addEdge(riga, turku, 15);
 
         cityMap.addEdge(tallin, kampen, 33);
         cityMap.addEdge(tallin, bergen, 28);
         cityMap.addEdge(tallin, lubeck, 18);
         cityMap.addEdge(tallin, riga, 5);
         cityMap.addEdge(tallin, stralsund, 15);
-        cityMap.addEdge(tallin, visby, 6);
+        cityMap.addEdge(tallin, visby, 8);
         cityMap.addEdge(tallin, aalborg, 19);
         cityMap.addEdge(tallin, stockholm, 14);
         cityMap.addEdge(tallin, danzig, 11);
-        cityMap.addEdge(tallin, turku, 4);
+        cityMap.addEdge(tallin, turku, 21);
 
         cityMap.addEdge(visby, kampen, 24);
         cityMap.addEdge(visby, bergen, 22);
         cityMap.addEdge(visby, lubeck, 6);
-        cityMap.addEdge(visby, riga, 6);
-        cityMap.addEdge(visby, tallin, 6);
+        cityMap.addEdge(visby, riga, 15);
+        cityMap.addEdge(visby, tallin, 8);
         cityMap.addEdge(visby, stralsund, 9);
         cityMap.addEdge(visby, aalborg, 12);
         cityMap.addEdge(visby, stockholm, 4);
@@ -180,7 +180,7 @@ public class StartActivity extends AppCompatActivity {
         cityMap.addEdge(visby, turku, 6);
 
         cityMap.addEdge(aalborg, kampen, 17);
-        cityMap.addEdge(aalborg, bergen, 10);
+        cityMap.addEdge(aalborg, bergen, 17);
         cityMap.addEdge(aalborg, lubeck, 6);
         cityMap.addEdge(aalborg, riga, 20);
         cityMap.addEdge(aalborg, tallin, 19);
@@ -209,18 +209,18 @@ public class StartActivity extends AppCompatActivity {
         cityMap.addEdge(danzig, visby, 8);
         cityMap.addEdge(danzig, aalborg, 12);
         cityMap.addEdge(danzig, stockholm, 11);
-        cityMap.addEdge(danzig, stralsund, 8);
-        cityMap.addEdge(danzig, turku, 10);
+        cityMap.addEdge(danzig, stralsund, 14);
+        cityMap.addEdge(danzig, turku, 19);
 
         cityMap.addEdge(turku, kampen, 34);
         cityMap.addEdge(turku, bergen, 29);
         cityMap.addEdge(turku, lubeck, 16);
-        cityMap.addEdge(turku, riga, 7);
-        cityMap.addEdge(turku, tallin, 4);
+        cityMap.addEdge(turku, riga, 15);
+        cityMap.addEdge(turku, tallin, 21);
         cityMap.addEdge(turku, visby, 6);
         cityMap.addEdge(turku, aalborg, 18);
         cityMap.addEdge(turku, stockholm, 5);
-        cityMap.addEdge(turku, danzig, 10);
+        cityMap.addEdge(turku, danzig, 19);
         cityMap.addEdge(turku, stralsund, 14);
     }
 

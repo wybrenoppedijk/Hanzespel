@@ -91,7 +91,7 @@ public class HandelFragment extends Fragment implements ItemTradeHandler, GameLi
                 @Override
                 public void onClick(View v) {
                     int newTotalPrice = boat.getLocation().getName().getProduct().getPrice() * (totalAmountOfItemsBought + 1);
-                    if (newTotalPrice <= totalMoney && model.getOccupation() + totalAmountOfItemsBought < 4) {
+                    if (newTotalPrice <= totalMoney && model.getOccupation() + totalAmountOfItemsBought < 6) {
                         totalAmountOfItemsBought++;
                         amountBuyItems.setText("" + totalAmountOfItemsBought);
                         totalPrice.setText("Ð " + boat.getLocation().getName().getProduct().getPrice() * totalAmountOfItemsBought);
