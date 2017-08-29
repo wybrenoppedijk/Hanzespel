@@ -16,23 +16,20 @@ import wybren_erik.hanzespel.model.InventoryModel;
 
 public class GameFinishedDialog extends DialogFragment {
     private InventoryModel inv = InventoryModel.getInstance();
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        if (Boat.getInstance().getLocation().toString().equals("Kampen")){
-            builder.setMessage("Het spel is afgelopen. Goed gedaan! U heeft Kampen gehaald met een bedrag van: " + InventoryModel.getInstance().getMoney()+ "Ð.").setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        if (Boat.getInstance().getLocation().toString().equals("Kampen")) {
+            builder.setMessage("Het spel is afgelopen. Goed gedaan! U heeft Kampen gehaald met een bedrag van: " + InventoryModel.getInstance().getMoney() + "Ð.").setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
 
                 }
             });
         } else {
-            if (inv.getMoney()> 1000) {
-                inv.withdrawMoney(1000);
-            } else {
-                inv.setMoney(inv.getMoney()/2);
-            }
+            inv.setMoney(((inv.getMoney() / 5) * 4));
             builder.setMessage("Het spel is afgelopen. Helaas heeft u Kampen niet gehaald. Daarvoor krijgt u een boete. van 1000Ð, Uw eindbedrag is " + InventoryModel.getInstance().getMoney() + "Ð.").setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
