@@ -1,5 +1,8 @@
 package wybren_erik.hanzespel.activiy;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -81,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
             return true;
         }
     };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -279,4 +283,5 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
     public void onWarnGameEnd() {
         almostEndGameDialog.show(getSupportFragmentManager(), "game_almost_over");
     }
+
 }

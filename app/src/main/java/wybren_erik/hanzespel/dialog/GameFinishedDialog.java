@@ -1,7 +1,12 @@
 package wybren_erik.hanzespel.dialog;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -16,11 +21,15 @@ import wybren_erik.hanzespel.model.InventoryModel;
 
 public class GameFinishedDialog extends DialogFragment {
     private InventoryModel inv = InventoryModel.getInstance();
+    private Uri intervention = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+    private Ringtone r;
 
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        r = RingtoneManager.getRingtone(getContext(), intervention);
+        r.play();
         if (Boat.getInstance().getLocation().toString().equals("Kampen")) {
             builder.setMessage("Het spel is afgelopen. Goed gedaan! U heeft Kampen gehaald met een bedrag van: " + InventoryModel.getInstance().getMoney() + "Ð.").setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override

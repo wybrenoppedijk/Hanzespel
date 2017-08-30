@@ -202,6 +202,8 @@ public class HandelFragment extends Fragment implements ItemTradeHandler, GameLi
         // Ignored
     }
 
+
+
     @Override
     public void onTotalAmountChangedListener(int totalAmount) {
         this.totalInventoryValue = totalAmount;

@@ -134,4 +134,5 @@ public class StatusFragment extends Fragment implements BoatListener, GameListen
     public void onWarnGameEnd() {
         // Ignored
     }
+
 }
