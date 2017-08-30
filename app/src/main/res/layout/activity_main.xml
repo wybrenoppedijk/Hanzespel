@@ -8,6 +8,7 @@
     android:orientation="vertical"
     tools:context="wybren_erik.hanzespel.activiy.MainActivity">
 
+
     <FrameLayout
         android:id="@+id/content"
         android:layout_width="match_parent"

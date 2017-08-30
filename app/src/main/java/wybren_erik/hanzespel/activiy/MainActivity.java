@@ -12,6 +12,8 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
@@ -87,6 +89,14 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
 
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        // Set own menu bar view as menu bar
+        inflater.inflate(R.menu.default_bar, menu);
+        return true;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -114,6 +124,22 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
         transaction.add(R.id.main_fragment, statusFragment);
         currentFragment = statusFragment;
         transaction.commit();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Add actions to menu bar
+            case R.id.action_help:
+                rulesDialog.show(getSupportFragmentManager(), "rules_dialog");
+                break;
+            case R.id.action_info:
+                rulesDialog.show(getSupportFragmentManager(), "rules_dialog");
+                break;
+            default:
+                super.onOptionsItemSelected(item);
+        }
+        return true;
     }
 
     @Override
