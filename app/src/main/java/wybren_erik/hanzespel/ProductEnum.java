@@ -54,8 +54,10 @@ public enum ProductEnum {
                 return R.mipmap.wheet;
             case HOUT:
                 return R.mipmap.wood;
+            case VLEES:
+                return R.mipmap.meat;
             default:
-                return R.mipmap.ic_launcher;
+                return R.mipmap.ic_launcher_round;
         }
     }
 }

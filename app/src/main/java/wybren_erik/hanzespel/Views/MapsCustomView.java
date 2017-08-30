@@ -1,17 +1,24 @@
 package wybren_erik.hanzespel.Views;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import java.io.InputStream;
+
 import wybren_erik.hanzespel.City;
+import wybren_erik.hanzespel.ProductEnum;
 import wybren_erik.hanzespel.R;
 import wybren_erik.hanzespel.dialog.ConfirmDialog;
 import wybren_erik.hanzespel.interfaces.BoatListener;
@@ -23,7 +30,9 @@ public class MapsCustomView extends LinearLayout implements View.OnClickListener
     Paint locationText;
     Paint travelTimeText;
     Paint border;
+    Paint bitmap;
     City travelDestination;
+    Bitmap icon;
     int travelTime;
     Boat boat;
     boolean enabled = true;
@@ -53,6 +62,7 @@ public class MapsCustomView extends LinearLayout implements View.OnClickListener
         border = new Paint();
         locationText = new Paint();
         travelTimeText = new Paint();
+        bitmap = new Paint();
         setOnClickListener(this);
 
         border.setColor(Color.BLACK);
@@ -85,12 +95,17 @@ public class MapsCustomView extends LinearLayout implements View.OnClickListener
         }
 
         canvas.drawText(travelDestination.toString(), canvas.getWidth() / 2, canvas.getHeight() / 4, locationText);
-        canvas.drawText(travelTime + "s", canvas.getWidth() / 2, canvas.getHeight() / 4 + 50, travelTimeText);
+        canvas.drawText(travelTime + "s", canvas.getWidth() / 2, canvas.getHeight() / 4 + 30, travelTimeText);
+
+        canvas.drawBitmap(icon, canvas.getWidth() / 2 - (icon.getWidth()/2), canvas.getHeight()/4 + 40, bitmap);
+
 
     }
 
     public void setDestination(City location) {
         this.travelDestination = location;
+
+        icon = BitmapFactory.decodeResource(getResources(), location.getName().getProduct().getIcon());
         invalidate();
     }
 

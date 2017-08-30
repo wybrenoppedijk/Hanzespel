@@ -20,7 +20,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:text="@string/inventory_string"
-            android:textSize="24sp" />
+            android:textSize="26sp" />
 
         <TextView
             android:id="@+id/handel_bal_text"
@@ -53,7 +53,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="15dp"
             android:text="Totaal bedrag:"
-            android:textSize="18sp"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
         <TextView
@@ -86,9 +86,10 @@
         android:id="@+id/thirdLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_toRightOf="@+id/secondView"
         android:orientation="vertical"
-        android:layout_marginBottom="62dp">
+        android:layout_marginBottom="11dp"
+        android:layout_above="@+id/handel_total_time_progressbar"
+        android:layout_toEndOf="@+id/secondView">
 
         <TextView
             android:id="@+id/INTERNAL_inv_text2"
@@ -98,7 +99,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:text="Inkopen"
-            android:textSize="24sp" />
+            android:textSize="26sp" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -123,7 +124,8 @@
                 android:layout_toEndOf="@+id/handel_buy_icon"
                 android:layout_toRightOf="@+id/handel_buy_icon"
                 android:gravity="center"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/handel_buy_price"
@@ -136,7 +138,8 @@
                 android:layout_toEndOf="@+id/handel_buy_name"
                 android:layout_toRightOf="@+id/handel_buy_name"
                 android:gravity="center"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/decreaseBuyItem"
@@ -147,7 +150,7 @@
                 android:layout_toStartOf="@+id/amountOfBuyItems"
                 android:gravity="center"
                 android:text="-"
-                android:textSize="14sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -160,7 +163,8 @@
                 android:layout_marginRight="10dp"
                 android:layout_toStartOf="@+id/increaseBuyItem"
                 android:gravity="center"
-                android:text="test" />
+                android:text="test"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/increaseBuyItem"
@@ -172,7 +176,8 @@
                 android:layout_marginRight="24dp"
                 android:gravity="center"
                 android:text="+"
-                android:textSize="14sp" />
+                android:textStyle="bold"
+                android:textSize="20sp" />
 
 
         </RelativeLayout>
@@ -185,7 +190,7 @@
             android:layout_marginLeft="24dp"
             android:layout_marginTop="375dp"
             android:text="Totaal bedrag:"
-            android:textSize="18sp"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
         <TextView
@@ -196,6 +201,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="24dp"
             android:layout_marginTop="12dp"
+            android:textSize="24sp"
             android:textAlignment="center" />
 
         <Button
@@ -230,7 +236,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/handel_total_time_progressbar"
         android:layout_centerHorizontal="true"
-        android:textSize="14sp" />
+        android:textSize="18sp" />
 
 
 </RelativeLayout>

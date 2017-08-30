@@ -18,7 +18,9 @@
         android:layout_alignBottom="@+id/handel_trade_icon"
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/handel_trade_icon"
-        android:gravity="center" />
+        android:textSize="18sp"
+        android:gravity="center"
+        android:layout_marginLeft="5dp"/>
 
     <TextView
         android:id="@+id/x"
@@ -28,6 +30,7 @@
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/handel_inventory_amount"
         android:gravity="center"
+        android:textSize="20sp"
         android:text="x " />
 
     <TextView
@@ -37,18 +40,20 @@
         android:layout_alignBottom="@+id/x"
         android:layout_toEndOf="@+id/x"
         android:gravity="center"
+        android:textSize="20sp"
         android:layout_alignTop="@+id/handel_trade_icon" />
 
     <Button
         android:id="@+id/increaseTradeItem"
-        android:layout_width="40dp"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/handel_inventory_prouct_name"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:gravity="center"
         android:text="+"
-        android:textSize="14sp" />
+        android:textSize="20sp"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/amountOfTradeItems"
@@ -59,18 +64,19 @@
         android:layout_alignBottom="@id/increaseTradeItem"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"/>
+        android:layout_marginRight="10dp"
+        android:textSize="20sp"/>
 
     <Button
         android:id="@+id/decreaseTradeItem"
-        android:layout_width="40dp"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/increaseTradeItem"
         android:layout_alignParentTop="true"
         android:layout_toStartOf="@id/amountOfTradeItems"
         android:gravity="center"
         android:text="-"
-        android:textSize="14sp"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
 </RelativeLayout>
