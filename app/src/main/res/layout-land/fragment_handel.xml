@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -30,28 +29,23 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="24dp"
             android:textSize="24sp"
-            android:textAlignment="textEnd"
-            tools:ignore="RelativeOverlap" />
+            android:textAlignment="textEnd" />
 
         <ListView
             android:id="@+id/handel_inventory_products"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="match_parent"
             android:layout_below="@id/INTERNAL_inv_text"
-            android:layout_marginLeft="24dp"
             android:layout_marginStart="24dp"
-            android:paddingRight="24dp">
-
-        </ListView>
+            android:layout_marginBottom="196dp"/>
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/handel_inventory_products"
-            android:layout_marginLeft="24dp"
+            android:layout_below="@id/handel_inventory_products"
+            android:layout_marginTop="-186dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="15dp"
             android:text="Totaal bedrag:"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -60,18 +54,17 @@
             android:id="@+id/TradeProfitMoney"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textView2"
-            android:layout_marginLeft="24dp"
+            android:layout_below="@id/textView2"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="12dp"
             android:textAlignment="center" />
 
         <Button
             android:id="@+id/sell_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="86dp"
+            android:layout_marginStart="24dp"
             android:layout_below="@+id/TradeProfitMoney"
-            android:layout_marginLeft="24dp"
             android:text="Verkoop" />
     </RelativeLayout>
 
@@ -133,17 +126,15 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/handel_buy_icon"
                 android:layout_alignParentTop="true"
-                android:layout_marginLeft="24dp"
                 android:layout_marginStart="24dp"
                 android:layout_toEndOf="@+id/handel_buy_name"
-                android:layout_toRightOf="@+id/handel_buy_name"
                 android:gravity="center"
                 android:text="TextView"
                 android:textSize="20sp" />
 
             <Button
                 android:id="@+id/decreaseBuyItem"
-                android:layout_width="40dp"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/handel_buy_name"
                 android:layout_alignParentTop="true"
@@ -168,12 +159,12 @@
 
             <Button
                 android:id="@+id/increaseBuyItem"
-                android:layout_width="40dp"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/handel_buy_name"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginRight="24dp"
+                android:layout_marginEnd="24dp"
                 android:gravity="center"
                 android:text="+"
                 android:textStyle="bold"
@@ -185,10 +176,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/handel_inventory_products"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="375dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="272dp"
             android:text="Totaal bedrag:"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -197,9 +186,7 @@
             android:id="@+id/total_buy_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textView2"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="24dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="12dp"
             android:textSize="24sp"
             android:textAlignment="center" />
@@ -208,9 +195,8 @@
             android:id="@+id/buy_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/TradeProfitMoney"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="24dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="50dp"
             android:text="Koop" />
     </LinearLayout>
 
