@@ -1,5 +1,8 @@
 package wybren_erik.hanzespel.activiy;
 
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -39,6 +42,8 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
     private GameFinishedDialog endGameDialog = new GameFinishedDialog();
     private GameAlmostOverDialog almostEndGameDialog = new GameAlmostOverDialog();
     private BottomNavigationView navigation;
+    private Uri intervention = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+    private Ringtone r;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -87,6 +92,9 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
         Intervention.addListener(this);
         Game.addListener(this);
 
+        r = RingtoneManager.getRingtone(getApplicationContext(), intervention);
+
+
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -119,6 +127,11 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
 
     @Override
     public void onArrive() {
+        try {
+            r.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         arrivedDialog.show(getSupportFragmentManager(), "arrivedDialog");
         FragmentTransaction t = getSupportFragmentManager().beginTransaction();
         currentFragment = statusFragment;
@@ -136,29 +149,54 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
     public void pirateship() {
         interventionDialog.text = "U bent aangevallen door een piratenschip! \n " +
                 "U verliest een deel van uw lading.";
+        try {
+            r.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         interventionDialog.show(getSupportFragmentManager(), "interventionDialog");
     }
 
     @Override
     public void boatLeak() {
+        try {
+            r.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         interventionDialog.text = "Er zit een gat in uw boot! Gelukkig heeft u het kunnen repareren, maar u heeft wel vertraging opgelopen.";
         interventionDialog.show(getSupportFragmentManager(), "interventionDialog");
     }
 
     @Override
     public void crewOverboard() {
+        try {
+            r.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         interventionDialog.text = "Een matroos is overboord geslagen. U heeft vertraging opgelopen";
         interventionDialog.show(getSupportFragmentManager(), "interventionDialog");
     }
 
     @Override
     public void badWeather() {
+        try {
+            r.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         interventionDialog.text = "Er is een sterke tegenwind. U heeft vertraging opgelopen";
         interventionDialog.show(getSupportFragmentManager(), "interventionDialog");
     }
 
     @Override
     public void bandit() {
+        try {
+            r.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         if (InventoryModel.getInstance().getMoney() < 300) {
             interventionDialog.text = "U bent aangevallen door een bandiet, maar de bandiet heeft medelijden gekregen dat u zo weinig geld heeft. " +
                     "Hij laat 200 daalders achter voor een bed vannacht.";
@@ -167,28 +205,49 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
             interventionDialog.text = "Een bandiet steelt een groot gedeelte van uw geld!";
             interventionDialog.show(getSupportFragmentManager(), "interventionDialog");
         }
+
     }
 
     @Override
     public void goodWeather() {
+        try {
+            r.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         interventionDialog.text = "De wind waait vol in de zeilen! U bent eerder op uw bestemming.";
         interventionDialog.show(getSupportFragmentManager(), "interventionDialog");
     }
 
     @Override
     public void foundHiddenChest() {
+        try {
+            r.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         interventionDialog.text = "U vindt een kist met 500 daalders!";
         interventionDialog.show(getSupportFragmentManager(), "interventionDialog");
     }
 
     @Override
     public void defeatPirateShip() {
+        try {
+            r.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         interventionDialog.text = "U bent een piratenschip tegengekomen! U hebt het verslagen en ontvangt 1000 daalders!";
         interventionDialog.show(getSupportFragmentManager(), "interventionDialog");
     }
 
     @Override
     public void shortCut() {
+        try {
+            r.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         interventionDialog.text = "U heeft een kortere route gevonden, U bent eerder op uw bestemming.";
         interventionDialog.show(getSupportFragmentManager(), "interventionDialog");
     }
