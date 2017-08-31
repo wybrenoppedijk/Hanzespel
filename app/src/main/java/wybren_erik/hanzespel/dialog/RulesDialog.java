@@ -13,16 +13,18 @@ public class RulesDialog extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        String message = "SPELREGELS KOMEN HIER\n" +
-                "BLADIEBLADIEBLA\n" +
-                "oke einde doei veel plezier met spelen";
+        String message = "Het spel loopt als volgt:\n" +
+                "U heeft anderhalf uur om te spelen. Het doel van het spel is om zoveel mogelijk geld te verzamelen.\n" +
+                "U kunt handelen in twaalf steden, elk met een eigen product. Elk product verkoopt voor een andere prijs in een andere stad.\n" +
+                "Een tabel van verkoopfactoren is te vinden bij de informatie knop. Succes!";
         builder.setMessage(message)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                     }
-                });
+                })
+                .setTitle("Hanzespel");
         return builder.create();
     }
 

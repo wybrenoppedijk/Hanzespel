@@ -6,9 +6,13 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
+import android.widget.ImageView;
+
+import wybren_erik.hanzespel.R;
 
 public class InterventionDialog extends DialogFragment {
     public String text;
+    public int image = R.drawable.img_dock;
 
     @NonNull
     @Override
@@ -16,6 +20,8 @@ public class InterventionDialog extends DialogFragment {
         if (text.isEmpty() || text == null) {
             throw new NullPointerException("Text not declared");
         }
+        ImageView image = new ImageView(getContext());
+        image.setImageResource(this.image);
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setMessage(text)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -23,7 +29,8 @@ public class InterventionDialog extends DialogFragment {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                     }
-                });
+                })
+                .setView(image);
         return builder.create();
     }
 

@@ -29,6 +29,7 @@ import wybren_erik.hanzespel.controller.Intervention;
 import wybren_erik.hanzespel.dialog.ArrivedDialog;
 import wybren_erik.hanzespel.dialog.GameAlmostOverDialog;
 import wybren_erik.hanzespel.dialog.GameFinishedDialog;
+import wybren_erik.hanzespel.dialog.InfoDialog;
 import wybren_erik.hanzespel.dialog.InterventionDialog;
 import wybren_erik.hanzespel.dialog.RulesDialog;
 import wybren_erik.hanzespel.fragments.HandelFragment;
@@ -47,11 +48,15 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
     private HandelFragment handelFragment;
     private MapFragment mapFragment;
     private Fragment currentFragment;
+
+    // Dialogs...
     private ArrivedDialog arrivedDialog;
     private RulesDialog rulesDialog;
+    private InfoDialog infoDialog;
     private InterventionDialog interventionDialog = new InterventionDialog();
     private GameFinishedDialog endGameDialog = new GameFinishedDialog();
     private GameAlmostOverDialog almostEndGameDialog = new GameAlmostOverDialog();
+
     private BottomNavigationView navigation;
     private Uri intervention = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
     private Ringtone r;
@@ -127,6 +132,7 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
         mapFragment = new MapFragment();
         arrivedDialog = new ArrivedDialog();
         rulesDialog = new RulesDialog();
+        infoDialog = new InfoDialog();
 
         rulesDialog.show(getSupportFragmentManager(), "rules_dialog");
 
@@ -159,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
                 rulesDialog.show(getSupportFragmentManager(), "rules_dialog");
                 break;
             case R.id.action_info:
-                rulesDialog.show(getSupportFragmentManager(), "rules_dialog");
+                infoDialog.show(getSupportFragmentManager(), "rules_dialog");
                 break;
             default:
                 super.onOptionsItemSelected(item);
@@ -204,13 +210,13 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
 
     @Override
     public void pirateship() {
-        interventionDialog.text = "U bent aangevallen door een piratenschip! \n " +
-                "U verliest een deel van uw lading.";
         try {
             r.play();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        interventionDialog.text = "U bent aangevallen door een piratenschip! \nU verliest een deel van uw lading.";
+        interventionDialog.image = R.drawable.img_pirate;
         interventionDialog.show(getSupportFragmentManager(), "interventionDialog");
     }
 
@@ -222,6 +228,7 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
             e.printStackTrace();
         }
         interventionDialog.text = "Er zit een gat in uw boot! Gelukkig heeft u het kunnen repareren, maar u heeft wel vertraging opgelopen.";
+        interventionDialog.image = R.drawable.img_fire;
         interventionDialog.show(getSupportFragmentManager(), "interventionDialog");
     }
 
@@ -233,6 +240,7 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
             e.printStackTrace();
         }
         interventionDialog.text = "Een matroos is overboord geslagen. U heeft vertraging opgelopen";
+        interventionDialog.image = R.drawable.img_drown;
         interventionDialog.show(getSupportFragmentManager(), "interventionDialog");
     }
 
@@ -244,6 +252,7 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
             e.printStackTrace();
         }
         interventionDialog.text = "Er is een sterke tegenwind. U heeft vertraging opgelopen";
+        interventionDialog.image = R.drawable.img_storm;
         interventionDialog.show(getSupportFragmentManager(), "interventionDialog");
     }
 
@@ -254,6 +263,7 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
         } catch (Exception e) {
             e.printStackTrace();
         }
+        interventionDialog.image = R.drawable.img_bandit;
         if (InventoryModel.getInstance().getMoney() < 300) {
             interventionDialog.text = "U bent aangevallen door een bandiet, maar de bandiet heeft medelijden gekregen dat u zo weinig geld heeft. " +
                     "Hij laat 200 daalders achter voor een bed vannacht.";
@@ -273,6 +283,7 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
             e.printStackTrace();
         }
         interventionDialog.text = "De wind waait vol in de zeilen! U bent eerder op uw bestemming.";
+        interventionDialog.image = R.drawable.img_goodweather;
         interventionDialog.show(getSupportFragmentManager(), "interventionDialog");
     }
 
@@ -295,6 +306,7 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
             e.printStackTrace();
         }
         interventionDialog.text = "U bent een piratenschip tegengekomen! U hebt het verslagen en ontvangt 1000 daalders!";
+        interventionDialog.image = R.drawable.img_treasure;
         interventionDialog.show(getSupportFragmentManager(), "interventionDialog");
     }
 
@@ -306,6 +318,7 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
             e.printStackTrace();
         }
         interventionDialog.text = "U heeft een kortere route gevonden, U bent eerder op uw bestemming.";
+        interventionDialog.image = R.drawable.img_goodweather;
         interventionDialog.show(getSupportFragmentManager(), "interventionDialog");
     }
 
