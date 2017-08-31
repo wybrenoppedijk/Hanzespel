@@ -25,6 +25,7 @@ import java.util.concurrent.TimeUnit;
 import wybren_erik.hanzespel.City;
 import wybren_erik.hanzespel.Location;
 import wybren_erik.hanzespel.R;
+import wybren_erik.hanzespel.RoadMap;
 import wybren_erik.hanzespel.controller.Intervention;
 import wybren_erik.hanzespel.dialog.ArrivedDialog;
 import wybren_erik.hanzespel.dialog.GameAlmostOverDialog;
@@ -119,9 +120,7 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
         Game.addListener(this);
 
         r = RingtoneManager.getRingtone(getApplicationContext(), intervention);
-
         executor = Executors.newSingleThreadScheduledExecutor();
-
 
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -144,9 +143,11 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
     Runnable dockIntervention = new Runnable() {
         @Override
         public void run() {
-            if (!Boat.getInstance().getLocation().equals(Location.KAMPEN)){
-                interventionDialog.text = "U bent de haven uitgetrapt. U wordt teruggestuurd naar kampen.";
-                Boat.getInstance().goToCity(new City(Location.KAMPEN));
+            City kampen = RoadMap.getInstance().getCity(Location.KAMPEN);
+            if (!Boat.getInstance().getLocation().equals(kampen)){
+                interventionDialog.text = "U bent de haven uitgetrapt omdat u te lang bleef treuzelen. U wordt teruggestuurd naar kampen.";
+                interventionDialog.image = R.drawable.img_dock;
+                Boat.getInstance().goToCity(kampen);
                 try {
                     r.play();
                 } catch (Exception e) {
@@ -189,7 +190,8 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
 
     @Override
     public void onArrive() {
-       executor.schedule(dockIntervention, 5, TimeUnit.MINUTES);
+        executor = Executors.newSingleThreadScheduledExecutor();
+        executor.schedule(dockIntervention, 5, TimeUnit.MINUTES);
         try {
             r.play();
         } catch (Exception e) {
@@ -295,6 +297,7 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
             e.printStackTrace();
         }
         interventionDialog.text = "U vindt een kist met 500 daalders!";
+        interventionDialog.image = R.drawable.img_treasure;
         interventionDialog.show(getSupportFragmentManager(), "interventionDialog");
     }
 
@@ -306,7 +309,7 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
             e.printStackTrace();
         }
         interventionDialog.text = "U bent een piratenschip tegengekomen! U hebt het verslagen en ontvangt 1000 daalders!";
-        interventionDialog.image = R.drawable.img_treasure;
+        interventionDialog.image = R.drawable.img_pirate;
         interventionDialog.show(getSupportFragmentManager(), "interventionDialog");
     }
 
