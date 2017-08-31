@@ -63,7 +63,7 @@
             android:id="@+id/sell_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="86dp"
+            android:layout_marginTop="50dp"
             android:layout_marginStart="24dp"
             android:layout_below="@+id/TradeProfitMoney"
             android:text="Verkoop" />
@@ -178,7 +178,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="268dp"
+            android:layout_marginTop="284dp"
             android:text="Totaal bedrag:"
             android:textSize="24sp"
             android:textStyle="bold" />
