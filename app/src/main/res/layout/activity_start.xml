@@ -30,7 +30,6 @@
         android:layout_below="@id/INTERNAL_title"
         android:layout_marginTop="24dp"
         android:layout_toEndOf="@id/welcome_name"
-        android:layout_toRightOf="@id/welcome_name"
         android:text="Start" />
 
 </RelativeLayout>

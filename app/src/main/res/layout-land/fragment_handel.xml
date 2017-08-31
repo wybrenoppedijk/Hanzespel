@@ -56,6 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/textView2"
             android:layout_marginStart="24dp"
+            android:textSize="24sp"
             android:textAlignment="center" />
 
         <Button
@@ -177,7 +178,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="272dp"
+            android:layout_marginTop="268dp"
             android:text="Totaal bedrag:"
             android:textSize="24sp"
             android:textStyle="bold" />
