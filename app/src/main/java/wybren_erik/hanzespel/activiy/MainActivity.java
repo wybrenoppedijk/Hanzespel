@@ -18,6 +18,12 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
+import wybren_erik.hanzespel.City;
+import wybren_erik.hanzespel.Location;
 import wybren_erik.hanzespel.R;
 import wybren_erik.hanzespel.controller.Intervention;
 import wybren_erik.hanzespel.dialog.ArrivedDialog;
@@ -49,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
     private BottomNavigationView navigation;
     private Uri intervention = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
     private Ringtone r;
+    private static ScheduledExecutorService executor;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -108,6 +115,8 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
 
         r = RingtoneManager.getRingtone(getApplicationContext(), intervention);
 
+        executor = Executors.newSingleThreadScheduledExecutor();
+
 
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -125,6 +134,22 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
         currentFragment = statusFragment;
         transaction.commit();
     }
+
+    Runnable dockIntervention = new Runnable() {
+        @Override
+        public void run() {
+            if (!Boat.getInstance().getLocation().equals(Location.KAMPEN)){
+                interventionDialog.text = "U bent de haven uitgetrapt. U wordt teruggestuurd naar kampen.";
+                Boat.getInstance().goToCity(new City(Location.KAMPEN));
+                try {
+                    r.play();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                interventionDialog.show(getSupportFragmentManager(), "interventionDialog");
+            }
+        }
+    };
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -149,6 +174,7 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
 
     @Override
     public void onDepart(long travelTime) {
+        executor.shutdownNow();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         currentFragment = statusFragment;
         transaction.replace(R.id.main_fragment, statusFragment);
@@ -157,6 +183,7 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
 
     @Override
     public void onArrive() {
+       executor.schedule(dockIntervention, 5, TimeUnit.MINUTES);
         try {
             r.play();
         } catch (Exception e) {
