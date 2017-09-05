@@ -21,8 +21,8 @@ public class Intervention {
         int randomNum = rand.nextInt(110);
         Log.d(TAG, "Generated random number " + randomNum + " for intervention chances.");
 
-        if (randomNum <= 0 || randomNum > 75) {
-            if (randomNum > 75 && randomNum <= 90) {
+        if (randomNum <= 0 || randomNum > 10) { //75
+            if (randomNum > 10 && randomNum <= 90) {
                 randomNum = rand.nextInt(4);
                 try {
                     Method[] negativeInterventions = NegativeInterventions.class.getDeclaredMethods();

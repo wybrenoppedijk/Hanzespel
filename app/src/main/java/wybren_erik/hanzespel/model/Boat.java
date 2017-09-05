@@ -121,6 +121,9 @@ public class Boat implements InterventionListener {
         new Intervention();
         int travelTime = getTimeTO(location);
 
+        travelTime = travelTime-lessTime;
+        travelTime = travelTime+additionalTime;
+
         arrivalFuture = arrivalExecutor.schedule(arrivalTask, travelTime, TimeUnit.SECONDS);
         System.out.println("Travel time: " + travelTime);
         updateExecutor.scheduleAtFixedRate(updateTask, 1, 1, TimeUnit.SECONDS);
