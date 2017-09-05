@@ -22,4 +22,10 @@ public class City implements Vertex<Location> {
         return location.toString();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Location)) return super.equals(o);
+        return super.equals(RoadMap.getInstance().getCity((Location) o));
+    }
+
 }
