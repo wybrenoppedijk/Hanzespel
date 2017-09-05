@@ -15,8 +15,10 @@ public class RulesDialog extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         String message = "Het spel loopt als volgt:\n" +
                 "U heeft anderhalf uur om te spelen. Het doel van het spel is om zoveel mogelijk geld te verzamelen.\n" +
-                "U kunt handelen in twaalf steden, elk met een eigen product. Elk product verkoopt voor een andere prijs in een andere stad.\n" +
-                "Een tabel van verkoopfactoren is te vinden bij de informatie knop. Succes!";
+                "U kunt handelen in twaalf steden, elk met een eigen product. Elk product heeft een andere waarde in een andere stad.\n" +
+                "Een tabel van verkoopfactoren is te vinden bij de informatie knop.\n" +
+                "Als u tien minuten in dezelfde haven blijft rondhangen wordt u teruggestuurd naar Kampen!\n" +
+                "Succes!";
         builder.setMessage(message)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override

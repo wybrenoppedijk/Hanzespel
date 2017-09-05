@@ -28,6 +28,7 @@ import wybren_erik.hanzespel.R;
 import wybren_erik.hanzespel.RoadMap;
 import wybren_erik.hanzespel.controller.Intervention;
 import wybren_erik.hanzespel.dialog.ArrivedDialog;
+import wybren_erik.hanzespel.dialog.DockInterventionWarningDialog;
 import wybren_erik.hanzespel.dialog.GameAlmostOverDialog;
 import wybren_erik.hanzespel.dialog.GameFinishedDialog;
 import wybren_erik.hanzespel.dialog.InfoDialog;
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
     private InterventionDialog interventionDialog = new InterventionDialog();
     private GameFinishedDialog endGameDialog = new GameFinishedDialog();
     private GameAlmostOverDialog almostEndGameDialog = new GameAlmostOverDialog();
+    private DockInterventionWarningDialog dockInterventionWarningDialog = new DockInterventionWarningDialog();
 
     private BottomNavigationView navigation;
     private Uri intervention = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
@@ -132,6 +134,7 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
         arrivedDialog = new ArrivedDialog();
         rulesDialog = new RulesDialog();
         infoDialog = new InfoDialog();
+        dockInterventionWarningDialog = new DockInterventionWarningDialog();
 
         rulesDialog.show(getSupportFragmentManager(), "rules_dialog");
 
@@ -140,7 +143,7 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
         transaction.commit();
     }
 
-    Runnable dockIntervention = new Runnable() {
+    private final Runnable dockIntervention = new Runnable() {
         @Override
         public void run() {
             City kampen = RoadMap.getInstance().getCity(Location.KAMPEN);
@@ -155,6 +158,13 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
                 }
                 interventionDialog.show(getSupportFragmentManager(), "interventionDialog");
             }
+        }
+    };
+
+    private final Runnable dockInterventionWarning = new Runnable() {
+        @Override
+        public void run() {
+            dockInterventionWarningDialog.show(getSupportFragmentManager(), "interventionWarningDialog");
         }
     };
 
@@ -190,8 +200,9 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
 
     @Override
     public void onArrive() {
-        executor = Executors.newSingleThreadScheduledExecutor();
-        executor.schedule(dockIntervention, 5, TimeUnit.MINUTES);
+        executor = Executors.newScheduledThreadPool(2);
+        executor.schedule(dockIntervention, 10, TimeUnit.MINUTES);
+        executor.schedule(dockInterventionWarning, 8, TimeUnit.MINUTES);
         try {
             r.play();
         } catch (Exception e) {
