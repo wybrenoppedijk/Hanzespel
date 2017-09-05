@@ -1,8 +1,5 @@
 package wybren_erik.hanzespel.activiy;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -46,11 +43,11 @@ import wybren_erik.hanzespel.model.InventoryModel;
 
 public class MainActivity extends AppCompatActivity implements BoatListener, InterventionListener, GameListener {
 
+    private static ScheduledExecutorService executor;
     private StatusFragment statusFragment;
     private HandelFragment handelFragment;
     private MapFragment mapFragment;
     private Fragment currentFragment;
-
     // Dialogs...
     private ArrivedDialog arrivedDialog;
     private RulesDialog rulesDialog;
@@ -59,12 +56,32 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
     private GameFinishedDialog endGameDialog = new GameFinishedDialog();
     private GameAlmostOverDialog almostEndGameDialog = new GameAlmostOverDialog();
     private DockInterventionWarningDialog dockInterventionWarningDialog = new DockInterventionWarningDialog();
-
+    private final Runnable dockInterventionWarning = new Runnable() {
+        @Override
+        public void run() {
+            dockInterventionWarningDialog.show(getSupportFragmentManager(), "interventionWarningDialog");
+        }
+    };
     private BottomNavigationView navigation;
     private Uri intervention = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
     private Ringtone r;
-    private static ScheduledExecutorService executor;
-
+    private final Runnable dockIntervention = new Runnable() {
+        @Override
+        public void run() {
+            City kampen = RoadMap.getInstance().getCity(Location.KAMPEN);
+            if (!Boat.getInstance().getLocation().equals(kampen)) {
+                interventionDialog.text = "U bent de haven uitgetrapt omdat u te lang bleef treuzelen. U wordt teruggestuurd naar kampen.";
+                interventionDialog.image = R.drawable.img_dock;
+                Boat.getInstance().goToCity(kampen);
+                try {
+                    r.play();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                interventionDialog.show(getSupportFragmentManager(), "interventionDialog");
+            }
+        }
+    };
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
@@ -101,7 +118,6 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
             return true;
         }
     };
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -142,31 +158,6 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
         currentFragment = statusFragment;
         transaction.commit();
     }
-
-    private final Runnable dockIntervention = new Runnable() {
-        @Override
-        public void run() {
-            City kampen = RoadMap.getInstance().getCity(Location.KAMPEN);
-            if (!Boat.getInstance().getLocation().equals(kampen)){
-                interventionDialog.text = "U bent de haven uitgetrapt omdat u te lang bleef treuzelen. U wordt teruggestuurd naar kampen.";
-                interventionDialog.image = R.drawable.img_dock;
-                Boat.getInstance().goToCity(kampen);
-                try {
-                    r.play();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                interventionDialog.show(getSupportFragmentManager(), "interventionDialog");
-            }
-        }
-    };
-
-    private final Runnable dockInterventionWarning = new Runnable() {
-        @Override
-        public void run() {
-            dockInterventionWarningDialog.show(getSupportFragmentManager(), "interventionWarningDialog");
-        }
-    };
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -347,6 +338,10 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
             @Override
             public void run() {
                 endGameDialog.show(getSupportFragmentManager(), "game_over");
+                City kampen = RoadMap.getInstance().getCity(Location.KAMPEN);
+                if (!(Boat.getInstance().getLocation().equals(kampen) || Boat.isInDock()))
+                    InventoryModel.getInstance().setMoney(InventoryModel.getInstance().getMoney() / 10 * 8);
+
                 // Disable navigation and set active fragment to StatusFragment.
                 navigation.setEnabled(false);
                 navigation.setOnNavigationItemSelectedListener(null);
