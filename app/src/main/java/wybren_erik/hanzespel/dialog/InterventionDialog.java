@@ -8,7 +8,10 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.widget.ImageView;
 
+import wybren_erik.hanzespel.Location;
 import wybren_erik.hanzespel.R;
+import wybren_erik.hanzespel.RoadMap;
+import wybren_erik.hanzespel.model.Boat;
 
 public class InterventionDialog extends DialogFragment {
     public String text;
@@ -27,6 +30,8 @@ public class InterventionDialog extends DialogFragment {
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        if(text.equals("U bent de haven uitgetrapt omdat u te lang bleef treuzelen. U wordt teruggestuurd naar kampen."))
+                            Boat.getInstance().goToCity(RoadMap.getInstance().getCity(Location.KAMPEN));
                         dialog.dismiss();
                     }
                 })

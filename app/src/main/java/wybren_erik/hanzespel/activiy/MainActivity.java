@@ -72,13 +72,12 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
             if (!Boat.getInstance().getLocation().equals(kampen)) {
                 interventionDialog.text = "U bent de haven uitgetrapt omdat u te lang bleef treuzelen. U wordt teruggestuurd naar kampen.";
                 interventionDialog.image = R.drawable.img_dock;
-                Boat.getInstance().goToCity(kampen);
                 try {
                     r.play();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                interventionDialog.show(getSupportFragmentManager(), "interventionDialog");
+                interventionDialog.show(getSupportFragmentManager(), "dockInterventionDialog");
             }
         }
     };
@@ -192,8 +191,8 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
     @Override
     public void onArrive() {
         executor = Executors.newScheduledThreadPool(2);
-        executor.schedule(dockIntervention, 10, TimeUnit.MINUTES);
-        executor.schedule(dockInterventionWarning, 8, TimeUnit.MINUTES);
+        executor.schedule(dockIntervention, 20, TimeUnit.SECONDS);
+        executor.schedule(dockInterventionWarning, 10, TimeUnit.SECONDS);
         try {
             r.play();
         } catch (Exception e) {
