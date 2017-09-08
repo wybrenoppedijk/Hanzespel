@@ -102,7 +102,7 @@ public class StartActivity extends AppCompatActivity {
         cityMap.addVertex(danzig);
         cityMap.addVertex(turku);
 
-        cityMap.addEdge(kampen, bergen, 1); // TODO: THIS WAS 18 BUT DEBUG PURPOSES
+        cityMap.addEdge(kampen, bergen, 18);
         cityMap.addEdge(kampen, lubeck, 20);
         cityMap.addEdge(kampen, stralsund, 20);
         cityMap.addEdge(kampen, riga, 32);
@@ -113,7 +113,7 @@ public class StartActivity extends AppCompatActivity {
         cityMap.addEdge(kampen, danzig, 25);
         cityMap.addEdge(kampen, turku, 34);
 
-        cityMap.addEdge(bergen, kampen, 1); // TODO: THIS WAS 18 BUT DEBUG PURPOSES
+        cityMap.addEdge(bergen, kampen, 18);
         cityMap.addEdge(bergen, lubeck, 18);
         cityMap.addEdge(bergen, stralsund, 15);
         cityMap.addEdge(bergen, riga, 30);
