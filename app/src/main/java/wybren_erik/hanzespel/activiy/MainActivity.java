@@ -191,8 +191,8 @@ public class MainActivity extends AppCompatActivity implements BoatListener, Int
     @Override
     public void onArrive() {
         executor = Executors.newScheduledThreadPool(2);
-        executor.schedule(dockIntervention, 20, TimeUnit.SECONDS);
-        executor.schedule(dockInterventionWarning, 10, TimeUnit.SECONDS);
+        executor.schedule(dockIntervention, 10, TimeUnit.MINUTES);
+        executor.schedule(dockInterventionWarning, 8, TimeUnit.MINUTES);
         try {
             r.play();
         } catch (Exception e) {
